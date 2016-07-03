@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
-        <title>Foreign Function Interface | Rust by Example</title>
+        <title>他言語関数インターフェイス | Rust by Example</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.5.0">
@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="18.8" data-basepath=".." data-revision="1467264436880">
+    <div class="book" data-level="18.8" data-basepath=".." data-revision="1467535389604">
     
 
 <div class="book-summary">
@@ -2458,7 +2458,7 @@
                         
                             <b>18.</b>
                         
-                         Std misc
+                         標準ライブラリのその他
                     </a>
                 
             
@@ -2475,7 +2475,7 @@
                         
                             <b>18.1.</b>
                         
-                         Threads
+                         スレッド
                     </a>
                 
             
@@ -2491,7 +2491,7 @@
                         
                             <b>18.2.</b>
                         
-                         Channels
+                         チャネル
                     </a>
                 
             
@@ -2523,7 +2523,7 @@
                         
                             <b>18.4.</b>
                         
-                         File I/O
+                         ファイル I/O
                     </a>
                 
             
@@ -2577,7 +2577,7 @@
                         
                             <b>18.5.</b>
                         
-                         Child processes
+                         子プロセス
                     </a>
                 
             
@@ -2594,7 +2594,7 @@
                         
                             <b>18.5.1.</b>
                         
-                         Pipes
+                         パイプ
                     </a>
                 
             
@@ -2610,7 +2610,7 @@
                         
                             <b>18.5.2.</b>
                         
-                         Wait
+                         dropの延期
                     </a>
                 
             
@@ -2631,7 +2631,7 @@
                         
                             <b>18.6.</b>
                         
-                         Filesystem Operations
+                         ファイルシステムとのやり取り
                     </a>
                 
             
@@ -2647,7 +2647,7 @@
                         
                             <b>18.7.</b>
                         
-                         Program arguments
+                         引数処理
                     </a>
                 
             
@@ -2664,7 +2664,7 @@
                         
                             <b>18.7.1.</b>
                         
-                         Argument parsing
+                         引数のパース
                     </a>
                 
             
@@ -2685,7 +2685,7 @@
                         
                             <b>18.8.</b>
                         
-                         Foreign Function Interface
+                         他言語関数インターフェイス
                     </a>
                 
             
@@ -2856,20 +2856,21 @@
                 <div class="page-inner">
                 
                 
-                    <section class="normal" id="section-gitbook_133">
+                    <section class="normal" id="section-gitbook_134">
                     
-                        <h2 id="188-foreign-function-interface">18.8 Foreign Function Interface</h2>
-<p>Rust provides a Foreign Function Interface (FFI) to C libraries. Foreign
-functions must be declared inside an <code>extern</code> block annotated with a <code>#[link]</code>
-attribute containing the name of the foreign library.</p>
+                        <h2 id="188-">18.8 他言語関数インターフェイス</h2>
+<!-- Rust provides a Foreign Function Interface (FFI) to C libraries. Foreign
+functions must be declared inside an `extern` block annotated with a `#[link]`
+attribute containing the name of the foreign library. -->
+<p>RustはCのライブラリを呼び出すために他言語関数インターフェイス(Foreign Function Interface, FFI)を持っています。他言語の関数を使用する際には、そのライブラリ名を<code>#[link]</code>アトリビュートに渡し、更にそれでアノテーションされた<code>extern</code>ブロック内で宣言する必要があります。</p>
 <pre><code class="lang-rust"><span class="hljs-comment">// ffi.rs</span>
 <span class="hljs-keyword">use</span> std::fmt;
 
-<span class="hljs-comment">// this extern block links to the libm library</span>
+<span class="hljs-comment">// このexternブロックはlibmライブラリをリンクする。</span>
 <span class="hljs-preprocessor">#[link(name = "m")]</span>
 <span class="hljs-keyword">extern</span> {
-    <span class="hljs-comment">// this is a foreign function</span>
-    <span class="hljs-comment">// that computes the square root of a single precision complex number</span>
+    <span class="hljs-comment">// 他言語の関数宣言。</span>
+    <span class="hljs-comment">// この関数は単精度浮動小数の複素数型の平方根を計算するためのもの</span>
     <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">csqrtf</span></span>(z: Complex) -&gt; Complex;
 }
 
@@ -2877,7 +2878,7 @@ attribute containing the name of the foreign library.</p>
     <span class="hljs-comment">// z = -1 + 0i</span>
     <span class="hljs-keyword">let</span> z = Complex { re: -<span class="hljs-number">1</span>., im: <span class="hljs-number">0</span>. };
 
-    <span class="hljs-comment">// calling a foreign function is an unsafe operation</span>
+    <span class="hljs-comment">// 安全でない方法で他言語関数を呼び出す。</span>
     <span class="hljs-keyword">let</span> z_sqrt = <span class="hljs-keyword">unsafe</span> {
         csqrtf(z)
     };
@@ -2885,7 +2886,7 @@ attribute containing the name of the foreign library.</p>
     <span class="hljs-built_in">println!</span>(<span class="hljs-string">"the square root of {:?} is {:?}"</span>, z, z_sqrt);
 }
 
-<span class="hljs-comment">// Minimal implementation of single precision complex numbers</span>
+<span class="hljs-comment">// 単精度浮動小数の複素数型の最小限の実装</span>
 <span class="hljs-preprocessor">#[repr(C)]</span>
 <span class="hljs-preprocessor">#[derive(Clone, Copy)]</span>
 <span class="hljs-keyword">struct</span> Complex {
@@ -2905,8 +2906,9 @@ attribute containing the name of the foreign library.</p>
 </code></pre>
 <pre><code>$ rustc ffi.rs &amp;&amp; ./ffi
 the square root of -1+0i is 0+1i
-</code></pre><p>Since calling foreign functions is considered unsafe, it&#39;s common to write safe
-wrappers around them.</p>
+</code></pre><!-- Since calling foreign functions is considered unsafe, it's common to write safe
+wrappers around them. -->
+<p>他言語関数呼び出しは安全でない(unsafe)ので、安全にするためのラッパーを書くことが一般的です。</p>
 <pre><code class="lang-rust"><span class="hljs-comment">// safe.rs</span>
 <span class="hljs-keyword">use</span> std::fmt;
 
@@ -2915,7 +2917,7 @@ wrappers around them.</p>
     <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">ccosf</span></span>(z: Complex) -&gt; Complex;
 }
 
-<span class="hljs-comment">// safe wrapper</span>
+<span class="hljs-comment">// 型安全ににするためのラッパ</span>
 <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">cos</span></span>(z: Complex) -&gt; Complex {
     <span class="hljs-keyword">unsafe</span> { ccosf(z) }
 }
@@ -2927,7 +2929,7 @@ wrappers around them.</p>
     <span class="hljs-built_in">println!</span>(<span class="hljs-string">"cos({:?}) = {:?}"</span>, z, cos(z));
 }
 
-<span class="hljs-comment">// Minimal implementation of single precision complex numbers</span>
+<span class="hljs-comment">// 単精度浮動小数の複素数型の最小限の実装</span>
 <span class="hljs-preprocessor">#[repr(C)]</span>
 <span class="hljs-preprocessor">#[derive(Clone, Copy)]</span>
 <span class="hljs-keyword">struct</span> Complex {
@@ -2957,7 +2959,7 @@ cos(0+1i) = 1.5430806+0i
         </div>
 
         
-        <a href="../std_misc/arg/matching.html" class="navigation navigation-prev " aria-label="Previous page: Argument parsing"><i class="fa fa-angle-left"></i></a>
+        <a href="../std_misc/arg/matching.html" class="navigation navigation-prev " aria-label="Previous page: 引数のパース"><i class="fa fa-angle-left"></i></a>
         
         
         <a href="../meta.html" class="navigation navigation-next " aria-label="Next page: Meta"><i class="fa fa-angle-right"></i></a>

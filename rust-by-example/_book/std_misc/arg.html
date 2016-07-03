@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
-        <title>Program arguments | Rust by Example</title>
+        <title>引数処理 | Rust by Example</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.5.0">
@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="18.7" data-basepath=".." data-revision="1467264436880">
+    <div class="book" data-level="18.7" data-basepath=".." data-revision="1467535389604">
     
 
 <div class="book-summary">
@@ -2458,7 +2458,7 @@
                         
                             <b>18.</b>
                         
-                         Std misc
+                         標準ライブラリのその他
                     </a>
                 
             
@@ -2475,7 +2475,7 @@
                         
                             <b>18.1.</b>
                         
-                         Threads
+                         スレッド
                     </a>
                 
             
@@ -2491,7 +2491,7 @@
                         
                             <b>18.2.</b>
                         
-                         Channels
+                         チャネル
                     </a>
                 
             
@@ -2523,7 +2523,7 @@
                         
                             <b>18.4.</b>
                         
-                         File I/O
+                         ファイル I/O
                     </a>
                 
             
@@ -2577,7 +2577,7 @@
                         
                             <b>18.5.</b>
                         
-                         Child processes
+                         子プロセス
                     </a>
                 
             
@@ -2594,7 +2594,7 @@
                         
                             <b>18.5.1.</b>
                         
-                         Pipes
+                         パイプ
                     </a>
                 
             
@@ -2610,7 +2610,7 @@
                         
                             <b>18.5.2.</b>
                         
-                         Wait
+                         dropの延期
                     </a>
                 
             
@@ -2631,7 +2631,7 @@
                         
                             <b>18.6.</b>
                         
-                         Filesystem Operations
+                         ファイルシステムとのやり取り
                     </a>
                 
             
@@ -2647,7 +2647,7 @@
                         
                             <b>18.7.</b>
                         
-                         Program arguments
+                         引数処理
                     </a>
                 
             
@@ -2664,7 +2664,7 @@
                         
                             <b>18.7.1.</b>
                         
-                         Argument parsing
+                         引数のパース
                     </a>
                 
             
@@ -2685,7 +2685,7 @@
                         
                             <b>18.8.</b>
                         
-                         Foreign Function Interface
+                         他言語関数インターフェイス
                     </a>
                 
             
@@ -2858,9 +2858,10 @@
                 
                     <section class="normal" id="section-gitbook_137">
                     
-                        <h2 id="187-program-arguments">18.7 Program arguments</h2>
-<p>The command line arguments can be accessed using <code>std::env::args</code>, which
-returns an iterator that yields a String for each argument:</p>
+                        <h2 id="187-">18.7 引数処理</h2>
+<!-- The command line arguments can be accessed using `std::env::args`, which
+returns an iterator that yields a String for each argument: -->
+<p>コマンドライン引数は<code>std::env::args</code>を介して取得できます。これはそれぞれの引数を文字列としてyieldするイテレータを返します。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
@@ -2869,11 +2870,11 @@ returns an iterator that yields a String for each argument:</p>
 fn main() {
     let args: Vec&lt;String&gt; = env::args().collect();
 
-    // The first argument is the path that was used to call the program.
+    // ひとつ目の引数はプログラムを呼び出す際に使用したパス
     println!(&quot;My path is {}.&quot;, args[0]);
 
-    // The rest of the arguments are the passed command line parameters.
-    // Call the program like this:
+    // 残りはプログラムに渡されたコマンドラインパラメータ。
+    // プログラムはこんなふうに呼び出す。
     //   &#36; ./args arg1 arg2
     println!(&quot;I got {:?} arguments: {:?}.&quot;, args.len() - 1, &amp;args[1..]);
 }</div>
@@ -2893,10 +2894,10 @@ I got 3 arguments: [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;].
         </div>
 
         
-        <a href="../std_misc/fs.html" class="navigation navigation-prev " aria-label="Previous page: Filesystem Operations"><i class="fa fa-angle-left"></i></a>
+        <a href="../std_misc/fs.html" class="navigation navigation-prev " aria-label="Previous page: ファイルシステムとのやり取り"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../std_misc/arg/matching.html" class="navigation navigation-next " aria-label="Next page: Argument parsing"><i class="fa fa-angle-right"></i></a>
+        <a href="../std_misc/arg/matching.html" class="navigation navigation-next " aria-label="Next page: 引数のパース"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

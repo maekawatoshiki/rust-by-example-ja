@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
-        <title>File I/O | Rust by Example</title>
+        <title>ファイル I/O | Rust by Example</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.5.0">
@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="18.4" data-basepath=".." data-revision="1467264436880">
+    <div class="book" data-level="18.4" data-basepath=".." data-revision="1467535389604">
     
 
 <div class="book-summary">
@@ -2458,7 +2458,7 @@
                         
                             <b>18.</b>
                         
-                         Std misc
+                         標準ライブラリのその他
                     </a>
                 
             
@@ -2475,7 +2475,7 @@
                         
                             <b>18.1.</b>
                         
-                         Threads
+                         スレッド
                     </a>
                 
             
@@ -2491,7 +2491,7 @@
                         
                             <b>18.2.</b>
                         
-                         Channels
+                         チャネル
                     </a>
                 
             
@@ -2523,7 +2523,7 @@
                         
                             <b>18.4.</b>
                         
-                         File I/O
+                         ファイル I/O
                     </a>
                 
             
@@ -2577,7 +2577,7 @@
                         
                             <b>18.5.</b>
                         
-                         Child processes
+                         子プロセス
                     </a>
                 
             
@@ -2594,7 +2594,7 @@
                         
                             <b>18.5.1.</b>
                         
-                         Pipes
+                         パイプ
                     </a>
                 
             
@@ -2610,7 +2610,7 @@
                         
                             <b>18.5.2.</b>
                         
-                         Wait
+                         dropの延期
                     </a>
                 
             
@@ -2631,7 +2631,7 @@
                         
                             <b>18.6.</b>
                         
-                         Filesystem Operations
+                         ファイルシステムとのやり取り
                     </a>
                 
             
@@ -2647,7 +2647,7 @@
                         
                             <b>18.7.</b>
                         
-                         Program arguments
+                         引数処理
                     </a>
                 
             
@@ -2664,7 +2664,7 @@
                         
                             <b>18.7.1.</b>
                         
-                         Argument parsing
+                         引数のパース
                     </a>
                 
             
@@ -2685,7 +2685,7 @@
                         
                             <b>18.8.</b>
                         
-                         Foreign Function Interface
+                         他言語関数インターフェイス
                     </a>
                 
             
@@ -2858,14 +2858,17 @@
                 
                     <section class="normal" id="section-gitbook_131">
                     
-                        <h2 id="184-file-io">18.4 File I/O</h2>
-<p>The <code>File</code> struct represents a file that has been opened (it wraps a file
-descriptor), and gives read and/or write access to the underlying file.</p>
-<p>Since many things can go wrong when doing file I/O, all the <code>File</code> methods
-return the <code>io::Result&lt;T&gt;</code> type, which is an alias for <code>Result&lt;T, io::Error&gt;</code>.</p>
-<p>This makes the failure of all I/O operations <em>explicit</em>. Thanks to this, the
+                        <h2 id="184--io">18.4 ファイル I/O</h2>
+<!-- The `File` struct represents a file that has been opened (it wraps a file
+descriptor), and gives read and/or write access to the underlying file.
+
+Since many things can go wrong when doing file I/O, all the `File` methods
+return the `io::Result<T>` type, which is an alias for `Result<T, io::Error>`. -->
+<p><code>File</code>構造体は開かれたファイルを表し(実際にはファイルディスクリプタのラッパーです)、読み込み・書き込み権限のどちらか一方、あるいは両方を提供します。</p>
+<!-- This makes the failure of all I/O operations *explicit*. Thanks to this, the
 programmer can see all the failure paths, and is encouraged to handle them in
-a proactive manner.</p>
+a proactive manner. -->
+<p>これはI/Oに関するオペレーションの失敗をより明瞭にします。このおかげでプログラマは直面した失敗を全て見ることができ、より生産的な方法でそれらを扱うことが可能になります。</p>
 
                     
                     </section>

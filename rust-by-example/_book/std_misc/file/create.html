@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="18.4.2" data-basepath="../.." data-revision="1467264436880">
+    <div class="book" data-level="18.4.2" data-basepath="../.." data-revision="1467535389604">
     
 
 <div class="book-summary">
@@ -2458,7 +2458,7 @@
                         
                             <b>18.</b>
                         
-                         Std misc
+                         標準ライブラリのその他
                     </a>
                 
             
@@ -2475,7 +2475,7 @@
                         
                             <b>18.1.</b>
                         
-                         Threads
+                         スレッド
                     </a>
                 
             
@@ -2491,7 +2491,7 @@
                         
                             <b>18.2.</b>
                         
-                         Channels
+                         チャネル
                     </a>
                 
             
@@ -2523,7 +2523,7 @@
                         
                             <b>18.4.</b>
                         
-                         File I/O
+                         ファイル I/O
                     </a>
                 
             
@@ -2577,7 +2577,7 @@
                         
                             <b>18.5.</b>
                         
-                         Child processes
+                         子プロセス
                     </a>
                 
             
@@ -2594,7 +2594,7 @@
                         
                             <b>18.5.1.</b>
                         
-                         Pipes
+                         パイプ
                     </a>
                 
             
@@ -2610,7 +2610,7 @@
                         
                             <b>18.5.2.</b>
                         
-                         Wait
+                         dropの延期
                     </a>
                 
             
@@ -2631,7 +2631,7 @@
                         
                             <b>18.6.</b>
                         
-                         Filesystem Operations
+                         ファイルシステムとのやり取り
                     </a>
                 
             
@@ -2647,7 +2647,7 @@
                         
                             <b>18.7.</b>
                         
-                         Program arguments
+                         引数処理
                     </a>
                 
             
@@ -2664,7 +2664,7 @@
                         
                             <b>18.7.1.</b>
                         
-                         Argument parsing
+                         引数のパース
                     </a>
                 
             
@@ -2685,7 +2685,7 @@
                         
                             <b>18.8.</b>
                         
-                         Foreign Function Interface
+                         他言語関数インターフェイス
                     </a>
                 
             
@@ -2859,9 +2859,10 @@
                     <section class="normal" id="section-gitbook_135">
                     
                         <h3 id="1842-create">18.4.2 <code>create</code></h3>
-<p>The <code>create</code> static method opens a file in write-only mode. If the file
+<!-- The `create` static method opens a file in write-only mode. If the file
 already existed, the old content is destroyed. Otherwise, a new file is
-created.</p>
+created. -->
+<p>スタティックメソッドの<code>create</code>はファイルを書き込み専用モードで開きます。すでにファイルが存在している場合、破棄して新しい物を作成します。</p>
 <pre><code class="lang-rust"><span class="hljs-comment">// create.rs</span>
 <span class="hljs-keyword">static</span> LOREM_IPSUM: &amp;'static <span class="hljs-keyword">str</span> =
 <span class="hljs-string">"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
@@ -2881,7 +2882,7 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
     <span class="hljs-keyword">let</span> path = Path::new(<span class="hljs-string">"out/lorem_ipsum.txt"</span>);
     <span class="hljs-keyword">let</span> display = path.display();
 
-    <span class="hljs-comment">// Open a file in write-only mode, returns `io::Result&lt;File&gt;`</span>
+    <span class="hljs-comment">// ファイルを書き込み専用モードで開く。返り値は`io::Result&lt;File&gt;`</span>
     <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut</span> file = <span class="hljs-keyword">match</span> File::create(&amp;path) {
         Err(why) =&gt; panic!(<span class="hljs-string">"couldn't create {}: {}"</span>,
                            display,
@@ -2889,7 +2890,7 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         Ok(file) =&gt; file,
     };
 
-    <span class="hljs-comment">// Write the `LOREM_IPSUM` string to `file`, returns `io::Result&lt;()&gt;`</span>
+    <span class="hljs-comment">// `LOREM_IPSUM`の文字列を`file`に書き込む。返り値は`io::Result&lt;()&gt;`</span>
     <span class="hljs-keyword">match</span> file.write_all(LOREM_IPSUM.as_bytes()) {
         Err(why) =&gt; {
             panic!(<span class="hljs-string">"couldn't write to {}: {}"</span>, display,
@@ -2899,7 +2900,8 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
     }
 }
 </code></pre>
-<p>Here&#39;s the expected successful output:</p>
+<!-- Here's the expected successful output: -->
+<p>以下は成功時に期待されるアウトプットです。</p>
 <pre><code>$ mkdir out
 $ rustc create.rs &amp;&amp; ./create
 successfully wrote to out/lorem_ipsum.txt
@@ -2910,10 +2912,12 @@ quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
 consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
 cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
 proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-</code></pre><p>(As in the previous example, you are encouraged to test this example under
-failure conditions.)</p>
-<p>There is also a more generic <code>open_mode</code> method that can open files in other
-modes like: read+write, append, etc.</p>
+</code></pre><!-- (As in the previous example, you are encouraged to test this example under
+failure conditions.) -->
+<!-- 前項の例と同じように、様々な失敗パターンをためしてみることをオススメします。 -->
+<!-- There is also a more generic `open_mode` method that can open files in other
+modes like: read+write, append, etc. -->
+<p>よりジェネリックな<code>open_mode</code>メソッドというものもあります。これはファイルをより様々なモード(例: 読み込み+書き込み、アペンドなど。)で開くことができます。</p>
 
                     
                     </section>
@@ -2927,7 +2931,7 @@ modes like: read+write, append, etc.</p>
         <a href="../../std_misc/file/open.html" class="navigation navigation-prev " aria-label="Previous page: `open`"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../../std_misc/process.html" class="navigation navigation-next " aria-label="Next page: Child processes"><i class="fa fa-angle-right"></i></a>
+        <a href="../../std_misc/process.html" class="navigation navigation-next " aria-label="Next page: 子プロセス"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>
