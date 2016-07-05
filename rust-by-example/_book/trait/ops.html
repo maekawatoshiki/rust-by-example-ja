@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
-        <title>Operator Overloading | Rust by Example</title>
+        <title>演算子のオーバーロード | Rust by Example</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.5.0">
@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="15.2" data-basepath=".." data-revision="1467535389604">
+    <div class="book" data-level="15.2" data-basepath=".." data-revision="1467727850813">
     
 
 <div class="book-summary">
@@ -1926,7 +1926,7 @@
                         
                             <b>15.</b>
                         
-                         Traits
+                         トレイト
                     </a>
                 
             
@@ -1943,7 +1943,7 @@
                         
                             <b>15.1.</b>
                         
-                         Derive
+                         継承(Derive)
                     </a>
                 
             
@@ -1959,7 +1959,7 @@
                         
                             <b>15.2.</b>
                         
-                         Operator Overloading
+                         演算子のオーバーロード
                     </a>
                 
             
@@ -1975,7 +1975,7 @@
                         
                             <b>15.3.</b>
                         
-                         Drop
+                         メモリ解放
                     </a>
                 
             
@@ -1991,7 +1991,7 @@
                         
                             <b>15.4.</b>
                         
-                         Iterators
+                         イテレータ
                     </a>
                 
             
@@ -2007,7 +2007,7 @@
                         
                             <b>15.5.</b>
                         
-                         Clone
+                         クローン
                     </a>
                 
             
@@ -2858,13 +2858,15 @@
                 
                     <section class="normal" id="section-gitbook_149">
                     
-                        <h2 id="152-operator-overloading">15.2 Operator Overloading</h2>
-<p>In Rust, many of the operators can be overloaded via traits. That is, some operators can
+                        <h2 id="152-">15.2 演算子のオーバーロード</h2>
+<!-- In Rust, many of the operators can be overloaded via traits. That is, some operators can
 be used to accomplish different tasks based on their input arguments. This is possible
-because operators are syntactic sugar for method calls. For example, the <code>+</code> operator in 
-<code>a + b</code> calls the <code>add</code> method (as in <code>a.add(b)</code>). This <code>add</code> method is part of the <code>Add</code> 
-trait. Hence, the <code>+</code> operator can be used by any implementor of the <code>Add</code> trait.</p>
-<p>A list of the traits, such as <code>Add</code>, that overload operators are available <a href="http://doc.rust-lang.org/core/ops/" target="_blank">here</a>.</p>
+because operators are syntactic sugar for method calls. For example, the `+` operator in
+`a + b` calls the `add` method (as in `a.add(b)`). This `add` method is part of the `Add`
+trait. Hence, the `+` operator can be used by any implementor of the `Add` trait. -->
+<p>Rustでは、多くの演算子はトレイトによってオーバーロードすることができます。つまり、一部の演算子は引数となる値の型に応じて異なる役割を果たすことができるということです。これが可能なのは、演算子が実際にはメソッド呼び出しの糖衣構文にすぎないからです。例えば<code>a + b</code>における<code>+</code>演算子は<code>add</code>メソッドを(<code>a.add(b)</code>の形で)呼び出します。この<code>add</code>メソッドは<code>Add</code>トレイトの一部です。それ故、<code>+</code>は<code>Add</code>トレイトを実装している全ての型に対して有効なのです。</p>
+<!-- A list of the traits, such as `Add`, that overload operators are available [here][ops]. -->
+<p><code>Add</code>などの、演算子をオーバーロードするトレイトの一覧は<a href="http://doc.rust-lang.org/core/ops/" target="_blank">ここ</a>にあります。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
@@ -2879,9 +2881,10 @@ struct FooBar;
 #[derive(Debug)]
 struct BarFoo;
 
-// The &#96;std::ops::Add&#96; trait is used to specify the functionality of &#96;+&#96;.
-// Here, we make &#96;Add&lt;Bar&gt;&#96; - the trait for addition with a RHS of type &#96;Bar&#96;.
-// The following block implements the operation: Foo + Bar = FooBar
+// &#96;std::ops::Add&#96;トレイトは&#96;+&#96;の振る舞いを規定するために使用される
+// ここでは&#96;Foo&#96;に対して&#96;Add&lt;Bar&gt;&#96;を実装する。これは加算時の右辺が&#96;Bar&#96;型
+// の時に呼び出されるトレイト。つまり以下は&#96;Foo + Bar = FooBar&#96;という振る舞いを
+// もたらす。
 impl ops::Add&lt;Bar&gt; for Foo {
     type Output = FooBar;
 
@@ -2892,9 +2895,9 @@ impl ops::Add&lt;Bar&gt; for Foo {
     }
 }
 
-// By reversing the types, we end up implementing non-commutative addition.
-// Here, we make &#96;Add&lt;Foo&gt;&#96; - the trait for addition with a RHS of type &#96;Foo&#96;.
-// This block implements the operation: Bar + Foo = BarFoo
+// 型を反転することで、非可換の加算を実装できる。ここでは&#96;Bar&#96;に対して
+// &#96;Add&lt;Foo&gt;&#96;を実装する。これは加算時の右辺が&#96;Foo&#96;型の時に呼び出されるメソッド。
+// つまり以下は&#96;Bar + Foo = BarFoo&#96;という結果をもたらす。
 impl ops::Add&lt;Foo&gt; for Bar {
     type Output = BarFoo;
 
@@ -2913,7 +2916,7 @@ fn main() {
 </div>
 
 <h3 id="see-also">See Also</h3>
-<p><a href="http://doc.rust-lang.org/core/ops/trait.Add.html" target="_blank">Add</a>, <a href="https://doc.rust-lang.org/book/syntax-index.html" target="_blank">Syntax Index</a></p>
+<p><a href="http://doc.rust-lang.org/core/ops/trait.Add.html" target="_blank">Add</a>, <a href="https://rust-lang-ja.github.io/the-rust-programming-language-ja/1.6/book/syntax-index.html" target="_blank">構文の索引</a></p>
 
                     
                     </section>
@@ -2924,10 +2927,10 @@ fn main() {
         </div>
 
         
-        <a href="../trait/derive.html" class="navigation navigation-prev " aria-label="Previous page: Derive"><i class="fa fa-angle-left"></i></a>
+        <a href="../trait/derive.html" class="navigation navigation-prev " aria-label="Previous page: 継承(Derive)"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../trait/drop.html" class="navigation navigation-next " aria-label="Next page: Drop"><i class="fa fa-angle-right"></i></a>
+        <a href="../trait/drop.html" class="navigation navigation-next " aria-label="Next page: メモリ解放"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>
