@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
-        <title>Strings | Rust by Example</title>
+        <title>文字列 | Rust by Example</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.5.0">
@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="17.3" data-basepath=".." data-revision="1467727850813">
+    <div class="book" data-level="17.3" data-basepath=".." data-revision="1467910478776">
     
 
 <div class="book-summary">
@@ -2264,7 +2264,7 @@
                         
                             <b>17.</b>
                         
-                         Std library types
+                         標準ライブラリの型
                     </a>
                 
             
@@ -2281,7 +2281,7 @@
                         
                             <b>17.1.</b>
                         
-                         Box, stack and heap
+                         Box, スタックとヒープ
                     </a>
                 
             
@@ -2297,7 +2297,7 @@
                         
                             <b>17.2.</b>
                         
-                         Vectors
+                         ベクタ型
                     </a>
                 
             
@@ -2313,7 +2313,7 @@
                         
                             <b>17.3.</b>
                         
-                         Strings
+                         文字列
                     </a>
                 
             
@@ -2399,7 +2399,7 @@
                         
                             <b>17.7.</b>
                         
-                         HashMap
+                         ハッシュマップ
                     </a>
                 
             
@@ -2416,7 +2416,7 @@
                         
                             <b>17.7.1.</b>
                         
-                         Alternate/custom key types
+                         key型の変種
                     </a>
                 
             
@@ -2432,7 +2432,7 @@
                         
                             <b>17.7.2.</b>
                         
-                         HashSet
+                         ハッシュ集合
                     </a>
                 
             
@@ -2858,51 +2858,54 @@
                 
                     <section class="normal" id="section-gitbook_128">
                     
-                        <h2 id="173-strings">17.3 Strings</h2>
-<p>There are two types of strings in Rust: <code>String</code> and <code>&amp;str</code>.</p>
-<p>A <code>String</code> is stored as a vector of bytes (<code>Vec&lt;u8&gt;</code>), but guaranteed to
-always be a valid UTF-8 sequence. <code>String</code> is heap allocated, growable and not
-null terminated.</p>
-<p><code>&amp;str</code> is a slice (<code>&amp;[u8]</code>) that always points to a valid UTF-8 sequence, and
-can be used to view into a <code>String</code>, just like <code>&amp;[T]</code> is a view into <code>Vec&lt;T&gt;</code>.</p>
+                        <h2 id="173-">17.3 文字列</h2>
+<!-- There are two types of strings in Rust: `String` and `&str`. -->
+<p>Rustには文字列を扱う型が2つあります。<code>String</code>と<code>&amp;str</code>です。</p>
+<!-- A `String` is stored as a vector of bytes (`Vec<u8>`), but guaranteed to
+always be a valid UTF-8 sequence. `String` is heap allocated, growable and not
+null terminated. -->
+<p><code>String</code>は有効なUTF-8の配列であることを保証されたバイトのベクタ(<code>Vec&lt;u8&gt;</code>)として保持されます。ヒープ上に保持され、伸長可能で、末端にnull文字を含みません。</p>
+<!-- `&str` is a slice (`&[u8]`) that always points to a valid UTF-8 sequence, and
+can be used to view into a `String`, just like `&[T]` is a view into `Vec<T>`. -->
+<p><code>&amp;str</code>は有効なUTF-8の配列のスライス(<code>&amp;[u8]</code>)で、いつでも<code>String</code>に変換することができます。<code>&amp;[T]</code>がいつでも<code>Vec&lt;T&gt;</code>に変換できるのと同様です。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
 <div id="editor">fn main() {
-    // (all the type annotations are superfluous)
-    // A reference to a string allocated in read only memory
+    // (以下の例では型を明示していますが、これらは必須ではありません。)
+    // read only memory上に割り当てられた文字列への参照
     let pangram: &amp;&#39;static str = &quot;the quick brown fox jumps over the lazy dog&quot;;
     println!(&quot;Pangram: {}&quot;, pangram);
 
-    // Iterate over words in reverse, no new string is allocated
+    // 単語を逆順にイテレートする。新しい文字列の割り当ては起こらない。
     println!(&quot;Words in reverse&quot;);
     for word in pangram.split&#95;whitespace().rev() {
         println!(&quot;&gt; {}&quot;, word);
     }
 
-    // Copy chars into a vector, sort and remove duplicates
+    // 文字をベクトルにコピー。ソートして重複を除去
     let mut chars: Vec&lt;char&gt; = pangram.chars().collect();
     chars.sort();
     chars.dedup();
 
-    // Create an empty and growable &#96;String&#96;
+    // 中身が空で、伸長可能な&#96;String&#96;を作成
     let mut string = String::new();
     for c in chars {
-        // Insert a char at the end of string
+        // 文字を文字列の末端に挿入
         string.push(c);
-        // Insert a string at the end of string
+        // 文字列を文字列の末端に挿入
         string.push&#95;str(&quot;, &quot;);
     }
 
-    // The trimmed string is a slice to the original string, hence no new
-    // allocation is performed
+    // 文字列のトリミング(特定文字種の除去)はオリジナルの文字列のスライスを
+    // 返すので、新規のメモリ割り当ては発生しない。
     let chars&#95;to&#95;trim: &amp;[char] = &amp;[&#39; &#39;, &#39;,&#39;];
     let trimmed&#95;str: &amp;str = string.trim&#95;matches(chars&#95;to&#95;trim);
     println!(&quot;Used characters: {}&quot;, trimmed&#95;str);
 
-    // Heap allocate a string
+    // 文字列をヒープに割り当てる。
     let alice = String::from(&quot;I like dogs&quot;);
-    // Allocate new memory and store the modified string there
+    // 新しくメモリを確保し、変更を加えた文字列をそこに割り当てる。
     let bob: String = alice.replace(&quot;dog&quot;, &quot;cat&quot;);
 
     println!(&quot;Alice says: {}&quot;, alice);
@@ -2911,10 +2914,11 @@ can be used to view into a <code>String</code>, just like <code>&amp;[T]</code> 
 <div id="result"></div>
 </div>
 
-<p>More <code>str</code>/<code>String</code> methods can be found under the
-<a href="http://doc.rust-lang.org/std/str/" target="_blank">std::str</a> and
-<a href="http://doc.rust-lang.org/std/string/" target="_blank">std::string</a>
-modules</p>
+<!-- More `str`/`String` methods can be found under the
+[std::str][str] and
+[std::string][string]
+modules -->
+<p><code>str</code>/<code>String</code>のメソッドをもっと見たい場合は<a href="http://doc.rust-lang.org/std/str/" target="_blank">std::str</a>、<a href="http://doc.rust-lang.org/std/string/" target="_blank">std::string</a>モジュールを参照してください。</p>
 
                     
                     </section>
@@ -2925,7 +2929,7 @@ modules</p>
         </div>
 
         
-        <a href="../std/vec.html" class="navigation navigation-prev " aria-label="Previous page: Vectors"><i class="fa fa-angle-left"></i></a>
+        <a href="../std/vec.html" class="navigation navigation-prev " aria-label="Previous page: ベクタ型"><i class="fa fa-angle-left"></i></a>
         
         
         <a href="../std/option.html" class="navigation navigation-next " aria-label="Next page: `Option`"><i class="fa fa-angle-right"></i></a>

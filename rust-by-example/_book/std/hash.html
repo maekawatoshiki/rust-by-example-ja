@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
-        <title>HashMap | Rust by Example</title>
+        <title>ハッシュマップ | Rust by Example</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.5.0">
@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="17.7" data-basepath=".." data-revision="1467727850813">
+    <div class="book" data-level="17.7" data-basepath=".." data-revision="1467910478776">
     
 
 <div class="book-summary">
@@ -2264,7 +2264,7 @@
                         
                             <b>17.</b>
                         
-                         Std library types
+                         標準ライブラリの型
                     </a>
                 
             
@@ -2281,7 +2281,7 @@
                         
                             <b>17.1.</b>
                         
-                         Box, stack and heap
+                         Box, スタックとヒープ
                     </a>
                 
             
@@ -2297,7 +2297,7 @@
                         
                             <b>17.2.</b>
                         
-                         Vectors
+                         ベクタ型
                     </a>
                 
             
@@ -2313,7 +2313,7 @@
                         
                             <b>17.3.</b>
                         
-                         Strings
+                         文字列
                     </a>
                 
             
@@ -2399,7 +2399,7 @@
                         
                             <b>17.7.</b>
                         
-                         HashMap
+                         ハッシュマップ
                     </a>
                 
             
@@ -2416,7 +2416,7 @@
                         
                             <b>17.7.1.</b>
                         
-                         Alternate/custom key types
+                         key型の変種
                     </a>
                 
             
@@ -2432,7 +2432,7 @@
                         
                             <b>17.7.2.</b>
                         
-                         HashSet
+                         ハッシュ集合
                     </a>
                 
             
@@ -2858,16 +2858,18 @@
                 
                     <section class="normal" id="section-gitbook_123">
                     
-                        <h2 id="177-hashmap">17.7 HashMap</h2>
-<p>Where vectors store values by an integer index, <code>HashMap</code>s store values by key. 
-<code>HashMap</code> keys can be booleans, integers, strings, 
-or any other type that implements the <code>Eq</code> and <code>Hash</code> traits. 
-More on this in the next section.</p>
-<p>Like vectors, <code>HashMap</code>s are growable, but HashMaps can also shrink themselves 
-when they have excess space. 
-You can create a HashMap with a certain starting capacity using 
-<code>HashMap::with_capacity(uint)</code>, or use <code>HashMap::new()</code> to get a HashMap 
-with a default initial capacity (recommended).</p>
+                        <h2 id="177-">17.7 ハッシュマップ</h2>
+<!-- Where vectors store values by an integer index, `HashMap`s store values by key.
+`HashMap` keys can be booleans, integers, strings,
+or any other type that implements the `Eq` and `Hash` traits.
+More on this in the next section. -->
+<p>ベクタ型が値を整数のインデックスで保持するのに対し、<code>HashMap</code>ではキーで保持する。<code>HashMap</code>のキーはブーリアン、整数、文字列等の<code>Eq</code>あるいは<code>Hash</code>トレイトを保持する型なら何でもOKです。後でより詳しく見ていきます。</p>
+<!-- Like vectors, `HashMap`s are growable, but HashMaps can also shrink themselves
+when they have excess space.
+You can create a HashMap with a certain starting capacity using
+`HashMap::with_capacity(uint)`, or use `HashMap::new()` to get a HashMap
+with a default initial capacity (recommended). -->
+<p>ベクタ型と同様、伸長可能ですが、<code>HashMap</code>の場合さらに、スペースが余っているときには小さくすることも可能です。<code>HashMap</code>を一定の容量のエリアに作成するときは<code>HashMap::with_capacity(uint)</code>を、デフォルトの容量で作成するときは<code>HashMap::new()</code>を用います。後者が推奨されています。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
@@ -2875,7 +2877,7 @@ with a default initial capacity (recommended).</p>
 
 fn call(number: &amp;str) -&gt; &amp;str {
     match number {
-        &quot;798-1364&quot; =&gt; &quot;We&#39;re sorry, the call cannot be completed as dialed. 
+        &quot;798-1364&quot; =&gt; &quot;We&#39;re sorry, the call cannot be completed as dialed.
             Please hang up and try again.&quot;,
         &quot;645-7689&quot; =&gt; &quot;Hello, this is Mr. Awesome&#39;s Pizza. My name is Fred.
             What can I get for you today?&quot;,
@@ -2883,7 +2885,7 @@ fn call(number: &amp;str) -&gt; &amp;str {
     }
 }
 
-fn main() { 
+fn main() {
     let mut contacts = HashMap::new();
 
     contacts.insert(&quot;Daniel&quot;, &quot;798-1364&quot;);
@@ -2891,14 +2893,16 @@ fn main() {
     contacts.insert(&quot;Katie&quot;, &quot;435-8291&quot;);
     contacts.insert(&quot;Robert&quot;, &quot;956-1745&quot;);
 
-    // Takes a reference and returns Option&lt;&amp;V&gt;
+    // 参照をとり、Option&lt;&amp;V&gt;を返す。
     match contacts.get(&amp;&quot;Daniel&quot;) {
         Some(&amp;number) =&gt; println!(&quot;Calling Daniel: {}&quot;, call(number)),
         &#95; =&gt; println!(&quot;Don&#39;t have Daniel&#39;s number.&quot;),
     }
 
-    // &#96;HashMap::insert()&#96; returns &#96;None&#96;
-    // if the inserted value is new, &#96;Some(value)&#96; otherwise
+    // &#96;HashMap::insert()&#96;は
+    // insertされた値が新しい場合は&#96;None&#96;を
+    // そうでなければ&#96;Some(value)&#96;を返す。
+
     contacts.insert(&quot;Daniel&quot;, &quot;164-6743&quot;);
 
     match contacts.get(&amp;&quot;Ashley&quot;) {
@@ -2906,20 +2910,21 @@ fn main() {
         &#95; =&gt; println!(&quot;Don&#39;t have Ashley&#39;s number.&quot;),
     }
 
-    contacts.remove(&amp;(&quot;Ashley&quot;)); 
+    contacts.remove(&amp;(&quot;Ashley&quot;));
 
-    // &#96;HashMap::iter()&#96; returns an iterator that yields 
-    // (&amp;&#39;a key, &amp;&#39;a value) pairs in arbitrary order.
+    // &#96;HashMap::iter()&#96;は(&amp;&#39;a key, &amp;&#39;a value)
+    // のペアを順不同で産出するイテレータを返す
     for (contact, &amp;number) in contacts.iter() {
-        println!(&quot;Calling {}: {}&quot;, contact, call(number)); 
+        println!(&quot;Calling {}: {}&quot;, contact, call(number));
     }
 }</div>
 <div id="result"></div>
 </div>
 
-<p>For more information on how hashing and hash maps 
-(sometimes called hash tables) work, have a look at 
-<a href="http://en.wikipedia.org/wiki/Hash_table" target="_blank">Hash Table Wikipedia</a></p>
+<!-- For more information on how hashing and hash maps
+(sometimes called hash tables) work, have a look at
+[Hash Table Wikipedia][wiki-hash] -->
+<p>ハッシングやハッシュマップ(ハッシュテーブルと呼ばれることもあります)の仕組みについて、より詳しく知りたい場合は<a href="http://en.wikipedia.org/wiki/Hash_table" target="_blank">Wikipediaのハッシュテーブルのページ</a>を見てください。</p>
 
                     
                     </section>
@@ -2933,7 +2938,7 @@ fn main() {
         <a href="../std/panic.html" class="navigation navigation-prev " aria-label="Previous page: `panic!`"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../std/hash/alt_key_types.html" class="navigation navigation-next " aria-label="Next page: Alternate/custom key types"><i class="fa fa-angle-right"></i></a>
+        <a href="../std/hash/alt_key_types.html" class="navigation navigation-next " aria-label="Next page: key型の変種"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

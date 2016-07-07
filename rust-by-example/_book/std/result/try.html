@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="17.5.1" data-basepath="../.." data-revision="1467727850813">
+    <div class="book" data-level="17.5.1" data-basepath="../.." data-revision="1467910478776">
     
 
 <div class="book-summary">
@@ -2264,7 +2264,7 @@
                         
                             <b>17.</b>
                         
-                         Std library types
+                         標準ライブラリの型
                     </a>
                 
             
@@ -2281,7 +2281,7 @@
                         
                             <b>17.1.</b>
                         
-                         Box, stack and heap
+                         Box, スタックとヒープ
                     </a>
                 
             
@@ -2297,7 +2297,7 @@
                         
                             <b>17.2.</b>
                         
-                         Vectors
+                         ベクタ型
                     </a>
                 
             
@@ -2313,7 +2313,7 @@
                         
                             <b>17.3.</b>
                         
-                         Strings
+                         文字列
                     </a>
                 
             
@@ -2399,7 +2399,7 @@
                         
                             <b>17.7.</b>
                         
-                         HashMap
+                         ハッシュマップ
                     </a>
                 
             
@@ -2416,7 +2416,7 @@
                         
                             <b>17.7.1.</b>
                         
-                         Alternate/custom key types
+                         key型の変種
                     </a>
                 
             
@@ -2432,7 +2432,7 @@
                         
                             <b>17.7.2.</b>
                         
-                         HashSet
+                         ハッシュ集合
                     </a>
                 
             
@@ -2856,13 +2856,14 @@
                 <div class="page-inner">
                 
                 
-                    <section class="normal" id="section-gitbook_127">
+                    <section class="normal" id="section-gitbook_126">
                     
                         <h3 id="1751-try">17.5.1 <code>try!</code></h3>
-<p>Chaining results using match can get pretty untidy; luckily, the <code>try!</code> macro
-can be used to make things pretty again. The <code>try!</code> macro expands to a match
-expression, where the <code>Err(err)</code> branch expands to an early <code>return Err(err)</code>,
-and the <code>Ok(ok)</code> branch expands to an <code>ok</code> expression.</p>
+<!-- Chaining results using match can get pretty untidy; luckily, the `try!` macro
+can be used to make things pretty again. The `try!` macro expands to a match
+expression, where the `Err(err)` branch expands to an early `return Err(err)`,
+and the `Ok(ok)` branch expands to an `ok` expression. -->
+<p>マッチを使用して結果をチェインするのは中々面倒です。幸いなことに、<code>try!</code>マクロを使用すればイケてるコードに戻すことができます。<code>try!</code>マクロはマッチ構文に展開され、<code>Err(err)</code>を返す分岐は早い段階で<code>return Err(err)</code>し、<code>Ok(ok)</code>を返す分岐は<code>ok</code>に展開されます。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
@@ -2900,12 +2901,12 @@ and the <code>Ok(ok)</code> branch expands to an <code>ok</code> expression.</p>
         }
     }
 
-    // Intermediate function
+    // &#96;op&#96;と、他の3つの関数との間の関数
     fn op&#95;(x: f64, y: f64) -&gt; MathResult {
-        // if &#96;div&#96; &quot;fails&quot;, then &#96;DivisionByZero&#96; will be &#96;return&#96;ed
+        // もし&#96;div&#96;が「失敗」したら、&#96;DivisionByZero&#96;が返される。
         let ratio = try!(div(x, y));
 
-        // if &#96;ln&#96; &quot;fails&quot;, then &#96;NegativeLogarithm&#96; will be &#96;return&#96;ed
+        // もし&#96;ln&#96;が「失敗」したら、&#96;NegativeLogarithm&#96;が返される
         let ln = try!(ln(ratio));
 
         sqrt(ln)
@@ -2932,8 +2933,9 @@ fn main() {
 <div id="result"></div>
 </div>
 
-<p>Be sure to check the <a href="http://doc.rust-lang.org/std/result/index.html" target="_blank">documentation</a>,
-as there are many methods to map/compose <code>Result</code>.</p>
+<!-- Be sure to check the [documentation][docs],
+as there are many methods to map/compose `Result`. -->
+<p><a href="http://doc.rust-lang.org/std/result/index.html" target="_blank">公式ドキュメント</a>をチェックすることをオススメします。<code>Result</code>型を扱う関数や<code>Result</code>型のメソッドが多く挙げられています。</p>
 
                     
                     </section>
