@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
-        <title>Testing | Rust by Example</title>
+        <title>テスト | Rust by Example</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.5.0">
@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="19.2" data-basepath=".." data-revision="1467980149496">
+    <div class="book" data-level="19.2" data-basepath=".." data-revision="1468075268774">
     
 
 <div class="book-summary">
@@ -2706,7 +2706,7 @@
                         
                             <b>19.</b>
                         
-                         Meta
+                         周辺情報
                     </a>
                 
             
@@ -2723,7 +2723,7 @@
                         
                             <b>19.1.</b>
                         
-                         Documentation
+                         ドキュメンテーション
                     </a>
                 
             
@@ -2739,7 +2739,7 @@
                         
                             <b>19.2.</b>
                         
-                         Testing
+                         テスト
                     </a>
                 
             
@@ -2858,24 +2858,27 @@
                 
                     <section class="normal" id="section-gitbook_90">
                     
-                        <h2 id="192-testing">19.2 Testing</h2>
-<p>Functions can be tested by using these <a href="/attribute.html">attributes</a>:</p>
+                        <h2 id="192-">19.2 テスト</h2>
+<!-- Functions can be tested by using these [attributes][attributes]: -->
+<p>関数のテストは以下の<a href="../attribute.html">アトリビュート</a>を用いて行うことができます。</p>
+<!-- * `#[test]` marks a function as a unit test. The function must take zero
+parameters and return nothing.
+* `#[should_panic]` marks a function as a panicking test. -->
 <ul>
-<li><code>#[test]</code> marks a function as a unit test. The function must take zero
-parameters and return nothing.</li>
-<li><code>#[should_panic]</code> marks a function as a panicking test.</li>
+<li><code>#[test]</code>は関数をユニットテスト化します。その場合その関数は引数と返り値が空でなくてはなりません。</li>
+<li><code>#[should_panic]</code>はパニックを引き起こすようなテストに用います。</li>
 </ul>
 <pre><code class="lang-rust"><span class="hljs-comment">// unit_test.rs</span>
-<span class="hljs-comment">// Conditionally compile `main` only when the test-suite is *not* being run.</span>
+<span class="hljs-comment">// テストを実行しない時に限り、`main`をコンパイルする。</span>
 <span class="hljs-preprocessor">#[cfg(not(test))]</span>
 <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() {
     <span class="hljs-built_in">println!</span>(<span class="hljs-string">"If you see this, the tests were not compiled nor ran!"</span>);
 }
 
-<span class="hljs-comment">// Conditionally compile the module `test` only when the test-suite is run.</span>
+<span class="hljs-comment">// テストを実行するときのみ`test`モジュールをコンパイルする。</span>
 <span class="hljs-preprocessor">#[cfg(test)]</span>
 <span class="hljs-keyword">mod</span> test {
-    <span class="hljs-comment">// A helper function `distance_test` will need.</span>
+    <span class="hljs-comment">// `distance_test`が必要とするヘルパーメソッド</span>
     <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">distance</span></span>(a: (<span class="hljs-keyword">f32</span>, <span class="hljs-keyword">f32</span>), b: (<span class="hljs-keyword">f32</span>, <span class="hljs-keyword">f32</span>)) -&gt; <span class="hljs-keyword">f32</span> {
         (
             (b.<span class="hljs-number">0</span> - a.<span class="hljs-number">0</span>).powi(<span class="hljs-number">2</span>) +
@@ -2895,21 +2898,23 @@ parameters and return nothing.</li>
     }
 }
 </code></pre>
-<p>Tests can be run with <code>cargo test</code> or <code>rustc --test</code>.</p>
+<!-- Tests can be run with `cargo test` or `rustc --test`. -->
+<p>テストは<code>cargo test</code>あるいは<code>rustc --test</code>で実行します。</p>
 <pre><code>$ rustc --test unit_test.rs
-$ ./unit_test 
+$ ./unit_test
 
 running 2 tests
 test test::distance_test ... ok
 test test::failing_test ... ok
 
 test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured
-</code></pre><p>If <code>--test</code> were not included, then this would happen</p>
+</code></pre><!-- If `--test` were not included, then this would happen -->
+<p>もし<code>--test</code>フラグがない場合、出力は以下のようになります。</p>
 <pre><code>$ rustc unit_test.rs
 $ ./unit_test
 If you see this, the tests were not compiled nor ran!
 </code></pre><h3 id="see-also">See also:</h3>
-<p><a href="/attribute.html">attributes</a>, <a href="/attribute/cfg.html">conditional compilation</a>, and <a href="/mod.html"><code>mod</code></a>.</p>
+<p><a href="../attribute.html">アトリビュート</a>, <a href="../attribute/cfg.html">環境に応じたコンパイル</a>, <a href="../mod.html"><code>mod</code></a>.</p>
 
                     
                     </section>
@@ -2920,7 +2925,7 @@ If you see this, the tests were not compiled nor ran!
         </div>
 
         
-        <a href="../meta/doc.html" class="navigation navigation-prev " aria-label="Previous page: Documentation"><i class="fa fa-angle-left"></i></a>
+        <a href="../meta/doc.html" class="navigation navigation-prev " aria-label="Previous page: ドキュメンテーション"><i class="fa fa-angle-left"></i></a>
         
         
         <a href="../unsafe.html" class="navigation navigation-next " aria-label="Next page: Unsafe operations"><i class="fa fa-angle-right"></i></a>

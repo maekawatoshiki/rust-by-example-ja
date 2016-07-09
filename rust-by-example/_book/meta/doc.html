@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
-        <title>Documentation | Rust by Example</title>
+        <title>ドキュメンテーション | Rust by Example</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.5.0">
@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="19.1" data-basepath=".." data-revision="1467980149496">
+    <div class="book" data-level="19.1" data-basepath=".." data-revision="1468075268774">
     
 
 <div class="book-summary">
@@ -2706,7 +2706,7 @@
                         
                             <b>19.</b>
                         
-                         Meta
+                         周辺情報
                     </a>
                 
             
@@ -2723,7 +2723,7 @@
                         
                             <b>19.1.</b>
                         
-                         Documentation
+                         ドキュメンテーション
                     </a>
                 
             
@@ -2739,7 +2739,7 @@
                         
                             <b>19.2.</b>
                         
-                         Testing
+                         テスト
                     </a>
                 
             
@@ -2858,31 +2858,34 @@
                 
                     <section class="normal" id="section-gitbook_89">
                     
-                        <h2 id="191-documentation">19.1 Documentation</h2>
-<p>Doc comments are very useful for big projects that require documentation. When
-running <a href="http://doc.rust-lang.org/book/documentation.html" target="_blank">Rustdoc</a>, these are the comments that get compiled into
-documentation. They are denoted by a <code>///</code>, and support <a href="https://en.wikipedia.org/wiki/Markdown" target="_blank">Markdown</a>.</p>
+                        <h2 id="191-">19.1 ドキュメンテーション</h2>
+<!-- Doc comments are very useful for big projects that require documentation. When
+running [Rustdoc][1], these are the comments that get compiled into
+documentation. They are denoted by a `///`, and support [Markdown][2]. -->
+<p>ドキュメンテーションコメントとは<a href="http://doc.rust-lang.org/book/documentation.html" target="_blank">Rustdoc</a>を使用した際にドキュメントにコンパイルされるコメントのことです。<code>///</code>によって普通のコメントと区別され、ここでは<a href="https://en.wikipedia.org/wiki/Markdown" target="_blank">Markdown</a>を使用することができます。ドキュメンテーションコメントは大規模なプロジェクトの際に非常に有用です。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
-<div id="editor">/// A human being is represented here
+<div id="editor">/// あらゆる人物はここに代表されます。
 pub struct Person {
-    /// A person must have a name, no matter how much Juliet may hate it
+    /// ジュリエットがどんなに名前というものを嫌っていようと、
+    /// 人物には名前が必要です。
     name: String,
 }
 
 impl Person {
-    /// Returns a person with the name given them
+    /// 与えられた名前を持つpersonをを返します。
     ///
     /// # Arguments
     ///
-    /// &#42; &#96;name&#96; - A string slice that holds the name of the person
+    /// &#42; &#96;name&#96; - &#96;person&#96;の名前を表す文字列のスライス
     ///
     /// # Example
     ///
     /// &#96;&#96;&#96;
-    /// // You can have rust code between fences inside the comments
-    /// // If you pass --test to Rustdoc, it will even test it for you!
+    /// // バッククォートによってRustのコードをコメント中に挟むこと
+    /// // もできます。Rustdocに--testを渡せば、テストも行えます！
+    /// // (訳注: pythonのdoctestと同じです。)
     /// let person = Person::new(&quot;name&quot;);
     /// &#96;&#96;&#96;
     pub fn new(name: &amp;str) -&gt; Person {
@@ -2891,9 +2894,10 @@ impl Person {
         }
     }
 
-    /// Gives a friendly hello!
+    /// フレンドリーに挨拶しましょう！
     ///
-    /// Says &quot;Hello, [name]&quot; to the &#96;Person&#96; it is called on.
+    /// このメソッドを呼び出した&#96;Person&#96;に対して&quot;Hello, [name]&quot;
+    /// と話しかけます。
     pub fn hello(&amp; self) {
         println!(&quot;Hello, {}!&quot;, self.name);
     }
@@ -2917,10 +2921,10 @@ fn main() {
         </div>
 
         
-        <a href="../meta.html" class="navigation navigation-prev " aria-label="Previous page: Meta"><i class="fa fa-angle-left"></i></a>
+        <a href="../meta.html" class="navigation navigation-prev " aria-label="Previous page: 周辺情報"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../meta/test.html" class="navigation navigation-next " aria-label="Next page: Testing"><i class="fa fa-angle-right"></i></a>
+        <a href="../meta/test.html" class="navigation navigation-next " aria-label="Next page: テスト"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>
