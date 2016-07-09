@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
-        <title>Unsafe operations | Rust by Example</title>
+        <title>安全でない操作 | Rust by Example</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.5.0">
@@ -36,7 +36,7 @@
 
 
         
-    <div class="book" data-level="20" data-basepath="." data-revision="1468075804610">
+    <div class="book" data-level="20" data-basepath="." data-revision="1468077263624">
     
 
 <div class="book-summary">
@@ -2758,7 +2758,7 @@
                         
                             <b>20.</b>
                         
-                         Unsafe operations
+                         安全でない操作
                     </a>
                 
             
@@ -2856,24 +2856,37 @@
                 
                     <section class="normal" id="section-gitbook_151">
                     
-                        <h1 id="20-unsafe-operations">20 Unsafe operations</h1>
-<p>As an introduction to this section, to borrow from <a href="http://doc.rust-lang.org/book/unsafe.html" target="_blank">the official docs</a>, &quot;one should try to minimize the
-amount of unsafe code in a code base.&quot; With that in mind, let&#39;s get started!
+                        <h1 id="20-">20 安全でない操作</h1>
+<!-- As an introduction to this section, to borrow from [the official docs](
+http://doc.rust-lang.org/book/unsafe.html), "one should try to minimize the
+amount of unsafe code in a code base." With that in mind, let's get started!
 Unsafe blocks in Rust are used to bypass protections put in place by the
 compiler; specifically, there are four primary things that unsafe blocks are
-used for:</p>
+used for: -->
+<p>この章の内容を見る前に、<a href="http://doc.rust-lang.org/book/unsafe.html" target="_blank">公式ドキュメント</a>から引用した以下の文章をお読みください。</p>
+<blockquote>
+<p>コードベース中の、アンセーフな操作をするコードの量は、可能な限り小さく無くてはならない。</p>
+</blockquote>
+<p>この戒めを頭に叩き込んだ上で、さあはじめましょう！</p>
+<p>Rustにおいて、アンセーフなブロックはコンパイラのチェックをスルーするために使われます。具体的には以下の4つの主要なユースケースがあります。</p>
+<!-- * dereferencing raw pointers
+* calling a function over FFI (but this is covered in a different part of the
+  book)
+* changing types through `std::cast::transmute`
+* inline assembly -->
 <ul>
-<li>dereferencing raw pointers</li>
-<li>calling a function over FFI (but this is covered in a different part of the
-book)</li>
-<li>changing types through <code>std::cast::transmute</code></li>
-<li>inline assembly</li>
+<li>生ポインタのデリファレンス</li>
+<li>FFIを介した他言語関数の実行(別の章ですでに解説したので、ここではしません。)</li>
+<li><code>std::cast::transmute</code>による型の変更</li>
+<li>インラインアセンブリ</li>
 </ul>
-<h3 id="raw-pointers">Raw Pointers</h3>
-<p>Raw pointers <code>*</code> and references <code>&amp;T</code> function similarly, but references are
+<!-- ### Raw Pointers
+Raw pointers `*` and references `&T` function similarly, but references are
 always safe because they are guaranteed to point to valid data due to the
 borrow checker. Dereferencing a raw pointer can only be done through an unsafe
-block.</p>
+block. -->
+<h3 id="">生ポインタ</h3>
+<p>生ポインタ<code>*</code>と参照<code>&amp;T</code>はよく似た機能を持ちますが、後者は必ず有効なデータを指していることが借用チェッカーによって保証されているので、常に安全です。生ポインタのデリファレンスはアンセーフなブロックでしか実行できません。</p>
 <pre><code class="lang-rust"><span class="hljs-comment">// pointer.rs</span>
 <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() {
     <span class="hljs-keyword">let</span> raw_p: *<span class="hljs-keyword">const</span> <span class="hljs-keyword">u32</span> = &amp;<span class="hljs-number">10</span>;
@@ -2883,9 +2896,11 @@ block.</p>
     }
 }
 </code></pre>
-<h3 id="transmute">Transmute</h3>
-<p>Allows simple conversion from one type to another, however both types must have
-the same size and alignment:</p>
+<!-- ### Transmute
+Allows simple conversion from one type to another, however both types must have
+the same size and alignment: -->
+<h3 id="">トランスミュート</h3>
+<p>ある型から別の型へのシンプルな変換を可能にします。ただし双方の型がサイズとメモリ上への配置の仕方において同じでなくてはなりません。</p>
 <pre><code class="lang-rust"><span class="hljs-comment">// transmute.rs</span>
 <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() {
     <span class="hljs-keyword">let</span> u: &amp;[<span class="hljs-keyword">u8</span>] = &amp;[<span class="hljs-number">49</span>, <span class="hljs-number">50</span>, <span class="hljs-number">51</span>];
