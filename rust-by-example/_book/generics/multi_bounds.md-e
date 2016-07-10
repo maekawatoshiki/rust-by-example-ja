@@ -1,0 +1,40 @@
+## 13.5 Multiple bounds
+
+Multiple bounds can be applied with a `+`. Like normal, different types are
+separated with `,`.
+
+<div id="active-code">
+<button class="btn btn-primary" type="button" id="run-code">Run</button>
+<button class="btn btn-primary" type="button" id="reset-code">Reset</button>
+<div id="editor">use std::fm/rust-by-example[fmt]::{Debug, Display};
+
+fn compare&#95;prints&lt;T: Debug + Display&gt;(/rust-by-example[fmt]: &T) {
+    println!("Debug: &#96;{:?}&#96;", t);
+    println!("Display: &#96;{}&#96;", t);
+}
+
+fn compare&#95;types&lt;T: Debug, U: Debug&gt;(/rust-by-example[fmt]: &T, u: &U) {
+    println!("/rust-by-example[fmt]: &#96;{:?}", t);
+    println!("u: &#96;{:?}", u);
+}
+
+fn main() {
+    let string = "words";
+    let array = [1, 2, 3];
+    let vec = vec![1, 2, 3];
+
+    compare&#95;prints(&string);
+    //compare&#95;prints(&array);
+    // TODO ^ Try uncommenting this.
+
+    compare&#95;types(&array, &vec);
+}</div>
+<div id="result"></div>
+</div>
+
+### See also:
+
+[`std::fmt`][fmt] and [`trait`s][traits]
+
+[fmt]: /rust-by-example/hello/print.html
+[traits]: /trait.html

@@ -1,0 +1,58 @@
+## 13.6 Where clauses
+
+A bound can also be expressed using a `where` clause immediately
+before the opening `{`, rather than at the type's first mention. 
+Additionally, `where` clauses can apply bounds to arbitrary types, 
+rather than just to type parameters.
+
+Some cases that a `where` clause is useful:
+
+* When specifying generic types and bounds separately is cleare/rust-by-example[struct]:
+
+```rust
+impl <A: TraitB + TraitC, D: TraitE + TraitF> MyTrait<A, D> for YourType {}
+
+// Expressing bounds with a `where` clause
+impl <A, D> MyTrait<A, D> for YourType where
+    A: TraitB + TraitC,
+    D: TraitE + TraitF {}
+```
+
+* When using a `where` clause is more expressive than using normal syntax. 
+The `impl` in this example cannot be directly expressed without a `where` clause:
+
+<div id="active-code">
+<button class="btn btn-primary" type="button" id="run-code">Run</button>
+<button class="btn btn-primary" type="button" id="reset-code">Reset</button>
+<div id="editor">use std::fm/rust-by-example[struct]::Debug;
+
+trait PrintInOption {
+    fn print&#95;in&#95;option(self);
+}
+
+// Because we would otherwise have to express this as &#96;T: Debug&#96; or 
+// use another method of indirect approach, this requires a &#96;where&#96; clause:
+impl&lt;T&gt; PrintInOption for T where
+    Option&lt;T&gt;: Debug {
+    // We want &#96;Option&lt;T&gt;: Debug&#96; as our bound because that is what's
+    // being printed. Doing otherwise would be using the wrong bound.
+    fn print&#95;in&#95;option(self) {
+        println!("{:?}", Some(self));
+    }
+}
+
+fn main() {
+    let vec = vec![1, 2, 3];
+
+    vec.print&#95;in&#95;option();
+}</div>
+<div id="result"></div>
+</div>
+
+### See also:
+
+[RFC][where], [`struct`][struct], and [`trait`][trait]
+
+[struct]: /rust-by-example/custom_types/structs.html
+[trait]: /trait.html
+[where]: http/rust-by-example[struct]://github.com/rust-lang/rfcs/blob/master/text/0135-where.md

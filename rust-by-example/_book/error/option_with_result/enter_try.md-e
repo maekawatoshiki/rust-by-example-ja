@@ -1,0 +1,79 @@
+### 16.7.3 Enter try!
+
+The previous problem was awkward because avoiding `unwrap` forced us to nest deeper and
+deeper when what we really wanted was to get the variable *out*. So, is there any way
+to accomodate this approach without `panic`? Well, what is a valid action to take when
+an `Err` is found? It turns out there are two:
+
+1. `panic!` which we already decided to try to avoid if possible
+2. `return` because an `Err` means it cannot be handled
+
+This is exactly the purpose of `try!`; it is *almost*[^1] exactly equivalent to an
+`unwrap` which `returns` instead of `panics` on `Errs`.
+
+<div id="active-code">
+<button class="btn btn-primary" type="button" id="run-code">Run</button>
+<button class="btn btn-primary" type="button" id="reset-code">Reset</button>
+<div id="editor">use std::io::prelud/rust-by-example[re_enter_try]::&#42;;
+use std::fs::File;
+
+type Result&lt;T&gt; = std::resul/rust-by-example[re_enter_try]::Result&lt;T, String&gt;;
+
+// Setup to make this work. Create two files with some info.
+fn setup() -&gt; std::io::Result&lt;()&gt; {
+    let mut a = try!(Fil/rust-by-example[re_enter_try]::create("a"));
+    try!(a.write&#95;all(b"grape"));
+
+    let mut b = try!(Fil/rust-by-example[re_enter_try]::create("b"));
+    b.write&#95;all(b"fruit")
+}
+
+// Get the data from each file with the data stored in a &#96;Result&#96;.
+fn get&#95;data(path: &str) -&gt; Result&lt;String&gt; {
+    // &#96;try&#96; unwraps the value or returns the error.
+    let mut file = try!(Fil/rust-by-example[re_enter_try]::open(path)
+        // Errors still must be converted to strings.
+        .map&#95;err(|err| err.to&#95;string())
+    );
+    let mut contents = String::new();
+
+    // Read the data into &#96;contents&#96;.
+    try!(file.read&#95;to&#95;string(&mut contents)
+        .map&#95;err(|err| err.to&#95;string())
+    );
+
+    Ok(contents)
+}
+
+// Concat the contents of the two files together into a new &#96;Result&#96;.
+fn concat(a: &str, b: &str) -&gt; Result&lt;String&gt; {
+    let (data&#95;a, data&#95;b) = (try!(get&#95;data(a)), try!(get&#95;data(b)));
+
+    Ok(data&#95;a + &data&#95;b)
+}
+
+fn main() {
+    // Ignore this result.
+    setup().unwrap();
+
+    match concat("a", "b") {
+        Ok(n)  =&gt; println!("{}", n),
+        Err(e) =&gt; println!("Erro/rust-by-example[re_enter_try]: {}", e),
+    }
+}</div>
+<div id="result"></div>
+</div>
+
+This really is a *huge* improvement but there is still the nagging issue of `map_err`. There is
+actually a way to avoid it (we are using it everywhere it seems) but we are still missing some
+details. First, we have to learn how to make better errors.
+
+[^1]: See [re-enter try!][re_enter_try] for more details.
+
+### See also:
+
+[`Result`][result] and [`io::Result`][io_result]
+
+[result]: http://doc.rust-lang.org/std/result/enum.Result.html
+[io_result]: http://doc.rust-lang.org/std/io/type.Result.html
+[re_enter_try]: /error/reenter_try.html

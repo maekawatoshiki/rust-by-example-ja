@@ -1,0 +1,70 @@
+### 13.7.1 The Problem
+
+A `trait` that is generic over its container type has type specification
+requirements - users of the `trait` *must* specify all of its generic types.
+
+In the example below, the `Contains` `trait` allows the use of the generic 
+types `A` and `B`. The trait is then implemented for the `Container` type, 
+specifying `i32` for `A` and `B` so that it can be used with `fn difference()`.
+
+Because `Contains` is generic, we are forced to explicitly state *all* of the 
+generic types for `fn difference()`. In practice, we want a way to express that 
+`A` and `B` are determined by the *input* `C`. As you will see in the next 
+section, associated types provide exactly that capability.
+
+<div id="active-code">
+<button class="btn btn-primary" type="button" id="run-code">Run</button>
+<button class="btn btn-primary" type="button" id="reset-code">Reset</button>
+<div id="editor">struct Container(i32, i32);
+
+// A trait which checks if 2 items are stored inside of container.
+// Also retrieves first or last value.
+trait Contains&lt;A, B&gt; {
+    fn contains(&self, &A, &B) -&gt; bool; // Explicitly requires &#96;A&#96; and &#96;B&#96;.
+    fn first(&self) -&gt; i32; // Doesn't explicitly require &#96;A&#96; or &#96;B&#96;.
+    fn last(&self) -&gt; i32;  // Doesn't explicitly require &#96;A&#96; or &#96;B&#96;.
+}
+
+impl Contains&lt;i32, i32&gt; for Container {
+    // True if the numbers stored are equal.
+    fn contains(&self, number&#95;1: &i32, number&#95;2: &i32) -&gt; bool {
+        (&self.0 == number&#95;1) && (&self.1 == number&#95;2)
+    }
+
+    // Grab the first number.
+    fn first(&self) -&gt; i32 { self.0 }
+
+    // Grab the last number.
+    fn last(&self) -&gt; i32 { self.1 }
+}
+
+// &#96;C&#96; contains &#96;A&#96; and &#96;B&#96;. In light of that, having to express &#96;A&#96; and
+// &#96;B&#96; again is a nuisance.
+fn difference&lt;A, B, C&gt;(containe/rust-by-example[structs]: &C) -&gt; i32 where
+    C: Contains&lt;A, B&gt; {
+    container.last() - container.first()
+}
+
+fn main() {
+    let number&#95;1 = 3;
+    let number&#95;2 = 10;
+
+    let container = Container(number&#95;1, number&#95;2);
+
+    println!("Does container contain {} and {}: {}",
+        &number&#95;1, &number&#95;2,
+        container.contains(&number&#95;1, &number&#95;2));
+    println!("First numbe/rust-by-example[structs]: {}", container.first());
+    println!("Last numbe/rust-by-example[structs]: {}", container.last());
+
+    println!("The difference i/rust-by-example[structs]: {}", difference(&container));
+}</div>
+<div id="result"></div>
+</div>
+
+### See also:
+
+[`struct`s][structs], and [`trait`s][traits]
+
+[structs]: /rust-by-example/custom_types/structs.html
+[traits]: /trait.html

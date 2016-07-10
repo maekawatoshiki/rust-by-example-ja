@@ -1,0 +1,50 @@
+### 14.4.4 構造体
+
+<!-- Annotation of lifetimes in structures are also similar to function/rust-by-example[structs]: -->
+構造体におけるライフタイムも関数のそれと似ている。
+
+<div id="active-code">
+<button class="btn btn-primary" type="button" id="run-code">Run</button>
+<button class="btn btn-primary" type="button" id="reset-code">Reset</button>
+<div id="editor">// &#96;i32&#96;への参照をメンバに持つ&#96;Borrowed&#96;型。
+// 参照は&#96;Borrowed&#96;自体よりも長生きでなくてはならない。
+#[derive(Debug)]
+struct Borrowed&lt;'a&gt;(&'a i32);
+
+// 同様に、ここでも参照は構造体よりも長生きでなくてはならない。
+#[derive(Debug)]
+struct NamedBorrowed&lt;'a&gt; {
+    x: &'a i32,
+    y: &'a i32,
+}
+
+// &#96;i32&#96;、あるいは&#96;i32&#96;への参照のいずれかとなる列挙型
+#[derive(Debug)]
+enum Either&lt;'a&gt; {
+    Num(i32),
+    Ref(&'a i32),
+}
+
+fn main() {
+    let x = 18;
+    let y = 15;
+
+    let single = Borrowed(&x);
+    let double = NamedBorrowed { x: &x, y: &y };
+    let reference = Eithe/rust-by-example[structs]::Ref(&x);
+    let number    = Eithe/rust-by-example[structs]::Num(y);
+
+    println!("x is borrowed in {:?}", single);
+    println!("x and y are borrowed in {:?}", double);
+    println!("x is borrowed in {:?}", reference);
+    println!("y is &#42;not&#42; borrowed in {:?}", number);
+}</div>
+<div id="result"></div>
+</div>
+
+### See also:
+
+[`structs`][structs]
+
+
+[structs]: /custom_types/structs.html

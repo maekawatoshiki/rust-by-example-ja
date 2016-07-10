@@ -1,0 +1,85 @@
+### 14.4.1 明示的アノテーション
+
+<!-- The borrow checker uses explicit lifetime annotations to determine
+how long references should be valid. In cases where lifetimes are not
+elided[^1], Rust requires explicit annotations to determine what the
+lifetime of a reference should be. The syntax for explicitly annotating
+a lifetime uses an apostrophe character as follow/rust-by-example[closures]: -->
+借用チェッカーは参照がどれだけの間有効かを決定するために、明示的なアノテーションを使用します。ライフタイムが省略[^1]されなかった場合、Rustは参照のライフタイムがどのようなものであるか、明示的なアノテーションを必要とします。
+
+```rust
+foo<'a>
+// `foo`は`'a`というライフタイムパラメータを持ちます。
+```
+
+<!-- Similar to [closures][anonymity], using lifetimes requires generics.
+Additionally, this lifetime syntax indicates that the lifetime of `foo`
+may not exceed that of `'a`. Explicit annotation of a type has the form
+`&'a T` where `'a` has already been introduced. -->
+[クロージャ][anonymity]と同様、ライフタイムの使用はジェネリクスを必要とします。もう少し詳しく言うと、この書き方は「`foo`のライフタイムは`'a`のそれを超えることはない。」ということを示しており、型を明示した場合`'a`は`&'a T`となるということです。
+
+<!-- In cases with multiple lifetimes, the syntax is simila/rust-by-example[closures]: -->
+ライフタイムが複数ある場合も、同じような構文になります。
+
+```rust
+foo<'a, 'b>
+// `foo` has lifetime parameters `'a` and `'b`
+// `foo`は`'a`と`'b`というライフタイムパラメータを持ちます。
+```
+
+<!-- In this case, the lifetime of `foo` cannot exceed that of either `'a` *or* `'b`.
+
+See the following example for explicit lifetime annotation in us/rust-by-example[closures]: -->
+この場合は、`foo`のライフタイムは`'a`、`'b`の*どちらよりも*長くなければなりません。
+以下はライフタイムを明示的に書く場合の例です。
+
+<div id="active-code">
+<button class="btn btn-primary" type="button" id="run-code">Run</button>
+<button class="btn btn-primary" type="button" id="reset-code">Reset</button>
+<div id="editor">// &#96;print&#95;refs&#96;は&#96;i32&#96;への参照を2つとり、それぞれ&#96;'a&#96;と&#96;'b&#96;という
+// ライフタイムを持つ。これらのライフタイムは最短でも&#96;print&#95;refs&#96;
+// 関数と同じになる。
+fn print&#95;refs&lt;'a, 'b&gt;(x: &'a i32, /rust-by-example[anonymity]: &'b i32) {
+    println!("x is {} and y is {}", x, y);
+}
+
+// 引数を取らないがライフタイムパラメータ&#96;'a&#96;を持つ関数。
+fn failed&#95;borrow&lt;'a&gt;() {
+    let &#95;x = 12;
+
+    // エラー: &#96;&#95;x&#96;の寿命が短すぎる。
+    //let /rust-by-example[anonymity]: &'a i32 = &&#95;x;
+    // &#96;&&#95;x&#96;のライフタイムは&#96;y&#96;のそれよりも短いため、関数内で&#96;'a&#96;を使用して
+    // 変数のライフタイムを指定しようとすると失敗する。つまり、短いライフタイム
+    // を持つ参照をより長いものに強制的に代入することはできない。
+}
+
+fn main() {
+    // 下で借用するための変数を作成
+    let (four, nine) = (4, 9);
+
+    // 2つの変数の借用(&#96;&&#96;)が関数に渡される。
+    print&#95;refs(&four, &nine);
+    // 借用された変数の寿命は、借り手のそれよりも長くなくてはならない。
+    // つまり、&#96;four&#96;、&#96;nine&#96;のライフタイムは&#96;print&#95;refs&#96;のそれよりも
+    // 長くなくてはならない。
+
+    failed&#95;borrow();
+    // &#96;failed&#95;borrow&#96;は関数のライフタイムよりも&#96;'a&#96;を長くさせるような
+    // 参照を持たないが、それでも&#96;'a&#96;のほうが長くなる。なぜならそのような
+    // 場合&#96;'a&#96;はデフォルトで&#96;'static&#96;になるからである。
+}</div>
+<div id="result"></div>
+</div>
+
+<!-- [^1]: [elision][elision] implicitly annotates lifetimes and so is different.-->
+[^1]: [省略][elision] はライフタイムが暗黙のうちに(プログラマから見えない形で)アノテートされることを指します。
+
+### See als/rust-by-example[anonymity]:
+
+[ジェネリクス][generics]、 [クロージャ][closures]
+
+[anonymity]: /rust-by-example/fn/closures/anonymity.html
+[closures]: /rust-by-example/fn/closures.html
+[elision]: /rust-by-example/scope/lifetime/elision.html
+[generics]: /generics.html
