@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="17.5" data-basepath=".." data-revision="1465698239173">
+    <div class="book" data-level="17.5" data-basepath=".." data-revision="1468168389646">
     
 
 <div class="book-summary">
@@ -1926,7 +1926,7 @@
                         
                             <b>15.</b>
                         
-                         Traits
+                         トレイト
                     </a>
                 
             
@@ -1943,7 +1943,7 @@
                         
                             <b>15.1.</b>
                         
-                         Derive
+                         継承(Derive)
                     </a>
                 
             
@@ -1959,7 +1959,7 @@
                         
                             <b>15.2.</b>
                         
-                         Operator Overloading
+                         演算子のオーバーロード
                     </a>
                 
             
@@ -1975,7 +1975,7 @@
                         
                             <b>15.3.</b>
                         
-                         Drop
+                         メモリ解放
                     </a>
                 
             
@@ -1991,7 +1991,7 @@
                         
                             <b>15.4.</b>
                         
-                         Iterators
+                         イテレータ
                     </a>
                 
             
@@ -2007,7 +2007,7 @@
                         
                             <b>15.5.</b>
                         
-                         Clone
+                         クローン
                     </a>
                 
             
@@ -2264,7 +2264,7 @@
                         
                             <b>17.</b>
                         
-                         Std library types
+                         標準ライブラリの型
                     </a>
                 
             
@@ -2281,7 +2281,7 @@
                         
                             <b>17.1.</b>
                         
-                         Box, stack and heap
+                         Box, スタックとヒープ
                     </a>
                 
             
@@ -2297,7 +2297,7 @@
                         
                             <b>17.2.</b>
                         
-                         Vectors
+                         ベクタ型
                     </a>
                 
             
@@ -2313,7 +2313,7 @@
                         
                             <b>17.3.</b>
                         
-                         Strings
+                         文字列
                     </a>
                 
             
@@ -2399,7 +2399,7 @@
                         
                             <b>17.7.</b>
                         
-                         HashMap
+                         ハッシュマップ
                     </a>
                 
             
@@ -2416,7 +2416,7 @@
                         
                             <b>17.7.1.</b>
                         
-                         Alternate/custom key types
+                         key型の変種
                     </a>
                 
             
@@ -2432,7 +2432,7 @@
                         
                             <b>17.7.2.</b>
                         
-                         HashSet
+                         ハッシュ集合
                     </a>
                 
             
@@ -2458,7 +2458,7 @@
                         
                             <b>18.</b>
                         
-                         Std misc
+                         標準ライブラリのその他
                     </a>
                 
             
@@ -2475,7 +2475,7 @@
                         
                             <b>18.1.</b>
                         
-                         Threads
+                         スレッド
                     </a>
                 
             
@@ -2491,7 +2491,7 @@
                         
                             <b>18.2.</b>
                         
-                         Channels
+                         チャネル
                     </a>
                 
             
@@ -2523,7 +2523,7 @@
                         
                             <b>18.4.</b>
                         
-                         File I/O
+                         ファイル I/O
                     </a>
                 
             
@@ -2577,7 +2577,7 @@
                         
                             <b>18.5.</b>
                         
-                         Child processes
+                         子プロセス
                     </a>
                 
             
@@ -2594,7 +2594,7 @@
                         
                             <b>18.5.1.</b>
                         
-                         Pipes
+                         パイプ
                     </a>
                 
             
@@ -2610,7 +2610,7 @@
                         
                             <b>18.5.2.</b>
                         
-                         Wait
+                         dropの延期
                     </a>
                 
             
@@ -2631,7 +2631,7 @@
                         
                             <b>18.6.</b>
                         
-                         Filesystem Operations
+                         ファイルシステムとのやり取り
                     </a>
                 
             
@@ -2647,7 +2647,7 @@
                         
                             <b>18.7.</b>
                         
-                         Program arguments
+                         引数処理
                     </a>
                 
             
@@ -2664,7 +2664,7 @@
                         
                             <b>18.7.1.</b>
                         
-                         Argument parsing
+                         引数のパース
                     </a>
                 
             
@@ -2685,7 +2685,7 @@
                         
                             <b>18.8.</b>
                         
-                         Foreign Function Interface
+                         他言語関数インターフェイス
                     </a>
                 
             
@@ -2706,7 +2706,7 @@
                         
                             <b>19.</b>
                         
-                         Meta
+                         周辺情報
                     </a>
                 
             
@@ -2723,7 +2723,7 @@
                         
                             <b>19.1.</b>
                         
-                         Documentation
+                         ドキュメンテーション
                     </a>
                 
             
@@ -2739,7 +2739,7 @@
                         
                             <b>19.2.</b>
                         
-                         Testing
+                         テスト
                     </a>
                 
             
@@ -2760,7 +2760,7 @@
                         
                             <b>20.</b>
                         
-                         Unsafe operations
+                         安全でない操作
                     </a>
                 
             
@@ -2859,22 +2859,26 @@
                     <section class="normal" id="section-gitbook_127">
                     
                         <h2 id="175-result">17.5 <code>Result</code></h2>
-<p>We&#39;ve seen that the <code>Option</code> enum can be used as a return value from functions
-that may fail, where <code>None</code> can be returned to indicate failure. However,
-sometimes it is important to express <em>why</em> an operation failed. To do this we 
-have the <code>Result</code> enum.</p>
-<p>The <code>Result&lt;T, E&gt;</code> enum has two variants:</p>
+<!-- We've seen that the `Option` enum can be used as a return value from functions
+that may fail, where `None` can be returned to indicate failure. However,
+sometimes it is important to express *why* an operation failed. To do this we
+have the `Result` enum. -->
+<p>これまでの例で、失敗する可能性のある関数の返り値として、列挙型<code>Option</code>が使用でき、失敗時の返り値には<code>None</code>を用いることを見てきました。しかし、時には<strong>なぜ</strong>そのオペレーションが失敗したのかを明示することが重要な場合があります。そのためには<code>Result</code>列挙型を使用します。</p>
+<!-- The `Result<T, E>` enum has two variants: -->
+<p>列挙型<code>Result&lt;T, E&gt;</code>は2つの値をとりえます。</p>
+<!-- * `Ok(value)` which indicates that the operation succeeded, and wraps the
+  `value` returned by the operation. (`value` has type `T`)
+* `Err(why)`, which indicates that the operation failed, and wraps `why`,
+  which (hopefully) explains the cause of the failure. (`why` has type `E`) -->
 <ul>
-<li><code>Ok(value)</code> which indicates that the operation succeeded, and wraps the
-<code>value</code> returned by the operation. (<code>value</code> has type <code>T</code>)</li>
-<li><code>Err(why)</code>, which indicates that the operation failed, and wraps <code>why</code>,
-which (hopefully) explains the cause of the failure. (<code>why</code> has type <code>E</code>)</li>
+<li><code>Ok(value)</code> ... これはオペレーションが成功したことを意味し、返り値<code>value</code>をラップします。(<code>value</code>は型<code>T</code>を持ちます。)</li>
+<li><code>Err(why)</code> ... これはオペレーションの失敗を意味します。<code>why</code>をラップしており、ここには失敗した理由が(必ずではありませんが)書かれています。(<code>why</code>の型は<code>E</code>です。)</li>
 </ul>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
 <div id="editor">mod checked {
-    // Mathematical &quot;errors&quot; we want to catch
+    // 補足対象としたい、数学的な「エラー」
     #[derive(Debug)]
     pub enum MathError {
         DivisionByZero,
@@ -2886,11 +2890,11 @@ which (hopefully) explains the cause of the failure. (<code>why</code> has type 
 
     pub fn div(x: f64, y: f64) -&gt; MathResult {
         if y == 0.0 {
-            // This operation would &#96;fail&#96;, instead let&#39;s return the reason of
-            // the failure wrapped in &#96;Err&#96;
+            // 分母が0なので、このオペレーションは普通に行えば失敗する。
+            // 代わりに&#96;Err&#96;でラップされた失敗の理由を返そう。
             Err(MathError::DivisionByZero)
         } else {
-            // This operation is valid, return the result wrapped in &#96;Ok&#96;
+            // このオペレーションは問題がないので、結果を&#96;Ok&#96;でラップして返そう。
             Ok(x / y)
         }
     }
@@ -2914,7 +2918,7 @@ which (hopefully) explains the cause of the failure. (<code>why</code> has type 
 
 // &#96;op(x, y)&#96; === &#96;sqrt(ln(x / y))&#96;
 fn op(x: f64, y: f64) -&gt; f64 {
-    // This is a three level match pyramid!
+    // 3段階の&#96;match&#96;ピラミッド！
     match checked::div(x, y) {
         Err(why) =&gt; panic!(&quot;{:?}&quot;, why),
         Ok(ratio) =&gt; match checked::ln(ratio) {
@@ -2928,7 +2932,7 @@ fn op(x: f64, y: f64) -&gt; f64 {
 }
 
 fn main() {
-    // Will this fail?
+    // これは失敗するだろうか？
     println!(&quot;{}&quot;, op(1.0, 10.0));
 }</div>
 <div id="result"></div>

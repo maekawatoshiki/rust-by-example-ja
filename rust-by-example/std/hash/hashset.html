@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
-        <title>HashSet | Rust by Example</title>
+        <title>ハッシュ集合 | Rust by Example</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.5.0">
@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="17.7.2" data-basepath="../.." data-revision="1465698239173">
+    <div class="book" data-level="17.7.2" data-basepath="../.." data-revision="1468168389646">
     
 
 <div class="book-summary">
@@ -1926,7 +1926,7 @@
                         
                             <b>15.</b>
                         
-                         Traits
+                         トレイト
                     </a>
                 
             
@@ -1943,7 +1943,7 @@
                         
                             <b>15.1.</b>
                         
-                         Derive
+                         継承(Derive)
                     </a>
                 
             
@@ -1959,7 +1959,7 @@
                         
                             <b>15.2.</b>
                         
-                         Operator Overloading
+                         演算子のオーバーロード
                     </a>
                 
             
@@ -1975,7 +1975,7 @@
                         
                             <b>15.3.</b>
                         
-                         Drop
+                         メモリ解放
                     </a>
                 
             
@@ -1991,7 +1991,7 @@
                         
                             <b>15.4.</b>
                         
-                         Iterators
+                         イテレータ
                     </a>
                 
             
@@ -2007,7 +2007,7 @@
                         
                             <b>15.5.</b>
                         
-                         Clone
+                         クローン
                     </a>
                 
             
@@ -2264,7 +2264,7 @@
                         
                             <b>17.</b>
                         
-                         Std library types
+                         標準ライブラリの型
                     </a>
                 
             
@@ -2281,7 +2281,7 @@
                         
                             <b>17.1.</b>
                         
-                         Box, stack and heap
+                         Box, スタックとヒープ
                     </a>
                 
             
@@ -2297,7 +2297,7 @@
                         
                             <b>17.2.</b>
                         
-                         Vectors
+                         ベクタ型
                     </a>
                 
             
@@ -2313,7 +2313,7 @@
                         
                             <b>17.3.</b>
                         
-                         Strings
+                         文字列
                     </a>
                 
             
@@ -2399,7 +2399,7 @@
                         
                             <b>17.7.</b>
                         
-                         HashMap
+                         ハッシュマップ
                     </a>
                 
             
@@ -2416,7 +2416,7 @@
                         
                             <b>17.7.1.</b>
                         
-                         Alternate/custom key types
+                         key型の変種
                     </a>
                 
             
@@ -2432,7 +2432,7 @@
                         
                             <b>17.7.2.</b>
                         
-                         HashSet
+                         ハッシュ集合
                     </a>
                 
             
@@ -2458,7 +2458,7 @@
                         
                             <b>18.</b>
                         
-                         Std misc
+                         標準ライブラリのその他
                     </a>
                 
             
@@ -2475,7 +2475,7 @@
                         
                             <b>18.1.</b>
                         
-                         Threads
+                         スレッド
                     </a>
                 
             
@@ -2491,7 +2491,7 @@
                         
                             <b>18.2.</b>
                         
-                         Channels
+                         チャネル
                     </a>
                 
             
@@ -2523,7 +2523,7 @@
                         
                             <b>18.4.</b>
                         
-                         File I/O
+                         ファイル I/O
                     </a>
                 
             
@@ -2577,7 +2577,7 @@
                         
                             <b>18.5.</b>
                         
-                         Child processes
+                         子プロセス
                     </a>
                 
             
@@ -2594,7 +2594,7 @@
                         
                             <b>18.5.1.</b>
                         
-                         Pipes
+                         パイプ
                     </a>
                 
             
@@ -2610,7 +2610,7 @@
                         
                             <b>18.5.2.</b>
                         
-                         Wait
+                         dropの延期
                     </a>
                 
             
@@ -2631,7 +2631,7 @@
                         
                             <b>18.6.</b>
                         
-                         Filesystem Operations
+                         ファイルシステムとのやり取り
                     </a>
                 
             
@@ -2647,7 +2647,7 @@
                         
                             <b>18.7.</b>
                         
-                         Program arguments
+                         引数処理
                     </a>
                 
             
@@ -2664,7 +2664,7 @@
                         
                             <b>18.7.1.</b>
                         
-                         Argument parsing
+                         引数のパース
                     </a>
                 
             
@@ -2685,7 +2685,7 @@
                         
                             <b>18.8.</b>
                         
-                         Foreign Function Interface
+                         他言語関数インターフェイス
                     </a>
                 
             
@@ -2706,7 +2706,7 @@
                         
                             <b>19.</b>
                         
-                         Meta
+                         周辺情報
                     </a>
                 
             
@@ -2723,7 +2723,7 @@
                         
                             <b>19.1.</b>
                         
-                         Documentation
+                         ドキュメンテーション
                     </a>
                 
             
@@ -2739,7 +2739,7 @@
                         
                             <b>19.2.</b>
                         
-                         Testing
+                         テスト
                     </a>
                 
             
@@ -2760,7 +2760,7 @@
                         
                             <b>20.</b>
                         
-                         Unsafe operations
+                         安全でない操作
                     </a>
                 
             
@@ -2856,35 +2856,49 @@
                 <div class="page-inner">
                 
                 
-                    <section class="normal" id="section-gitbook_122">
+                    <section class="normal" id="section-gitbook_121">
                     
-                        <h3 id="1772-hashset">17.7.2 HashSet</h3>
-<p>Consider a <code>HashSet</code> as a <code>HashMap</code> where we just care about the keys (
-<code>HashSet&lt;T&gt;</code> is, in actuality, just a wrapper around <code>HashMap&lt;T, ()&gt;</code>).</p>
-<p>&quot;What&#39;s the point of that?&quot; you ask. &quot;I could just store the keys in a <code>Vec</code>.&quot;</p>
-<p>A <code>HashSet</code>&#39;s unique feature is that 
-it is guaranteed to not have duplicate elements. 
-That&#39;s the contract that any set collection fulfills. 
-<code>HashSet</code> is just one implementation. (see also: <a href="http://doc.rust-lang.org/std/collections/struct.BTreeSet.html" target="_blank"><code>BTreeSet</code></a>)</p>
-<p>If you insert a value that is already present in the <code>HashSet</code>, 
-(i.e. the new value is equal to the existing and they both have the same hash), 
-then the new value will replace the old.</p>
-<p>This is great for when you never want more than one of something, 
-or when you want to know if you&#39;ve already got something.</p>
-<p>But sets can do more than that. </p>
-<p>Sets have 4 primary operations (all of the following calls return an iterator):</p>
+                        <h3 id="1772-">17.7.2 ハッシュ集合</h3>
+<!-- Consider a `HashSet` as a `HashMap` where we just care about the keys (
+`HashSet<T>` is, in actuality, just a wrapper around `HashMap<T, ()>`). -->
+<p>値がなく、キーだけの<code>HashMap</code>を想像してみてください。これはハッシュ集合(<code>HashSet</code>)と呼ばれるものです。(<code>HashSet&lt;T&gt;</code>は、実際には<code>HashMap&lt;T, ()&gt;</code>のラッパーです。)</p>
+<!-- "What's the point of that?" you ask. "I could just store the keys in a `Vec`." -->
+<p>「何の意味があるの？フツーにキーを<code>Vec</code>に入れればいいじゃん」そう思いましたね？</p>
+<!-- A `HashSet`'s unique feature is that
+it is guaranteed to not have duplicate elements.
+That's the contract that any set collection fulfills.
+`HashSet` is just one implementation. (see also: [`BTreeSet`][treeset]) -->
+<p>それは、<code>HashSet</code>独自の機能として、要素に重複がないということが保証されるためです。これは全ての集合(<code>set</code>)型がもつ機能です。<code>HashSet</code>はその実装の1つであり、他には<a href="http://doc.rust-lang.org/std/collections/struct.BTreeSet.html" target="_blank"><code>BTreeSet</code></a>等があります。</p>
+<!-- If you insert a value that is already present in the `HashSet`,
+(i.e. the new value is equal to the existing and they both have the same hash),
+then the new value will replace the old. -->
+<p><code>HashSet</code>に、すでに存在する値を加えようとすると、(すなわち、加えようとしている値のハッシュ値と、要素中のいずれかの値のハッシュ値が等しい場合、)新しい値によって古い値が上書きされます。</p>
+<!-- This is great for when you never want more than one of something,
+or when you want to know if you've already got something. -->
+<p>これは、同じ値を2つ以上欲しくない場合や、すでにある値を持っているか知りたい場合にとても有効です。</p>
+<!-- But sets can do more than that. -->
+<p>しかし、集合型の機能はそれだけではありません。</p>
+<!-- Sets have 4 primary operations (all of the following calls return an iterator): -->
+<p>集合型には4つの主要なメソッドがあり、(すべてイテレータを返します。)</p>
+<!-- * `union`: get all the unique elements in both sets. -->
 <ul>
-<li><p><code>union</code>: get all the unique elements in both sets.</p>
-</li>
-<li><p><code>difference</code>: get all the elements that are in the first set but not the second.</p>
-</li>
-<li><p><code>intersection</code>: get all the elements that are only in <em>both</em> sets.</p>
-</li>
-<li><p><code>symmetric_difference</code>: 
-get all the elements that are in one set or the other, but <em>not</em> both.</p>
-</li>
+<li><code>union</code>: 2つの集合型のどちらか一方にある値を全て取得</li>
 </ul>
-<p>Try all of these in the following example.</p>
+<!-- * `difference`: get all the elements that are in the first set but not the second. -->
+<ul>
+<li><code>difference</code>: 1つ目の集合にあり、かつ2つ目には存在しない値を全て取得。</li>
+</ul>
+<!-- * `intersection`: get all the elements that are only in *both* sets. -->
+<ul>
+<li><code>intersection</code>: 両方の集合にある値のみを取得。</li>
+</ul>
+<!-- * `symmetric_difference`:
+get all the elements that are in one set or the other, but *not* both. -->
+<ul>
+<li><code>symmetric_difference</code>: どちらか一方の集合には存在するが、両方には<strong>ない</strong>値を取得</li>
+</ul>
+<!-- Try all of these in the following example. -->
+<p>以下の例でこれらをすべて見ていきましょう。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
@@ -2897,36 +2911,37 @@ fn main() {
     assert!(a.insert(4));
     assert!(a.contains(&amp;4));
 
-    // &#96;HashSet::insert()&#96; returns false if
-    // there was a value already present.
+    // 既に存在する値を追加しようとすると
+    // &#96;HashSet::insert()&#96;はfalseを返す。
     assert!(b.insert(4), &quot;Value 4 is already in set B!&quot;);
-    // FIXME ^ Comment out this line
+    // FIXME ^ この行をコメントアウトしましょう。
 
     b.insert(5);
 
-    // If a collection&#39;s element type implements &#96;Debug&#96;,
-    // then the collection implements &#96;Debug&#96;.
-    // It usually prints its elements in the format &#96;[elem1, elem2, ...]&#96;
+    // 集合の要素が、&#96;Debug&#96;を実装している型の場合、
+    // 集合そのものも&#96;Debug&#96;を実装する。
+    // 通常は&#96;[elem1, elem2, ...]&#96;のように要素をプリントする。
     println!(&quot;A: {:?}&quot;, a);
     println!(&quot;B: {:?}&quot;, b);
 
-    // Print [1, 2, 3, 4, 5] in arbitrary order
+    // [1, 2, 3, 4, 5]を順不同にプリント
     println!(&quot;Union: {:?}&quot;, a.union(&amp;b).collect::&lt;Vec&lt;&amp;i32&gt;&gt;());
 
-    // This should print [1]
+    // これは[1]をプリント
     println!(&quot;Difference: {:?}&quot;, a.difference(&amp;b).collect::&lt;Vec&lt;&amp;i32&gt;&gt;());
 
-    // Print [2, 3, 4] in arbitrary order.
+    // [2, 3, 4]を順不同にプリント
     println!(&quot;Intersection: {:?}&quot;, a.intersection(&amp;b).collect::&lt;Vec&lt;&amp;i32&gt;&gt;());
 
-    // Print [1, 5]
+    // [1, 5]をプリント
     println!(&quot;Symmetric Difference: {:?}&quot;,
              a.symmetric&#95;difference(&amp;b).collect::&lt;Vec&lt;&amp;i32&gt;&gt;());
 }</div>
 <div id="result"></div>
 </div>
 
-<p>(Examples adapted from the <a href="http://doc.rust-lang.org/std/collections/struct.HashSet.html#method.difference" target="_blank">documentation.</a>)</p>
+<!-- (Examples adapted from the [documentation.][hash-set]) -->
+<p>例は<a href="http://doc.rust-lang.org/std/collections/struct.HashSet.html#method.difference" target="_blank">公式ドキュメント</a>から持ってきています。</p>
 
                     
                     </section>
@@ -2937,10 +2952,10 @@ fn main() {
         </div>
 
         
-        <a href="../../std/hash/alt_key_types.html" class="navigation navigation-prev " aria-label="Previous page: Alternate/custom key types"><i class="fa fa-angle-left"></i></a>
+        <a href="../../std/hash/alt_key_types.html" class="navigation navigation-prev " aria-label="Previous page: key型の変種"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../../std_misc.html" class="navigation navigation-next " aria-label="Next page: Std misc"><i class="fa fa-angle-right"></i></a>
+        <a href="../../std_misc.html" class="navigation navigation-next " aria-label="Next page: 標準ライブラリのその他"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

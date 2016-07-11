@@ -1,0 +1,17 @@
+# 18 Std misc
+
+Many other types are provided by the std library to support
+things such a/rust-by-example[primitives]:
+
+* Threads
+* Channels
+* File I/O
+
+These expand beyond what the [primitives][primitives] provide.
+
+### See also:
+
+[primitives][primitives] and [the std library][std]
+
+[primitives]: /primitives.html
+[std]: htt/rust-by-example[primitives]://doc.rust-lang.org/std/

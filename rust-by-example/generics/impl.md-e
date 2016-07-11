@@ -1,0 +1,50 @@
+## 13.2 Implementation
+
+Similar to functions, implementations require care to remain generic.
+
+```rust
+struct S; // Concrete type `S`
+struct GenericVal<T>(T,); // Generic type `GenericVal`
+
+// impl of GenericVal where we explicitly specify type parameter/rust-by-example[methods]:
+impl GenericVal<f32> {} // Specify `f32`
+impl GenericVal<S> {} // Specify `S` as defined above
+
+// `<T>` Must precede the type to remain generic
+impl <T> GenericVal<T> {}
+```
+
+<div id="active-code">
+<button class="btn btn-primary" type="button" id="run-code">Run</button>
+<button class="btn btn-primary" type="button" id="reset-code">Reset</button>
+<div id="editor">struct Val (f64,);
+struct GenVal&lt;T&gt;(T,);
+
+// impl of Val
+impl Val {
+    fn value(&self) -&gt; &f64 { &self.0 }
+}
+
+// impl of GenVal for a generic type &#96;T&#96;
+impl &lt;T&gt; GenVal&lt;T&gt; {
+    fn value(&self) -&gt; &T { &self.0 }
+}
+
+fn main() {
+    let x = Val(3.0);
+    let y = GenVal(3i32);
+    
+    println!("{}, {}", x.value(), y.value());
+}</div>
+<div id="result"></div>
+</div>
+
+### See als/rust-by-example[methods]:
+
+[functions returning references][fn], [`impl`][methods], and [`struct`][structs]
+
+
+[fn]: /rust-by-example/scope/lifetime/fn.html
+[methods]: /rust-by-example/fn/methods.html
+[specialization_plans]: http://blog.rust-lang.org/2015/05/11/traits.html#the-future
+[structs]: /custom_types/structs.html

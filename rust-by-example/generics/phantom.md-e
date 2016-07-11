@@ -1,0 +1,66 @@
+## 13.8 Phantom type parameters
+
+A phantom type parameter is one that doesn't show up at runtime,
+but is checked statically (and only) at compile time.
+
+Data types can use extra generic type parameters to act as markers
+or to perform compile-time type checking. These extra parameters 
+hold no storage values, and have no run-time behavior.
+
+In the following example, we combine [std::marke/rust-by-example[Derive]::PhantomData]
+with the phantom type parameter concept to create tuples containing
+different data types.
+
+<div id="active-code">
+<button class="btn btn-primary" type="button" id="run-code">Run</button>
+<button class="btn btn-primary" type="button" id="reset-code">Reset</button>
+<div id="editor">use std::marke/rust-by-example[Derive]::PhantomData;
+
+// A phantom tuple struct which is generic over A with hidden parameter B.
+#[derive(PartialEq)] // Allow equality test for this type
+struct PhantomTuple&lt;A, B&gt;(A,PhantomData&lt;B&gt;);
+
+// A phantom type struct which is generic over A with hidden parameter B.
+#[derive(PartialEq)] // Allow equality test for this type
+struct PhantomStruct&lt;A, B&gt; { firs/rust-by-example[struct]: A, phantom: PhantomData&lt;B&gt; }
+
+// Not/rust-by-example[Derive]: Storage is allocated for generic type A, but not for B.
+//       Therefore, B cannot be used in computations.
+
+fn main() {
+    // Here, &#96;f32&#96; and &#96;f64&#96;
+    // PhantomTuple type specified as &lt;char, f32&gt;
+    let &#95;tuple1: PhantomTuple&lt;char, f32&gt; = PhantomTuple('Q', PhantomData);
+    // PhantomTuple type specified as &lt;char, f64&gt;
+    let &#95;tuple2: PhantomTuple&lt;char, f64&gt; = PhantomTuple('Q', PhantomData);
+
+    // Type specified as &lt;char, f32&gt;
+    let &#95;struct1: PhantomStruct&lt;char, f32&gt; = PhantomStruct {
+        firs/rust-by-example[struct]: 'Q',
+        phantom: PhantomData,
+    };
+    // Type specified as &lt;char, f64&gt;
+    let &#95;struct2: PhantomStruct&lt;char, f64&gt; = PhantomStruct {
+        firs/rust-by-example[struct]: 'Q',
+        phantom: PhantomData,
+    };
+    
+    // Compile-time Error! Type mismatch so these cannot be compared:
+    //println!("&#95;tuple1 == &#95;tuple2 yield/rust-by-example[struct]: {}",
+    //          &#95;tuple1 == &#95;tuple2);
+    
+    // Compile-time Error! Type mismatch so these cannot be compared:
+    //println!("&#95;struct1 == &#95;struct2 yield/rust-by-example[struct]: {}",
+    //          &#95;struct1 == &#95;struct2);
+}</div>
+<div id="result"></div>
+</div>
+
+### See also:
+
+[Derive], [struct], and [TupleStructs]
+
+[Derive]: /rust-by-example/trait/derive.html
+[struct]: /rust-by-example/custom_types/structs.html
+[TupleStructs]: /rust-by-example/custom_types/structs.html
+[std::marke/rust-by-example[Derive]::PhantomData]: http/rust-by-example[struct]://doc.rust-lang.org/std/marker/struct.PhantomData.html

@@ -1,0 +1,28 @@
+#### 7.5.1.1 タプル
+
+<!--- Tuples can be destructured in a `match` as follows: --->
+以下のように、タプルは`match`を用いてデストラクトすることができます。
+
+<div id="active-code">
+<button class="btn btn-primary" type="button" id="run-code">Run</button>
+<button class="btn btn-primary" type="button" id="reset-code">Reset</button>
+<div id="editor">fn main() {
+    let pair = (0, -2);
+    // TODO ^ &#96;pair&#96;に別の値を入れてみましょう。
+
+    println!("Tell me about {:?}", pair);
+    // &#96;match&#96;を用いてタプルをデストラクトしてみましょう。
+    match pair {
+        // 2つ目の値をデストラクト
+        (0, y) =&gt; println!("First is &#96;0&#96; and &#96;y&#96; is &#96;{:?}&#96;", y),
+        (x, 0) =&gt; println!("&#96;x&#96; is &#96;{:?}&#96; and last is &#96;0&#96;", x),
+        &#95;      =&gt; println!("It doesn't matter what they are"),
+        // ここでは&#96;&#95;&#96;は、値を変数に束縛しないことを意味します。
+    }
+}</div>
+<div id="result"></div>
+</div>
+
+### See also:
+
+[タプル](../../../primitives/tuples.html)

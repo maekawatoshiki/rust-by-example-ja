@@ -1,0 +1,59 @@
+### 14.4.5 ライフタイム境界
+
+<!-- Just like generic types can be bounded, lifetimes (themselves generic)
+use bounds as well. The `:` character has a slightly different meaning here,
+but `+` is the same. Note how the following rea/rust-by-example[bounds]: -->
+ジェネリック型に境界(bound)を与え、特定のトレイトを実装していることを保証できるのと同様、ライフタイム(それ自身ジェネリック型)にも境界を与えることができます。`:`は、ここでは多少異なる意味を持ちますが`+`は同じです。以下の構文の意味をチェックしてください。
+
+<!-- 1. `T: 'a`: *All* references in `T` must outlive lifetime `'a`.
+2. `T: Trait + 'a`: Type `T` must implement trait `Trait` and *all* references
+in `T` must outlive `'a`. -->
+1. `T: 'a`: `T`内の*全ての*参照は`'a`よりも長生きでなくてはならない
+2. `T: Trait + 'a`: 上に加えて`T`は`Trait`という名のトレイトを実装してなくてはならない。
+
+<!-- The example below shows the above syntax in actio/rust-by-example[generics]: -->
+上記の構文を実際に動く例で見ていきましょう。
+
+<div id="active-code">
+<button class="btn btn-primary" type="button" id="run-code">Run</button>
+<button class="btn btn-primary" type="button" id="reset-code">Reset</button>
+<div id="editor">use st/rust-by-example[bounds]::fm/rust-by-example[multibounds]::Debug; // ライフタイムを紐付けるトレイト
+
+#[derive(Debug)]
+struct Ref&lt;'a, T: 'a&gt;(&'a T);
+// &#96;Ref&#96;は&#96;'a&#96;というライフタイムを持つジェネリック型&#96;T&#96;に対する参照を持ち、
+// &#96;T&#96;の値&#42;に対する参照&#42;は必ず&#96;'a&#96;よりも長生きでなくてはならない。
+// さらに、&#96;Ref&#96;のライフタイムは&#96;'a&#96;を超えてはならない。
+
+// &#96;Debug&#96;トレイトを利用してプリントを行うジェネリック関数
+fn print&lt;T&gt;(/rust-by-example[multibounds]: T) where
+    T: Debug {
+    println!("&#96;print&#96;: t is {:?}", t);
+}
+
+// &#96;Debug&#96;を実装している&#96;T&#96;への参照を取る。&#96;T&#96;への&#42;参照&#42;は
+// 必ず&#96;'a&#96;よりも長生きでなくてはならない。さらに、&#96;'a&#96;は
+// 関数自体よりも長生きでなくてはならない。
+fn print&#95;ref&lt;'a, T&gt;(/rust-by-example[multibounds]: &'a T) where
+    T: Debug + 'a {
+    println!("&#96;print&#95;ref&#96;: t is {:?}", t);
+}
+
+fn main() {
+    let x = 7;
+    let ref&#95;x = Ref(&x);
+
+    print&#95;ref(&ref&#95;x);
+    print(ref&#95;x);
+}</div>
+<div id="result"></div>
+</div>
+
+### See als/rust-by-example[bounds]:
+
+[ジェネリクス][generics], [ジェネリック境界][bounds],
+[境界が複数の場合][multibounds]
+
+[generics]: /rust-by-example/generics.html
+[bounds]: /rust-by-example/generics/bounds.html
+[multibounds]: /generics/multi_bounds.html

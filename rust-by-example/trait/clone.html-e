@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
-        <title>Clone | Rust by Example</title>
+        <title>クローン | Rust by Example</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.5.0">
@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="15.5" data-basepath=".." data-revision="1465698239173">
+    <div class="book" data-level="15.5" data-basepath=".." data-revision="1468168389646">
     
 
 <div class="book-summary">
@@ -1926,7 +1926,7 @@
                         
                             <b>15.</b>
                         
-                         Traits
+                         トレイト
                     </a>
                 
             
@@ -1943,7 +1943,7 @@
                         
                             <b>15.1.</b>
                         
-                         Derive
+                         継承(Derive)
                     </a>
                 
             
@@ -1959,7 +1959,7 @@
                         
                             <b>15.2.</b>
                         
-                         Operator Overloading
+                         演算子のオーバーロード
                     </a>
                 
             
@@ -1975,7 +1975,7 @@
                         
                             <b>15.3.</b>
                         
-                         Drop
+                         メモリ解放
                     </a>
                 
             
@@ -1991,7 +1991,7 @@
                         
                             <b>15.4.</b>
                         
-                         Iterators
+                         イテレータ
                     </a>
                 
             
@@ -2007,7 +2007,7 @@
                         
                             <b>15.5.</b>
                         
-                         Clone
+                         クローン
                     </a>
                 
             
@@ -2264,7 +2264,7 @@
                         
                             <b>17.</b>
                         
-                         Std library types
+                         標準ライブラリの型
                     </a>
                 
             
@@ -2281,7 +2281,7 @@
                         
                             <b>17.1.</b>
                         
-                         Box, stack and heap
+                         Box, スタックとヒープ
                     </a>
                 
             
@@ -2297,7 +2297,7 @@
                         
                             <b>17.2.</b>
                         
-                         Vectors
+                         ベクタ型
                     </a>
                 
             
@@ -2313,7 +2313,7 @@
                         
                             <b>17.3.</b>
                         
-                         Strings
+                         文字列
                     </a>
                 
             
@@ -2399,7 +2399,7 @@
                         
                             <b>17.7.</b>
                         
-                         HashMap
+                         ハッシュマップ
                     </a>
                 
             
@@ -2416,7 +2416,7 @@
                         
                             <b>17.7.1.</b>
                         
-                         Alternate/custom key types
+                         key型の変種
                     </a>
                 
             
@@ -2432,7 +2432,7 @@
                         
                             <b>17.7.2.</b>
                         
-                         HashSet
+                         ハッシュ集合
                     </a>
                 
             
@@ -2458,7 +2458,7 @@
                         
                             <b>18.</b>
                         
-                         Std misc
+                         標準ライブラリのその他
                     </a>
                 
             
@@ -2475,7 +2475,7 @@
                         
                             <b>18.1.</b>
                         
-                         Threads
+                         スレッド
                     </a>
                 
             
@@ -2491,7 +2491,7 @@
                         
                             <b>18.2.</b>
                         
-                         Channels
+                         チャネル
                     </a>
                 
             
@@ -2523,7 +2523,7 @@
                         
                             <b>18.4.</b>
                         
-                         File I/O
+                         ファイル I/O
                     </a>
                 
             
@@ -2577,7 +2577,7 @@
                         
                             <b>18.5.</b>
                         
-                         Child processes
+                         子プロセス
                     </a>
                 
             
@@ -2594,7 +2594,7 @@
                         
                             <b>18.5.1.</b>
                         
-                         Pipes
+                         パイプ
                     </a>
                 
             
@@ -2610,7 +2610,7 @@
                         
                             <b>18.5.2.</b>
                         
-                         Wait
+                         dropの延期
                     </a>
                 
             
@@ -2631,7 +2631,7 @@
                         
                             <b>18.6.</b>
                         
-                         Filesystem Operations
+                         ファイルシステムとのやり取り
                     </a>
                 
             
@@ -2647,7 +2647,7 @@
                         
                             <b>18.7.</b>
                         
-                         Program arguments
+                         引数処理
                     </a>
                 
             
@@ -2664,7 +2664,7 @@
                         
                             <b>18.7.1.</b>
                         
-                         Argument parsing
+                         引数のパース
                     </a>
                 
             
@@ -2685,7 +2685,7 @@
                         
                             <b>18.8.</b>
                         
-                         Foreign Function Interface
+                         他言語関数インターフェイス
                     </a>
                 
             
@@ -2706,7 +2706,7 @@
                         
                             <b>19.</b>
                         
-                         Meta
+                         周辺情報
                     </a>
                 
             
@@ -2723,7 +2723,7 @@
                         
                             <b>19.1.</b>
                         
-                         Documentation
+                         ドキュメンテーション
                     </a>
                 
             
@@ -2739,7 +2739,7 @@
                         
                             <b>19.2.</b>
                         
-                         Testing
+                         テスト
                     </a>
                 
             
@@ -2760,7 +2760,7 @@
                         
                             <b>20.</b>
                         
-                         Unsafe operations
+                         安全でない操作
                     </a>
                 
             
@@ -2858,55 +2858,57 @@
                 
                     <section class="normal" id="section-gitbook_145">
                     
-                        <h2 id="155-clone">15.5 Clone</h2>
-<p>When dealing with resources, the default behavior is to transfer them during
-assignments or function calls. However, sometimes we need to make a 
-copy of the resource as well.</p>
-<p>The <a href="https://doc.rust-lang.org/std/clone/trait.Clone.html" target="_blank"><code>Clone</code></a> trait helps us do exactly this. Most commonly, we can 
-use the <code>.clone()</code> method defined by the <code>Clone</code> trait.</p>
+                        <h2 id="155-">15.5 クローン</h2>
+<!-- When dealing with resources, the default behavior is to transfer them during
+assignments or function calls. However, sometimes we need to make a
+copy of the resource as well. -->
+<p>メモリ上の資源を扱う際、変数束縛や関数呼び出しを介して移動させるのがデフォルトの挙動です。しかしながら、場合によっては資源のコピーを作るのが適切なこともあります。</p>
+<!-- The [`Clone`][clone] trait helps us do exactly this. Most commonly, we can
+use the `.clone()` method defined by the `Clone` trait. -->
+<p><a href="https://doc.rust-lang.org/std/clone/trait.Clone.html" target="_blank"><code>Clone</code></a>トレイトはまさにこのためにあります。普通は<code>Clone</code>トレイトで定義されている<code>.clone()</code>を用います。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
-<div id="editor">// A unit struct without resources
+<div id="editor">// いかなる資源も持たない構造体
 #[derive(Debug, Clone, Copy)]
 struct Nil;
 
-// A tuple struct with resources that implements the &#96;Clone&#96; trait
+// &#96;Clone&#96;トレイトを実装する型の変数を資源として持つタプル
 #[derive(Clone, Debug)]
 struct Pair(Box&lt;i32&gt;, Box&lt;i32&gt;);
 
 fn main() {
-    // Instantiate &#96;Nil&#96;
+    // &#96;Nil&#96;のインスタンスを作成
     let nil = Nil;
-    // Copy &#96;Nil&#96;, there are no resources to move
+    // &#96;Nil&#96;をコピー、移動させる資源は存在しない
     let copied&#95;nil = nil;
 
-    // Both &#96;Nil&#96;s can be used independently
+    // いずれの&#96;Nil&#96;も独立に使用できる。
     println!(&quot;original: {:?}&quot;, nil);
     println!(&quot;copy: {:?}&quot;, copied&#95;nil);
 
-    // Instantiate &#96;Pair&#96;
+    // &#96;Pair&#96;のインスタンスを作成
     let pair = Pair(Box::new(1), Box::new(2));
     println!(&quot;original: {:?}&quot;, pair);
 
-    // Copy &#96;pair&#96; into &#96;moved&#95;pair&#96;, moves resources
+    // &#96;pair&#96;を&#96;moved&#95;pair&#96;にコピー、資源は移動(&#96;move&#96;)する。
     let moved&#95;pair = pair;
     println!(&quot;copy: {:?}&quot;, moved&#95;pair);
 
-    // Error! &#96;pair&#96; has lost it resources
+    // エラー! &#96;pair&#96;は資源を失っている。
     //println!(&quot;original: {:?}&quot;, pair);
-    // TODO ^ Try uncommenting this line
+    // TODO ^ この行をアンコメントしてみましょう。
 
-    // Clone &#96;moved&#95;pair&#96; into &#96;cloned&#95;pair&#96; (resources are included)
+    // &#96;moved&#95;pair&#96;を&#96;cloned&#95;pair&#96;にクローンする。(資源もクローンされる。)
     let cloned&#95;pair = moved&#95;pair.clone();
-    // Drop the original pair using std::mem::drop
+    // std::mem::dropを用いて元のpairをドロップする
     drop(moved&#95;pair);
 
-    // Error! &#96;moved&#95;pair&#96; has been dropped
+    // エラー! &#96;moved&#95;pair&#96;はドロップされている。
     //println!(&quot;copy: {:?}&quot;, moved&#95;pair);
-    // TODO ^ Try uncommenting this line
+    // TODO ^ この行をアンコメントしてみましょう。
 
-    // The result from .clone() can still be used!
+    // .clone()した値はまだ使用可能！
     println!(&quot;clone: {:?}&quot;, cloned&#95;pair);
 }</div>
 <div id="result"></div>
@@ -2922,7 +2924,7 @@ fn main() {
         </div>
 
         
-        <a href="../trait/iter.html" class="navigation navigation-prev " aria-label="Previous page: Iterators"><i class="fa fa-angle-left"></i></a>
+        <a href="../trait/iter.html" class="navigation navigation-prev " aria-label="Previous page: イテレータ"><i class="fa fa-angle-left"></i></a>
         
         
         <a href="../error.html" class="navigation navigation-next " aria-label="Next page: Error handling"><i class="fa fa-angle-right"></i></a>

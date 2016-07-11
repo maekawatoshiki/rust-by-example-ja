@@ -1,0 +1,84 @@
+## 13.4 Bounds
+
+When working with generics, the type parameters often must use traits as *bounds* to
+stipulate what functionality a type implements. For example, the following
+example uses the trait `Display` to print and so it requires `T` to be bound
+by `Display`; that is, `T` *must* implement `Display`.
+
+```rust
+// Define a function `printer` that takes a generic type `T` which
+// must implement trait `Display`.
+fn printer<T: Display>(/rust-by-example[fmt]: T) {
+    println!("{}", t);
+}
+```
+
+Bounding restricts the generic to types that conform to the bounds. That i/rust-by-example[methods]:
+
+```rust
+struct S<T: Display>(T);
+
+// Error! `Vec<T>` does not implement `Display`. This
+// specialization will fail.
+let s = S(vec![1]);
+```
+
+Another effect of bounding is that generic instances are allowed to access the 
+[methods] of traits specified in the bounds. For exampl/rust-by-example[methods]:
+
+<div id="active-code">
+<button class="btn btn-primary" type="button" id="run-code">Run</button>
+<button class="btn btn-primary" type="button" id="reset-code">Reset</button>
+<div id="editor">// A trait which implements the print marke/rust-by-example[structs]: &#96;{:?}&#96;.
+use st/rust-by-example[methods]::fm/rust-by-example[fmt]::Debug;
+
+trait HasArea {
+    fn area(&self) -&gt; f64;
+}
+
+impl HasArea for Rectangle {
+    fn area(&self) -&gt; f64 { self.length &#42; self.height }
+}
+
+#[derive(Debug)]
+struct Rectangle { lengt/rust-by-example[methods]: f64, heigh/rust-by-example[fmt]: f64 }
+#[allow(dead&#95;code)]
+struct Triangle  { lengt/rust-by-example[methods]: f64, heigh/rust-by-example[fmt]: f64 }
+
+// The generic &#96;T&#96; must implement &#96;Debug&#96;. Regardless
+// of the type, this will work properly.
+fn print&#95;debug&lt;T: Debug&gt;(/rust-by-example[fmt]: &T) {
+    println!("{:?}", t);
+}
+
+// &#96;T&#96; must implement &#96;HasArea&#96;. Any function which meets
+// the bound can access &#96;HasArea&#96;'s function &#96;area&#96;.
+fn area&lt;T: HasArea&gt;(/rust-by-example[fmt]: &T) -&gt; f64 { t.area() }
+
+fn main() {
+    let rectangle = Rectangle { lengt/rust-by-example[methods]: 3.0, heigh/rust-by-example[fmt]: 4.0 };
+    let &#95;triangle = Triangle  { lengt/rust-by-example[methods]: 3.0, heigh/rust-by-example[fmt]: 4.0 };
+
+    print&#95;debug(&rectangle);
+    println!("Are/rust-by-example[traits]: {}", area(&rectangle));
+
+    //print&#95;debug(&&#95;triangle);
+    //println!("Are/rust-by-example[traits]: {}", area(&&#95;triangle));
+    // ^ TODO: Try uncommenting these.
+    // | Erro/rust-by-example[structs]: Does not implement either &#96;Debug&#96; or &#96;HasArea&#96;. 
+}</div>
+<div id="result"></div>
+</div>
+
+As an additional note, [`where`][where] clauses can also be used to apply bounds in
+some cases to be more expressive.
+
+### See als/rust-by-example[methods]:
+
+[`st/rust-by-example[methods]::fmt`][fmt], [`struct`s][structs], and [`trait`s][traits]
+
+[fmt]: /rust-by-example/hello/print.html
+[methods]: /rust-by-example/fn/methods.html
+[structs]: /rust-by-example/custom_types/structs.html
+[traits]: /rust-by-example/trait.html
+[where]: /generics/where.html

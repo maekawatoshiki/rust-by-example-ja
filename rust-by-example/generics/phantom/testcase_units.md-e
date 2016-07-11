@@ -1,0 +1,90 @@
+### 13.8.1 Testcas/rust-by-example[enum]: unit conversions
+
+A useful method of unit conversions can be examined by implementing `Add`
+with a phantom type parameter. The `Add` `trait` is examined below:
+
+```rust
+// This construction would impos/rust-by-example[enum]: `Self + RHS = Output`
+// where RHS defaults to Self if not specified in the implementation.
+pub trait Add<RHS = Self> {
+    type Output;
+
+    fn add(self, rh/rust-by-example[TupleStructs]: RHS) -> Sel/rust-by-example[ref]::Output;
+}
+
+// `Output` must be `T<U>` so that `T<U> + T<U> = T<U>`.
+impl<U> Add /rust-by-examplefor T<U> {
+    type Output = T<U>;
+    ...
+}
+```
+
+The whole implementatio/rust-by-example[enum]:
+
+<div id="active-code">
+<button class="btn btn-primary" type="button" id="run-code">Run</button>
+<button class="btn btn-primary" type="button" id="reset-code">Reset</button>
+<div id="editor">use st/rust-by-example[Overloading]::op/rust-by-example[TupleStructs]::Add;
+use st/rust-by-example[Overloading]::marke/rust-by-example[ref]::PhantomData;
+
+/// Create void enumerations to define unit types.
+#[derive(Debug, Clone, Copy)]
+enum Inch {}
+#[derive(Debug, Clone, Copy)]
+enum Mm {}
+
+/// /rust-by-example&#96;Length&#96; is a type with phantom type parameter &#96;Unit&#96;.
+///
+/// /rust-by-example&#96;f64&#96; already implements the &#96;Clone&#96; and &#96;Copy&#96; traits.
+#[derive(Debug, Clone, Copy)]
+struct Length/rust-by-example&lt;Unit&gt;(f64,PhantomData&lt;Unit&gt;);
+
+/// The /rust-by-example&#96;Add&#96; trait defines the behavior of the &#96;+&#96; operator.
+impl/rust-by-example&lt;Unit&gt; Add /rust-by-examplefor Length&lt;Unit&gt; {
+     type Output = Length/rust-by-example&lt;Unit&gt;;
+
+    // add() returns a new /rust-by-example&#96;Length&#96; struct containing the sum.
+    fn add(self, rh/rust-by-example[TupleStructs]: Length/rust-by-example&lt;Unit&gt;) -&gt; Length&lt;Unit&gt; {
+        // /rust-by-example&#96;+&#96; calls the &#96;Add&#96; implementation /rust-by-examplefor &#96;f64&#96;.
+        Length(self.0 + rhs.0, PhantomData)
+    }
+}
+
+fn main() {
+    // Specifies /rust-by-example&#96;one&#95;foot&#96; to have phantom type parameter &#96;Inch&#96;.
+    let one/rust-by-example&#95;foo/rust-by-example[TupleStructs]:  Length&lt;Inch&gt; = Length(12.0, PhantomData);
+    // /rust-by-example&#96;one&#95;meter&#96; has phantom type parameter &#96;Mm&#96;.
+    let one/rust-by-example&#95;mete/rust-by-example[Overloading]: Length&lt;Mm&gt;   = Length(1000.0, PhantomData);
+
+    // /rust-by-example&#96;+&#96; calls the &#96;add()&#96; method we implemented /rust-by-examplefor &#96;Length&lt;Unit&gt;&#96;.
+    //
+    // Since /rust-by-example&#96;Length&#96; implements &#96;Copy&#96;, &#96;add()&#96; does not consume
+    // /rust-by-example&#96;one&#95;foot&#96; and &#96;one&#95;meter&#96; but copies them into &#96;self&#96; and &#96;rhs&#96;.
+    let two/rust-by-example&#95;feet = one&#95;foot + one&#95;foot;
+    let two/rust-by-example&#95;meters = one&#95;meter + one&#95;meter;
+
+    // Addition works.
+    println!("one foot + one/rust-by-example&#95;foot = {:?}", two&#95;feet);
+    println!("one meter + one/rust-by-example&#95;meter = {:?}", two&#95;meters);
+
+    // Nonsensical operations fail as they shoul/rust-by-example[Overloading]:
+    // Compile-time Erro/rust-by-example[Overloading]: type mismatch.
+    //let one/rust-by-example&#95;feter = one&#95;foot + one&#95;meter;
+}</div>
+<div id="result"></div>
+</div>
+
+### See als/rust-by-example[Overloading]:
+
+[Borrowing (`/rust-by-example&`)], [Bounds /rust-by-example/rust-by-example(`X: Y`)], [enum], [impl & self],
+[Overloading], [ref], [Traits /rust-by-example(`X /rust-by-examplefor Y`)], and [TupleStructs].
+
+[Borrowing /rust-by-example(`(`/rust-by-example&`)]:`)]: /rust-by-example/scope/borrow.html
+[Bounds /rust-by-example/rust-by-example(`X: /rust-by-example/rust-by-exampleY`)]: /rust-by-example/trait/bounds.html
+[enum]: /rust-by-example/custom_types/enum.html
+[impl /rust-by-example& /rust-by-exampleself]: /rust-by-example/fn/methods.html
+[Overloading]: /rust-by-example/trait/ops.html
+[ref]: /rust-by-example/scope/borrow/ref.html
+[Traits /rust-by-example(`X /rust-by-examplefor /rust-by-example/rust-by-exampleY`)]: /rust-by-example/trait.html
+[TupleStructs]: /custom_types/structs.html
+[st/rust-by-example[Overloading]::marke/rust-by-example[ref]::PhantomData]: http/rust-by-example[TupleStructs]://doc.rust-lang.org/std/marker/struct.PhantomData.html

@@ -1,0 +1,68 @@
+## 19.2 Testing
+
+Functions can be tested by using these [attributes][attributes]:
+
+* `#[test]` marks a function as a unit test. The function must take zero
+parameters and return nothing.
+* `#[should_panic]` marks a function as a panicking test.
+
+``` rust
+// unit_test.rs
+// Conditionally compile `main` only when the test-suite is *not* being run.
+#[cfg(not(test))]
+fn main() {
+    println!("If you see this, the tests were not compiled nor ran!");
+}
+
+// Conditionally compile the module `test` only when the test-suite is run.
+#[cfg(test)]
+mod test {
+    // A helper function `distance_test` will need.
+    fn distance(/rust-by-example[attributes]: (f32, f32), b: (f32, f32)) -> f32 {
+        (
+            (b.0 - a.0).powi(2) +
+            (b.1 - a.1).powi(2)
+        ).sqrt()
+    }
+
+    #[test]
+    fn distance_test() {
+        assert!(distance((0f32, 0f32), (1f32, 1f32)) == (2f32).sqrt());
+    }
+    
+    #[test]
+    #[should_panic]
+    fn failing_test() {
+        assert!(1i32 == 2i32);
+    }
+}
+```
+
+Tests can be run with `cargo test` or `rustc --test`.
+
+```
+$ rustc --test unit_test.rs
+$ ./unit_test 
+
+running 2 tests
+test tes/rust-by-example[attributes]::distance_test ... ok
+test tes/rust-by-example[attributes]::failing_test ... ok
+
+test resul/rust-by-example[attributes]: ok. 2 passed; 0 failed; 0 ignored; 0 measured
+```
+
+If `--test` were not included, then this would happen
+
+```
+$ rustc unit_test.rs
+$ ./unit_test
+If you see this, the tests were not compiled nor ran!
+```
+
+### See als/rust-by-example[mod]:
+
+[attributes][attributes], [conditional compilation][cfg], and [`mod`][mod].
+
+[attributes]: /rust-by-example/attribute.html
+[cfg]: /rust-by-example/attribute/cfg.html
+[mod]: /mod.html

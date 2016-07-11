@@ -1,0 +1,27 @@
+### 7.5.2 ガード
+
+<!-- A `match` *guard* can be added to filter the arm. -->
+`match`内の条件文をフィルタリングするために、*ガード(`guard`)*を使用することができます。
+
+<div id="active-code">
+<button class="btn btn-primary" type="button" id="run-code">Run</button>
+<button class="btn btn-primary" type="button" id="reset-code">Reset</button>
+<div id="editor">fn main() {
+    let pair = (2, -2);
+    // TODO ^ &#96;pair&#96;の値を変更してみましょう。
+
+    println!("Tell me about {:?}", pair);
+    match pair {
+        (x, y) if x == y =&gt; println!("These are twins"),
+        //     ^ &#96;if&#96;とそれに続く条件式がガードです。
+        (x, y) if x + y == 0 =&gt; println!("Antimatter, kaboom!"),
+        (x, &#95;) if x % 2 == 1 =&gt; println!("The first one is odd"),
+        &#95; =&gt; println!("No correlation..."),
+    }
+}</div>
+<div id="result"></div>
+</div>
+
+### See also:
+
+[タプル](../../primitives/tuples.html)

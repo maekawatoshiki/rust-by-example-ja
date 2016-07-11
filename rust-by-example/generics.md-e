@@ -1,0 +1,66 @@
+# 13 Generics
+
+Generics is the topic of generalizing types and functionality to broader
+cases. This is extremely useful in reducing code duplication in many ways,
+but requires a rather involving syntax. However, we will find that being 
+generic involves taking great care to specify over what types a generic type 
+is actually considered valid.
+
+A type parameter is specified as generic by the use of angle brackets and
+[camel case][camelcase]: `<A, B, ...>`. "Generic type parameters" are
+typically represented as `<T>`. In Rust, "generic" also describes anything that
+accepts one or more generic type parameters `<T>`. Any type specified as a 
+generic type parameter is generic, and everything else is concrete (non-generic).
+
+For example, defining a *generic function* named `foo` that takes an argument
+`T` of any type:
+
+```rust
+fn foo<T>(T) { ... }
+```
+
+Because `T` has been specified as a generic type parameter, it is considered
+generic when used here as `(T)`. This is the case even if `T` has previously
+been defined as a `struct`.
+
+This example shows some of the syntax in action:
+
+<div id="active-code">
+<button class="btn btn-primary" type="button" id="run-code">Run</button>
+<button class="btn btn-primary" type="button" id="reset-code">Reset</button>
+<div id="editor">// A concrete type &#96;A&#96;.
+struct A;
+
+// In defining the type &#96;Single&#96;, the first use of &#96;A&#96; is not preceded by &#96;&lt;A&gt;&#96;.
+// Therefore, &#96;Single&#96; is a concrete type, and &#96;A&#96; is defined as above.
+struct Single(A);
+//            ^ Here is &#96;Single&#96;s first use of the type &#96;A&#96;.
+
+// Here, &#96;&lt;T&gt;&#96; precedes the first use of &#96;T&#96;, so &#96;SingleGen&#96; is a generic type.
+// Because the type parameter &#96;T&#96; is generic, it could be anything, including
+// the concrete type &#96;A&#96; defined at the top.
+struct SingleGen&lt;T&gt;(T);
+
+fn main() {
+    // &#96;Single&#96; is concrete and explicitly takes &#96;A&#96;.
+    let &#95;s = Single(A);
+    
+    // Create a variable &#96;&#95;char&#96; of type &#96;SingleGen&lt;char&gt;&#96;
+    // and give it the value &#96;SingleGen('a')&#96;
+    // Here, &#96;SingleGen&#96; has a type parameter explicitly specified.
+    let &#95;cha/rust-by-example[structs]: SingleGen&lt;char&gt; = SingleGen('a');
+
+    // &#96;SingleGen&#96; can also have a type parameter implicitly specified:
+    let &#95;t    = SingleGen(A); // Uses &#96;A&#96; defined at the top.
+    let &#95;i32  = SingleGen(6); // Uses &#96;i32&#96;.
+    let &#95;char = SingleGen('a'); // Uses &#96;char&#96;.
+}</div>
+<div id="result"></div>
+</div>
+
+### See also:
+
+[`struct`s][structs]
+
+[structs]: /custom_types/structs.html
+[camelcase]: http/rust-by-example[structs]://en.wikipedia.org/wiki/CamelCase

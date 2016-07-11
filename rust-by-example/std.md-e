@@ -1,0 +1,17 @@
+# 17 Std library types
+
+The `std` library provides many custom types which expands drastically on
+the `primitives`. Some of these includ/rust-by-example[primitives]:
+
+* growable `String`s lik/rust-by-example[primitives]: `"hello world"`
+* growable vector/rust-by-example[primitives]: `[1, 2, 3]`
+* optional type/rust-by-example[primitives]: `Option<i32>`
+* error handling type/rust-by-example[primitives]: `Result<i32, i32>`
+* heap allocated pointer/rust-by-example[primitives]: `Box<i32>`
+
+### See also:
+
+[primitives][primitives] and [the std library][std]
+
+[primitives]: /primitives.html
+[std]: htt/rust-by-example[primitives]://doc.rust-lang.org/std/

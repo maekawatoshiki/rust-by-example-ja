@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
-        <title>Traits | Rust by Example</title>
+        <title>トレイト | Rust by Example</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.5.0">
@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="15" data-basepath="." data-revision="1465698239173">
+    <div class="book" data-level="15" data-basepath="." data-revision="1468168389646">
     
 
 <div class="book-summary">
@@ -1926,7 +1926,7 @@
                         
                             <b>15.</b>
                         
-                         Traits
+                         トレイト
                     </a>
                 
             
@@ -1943,7 +1943,7 @@
                         
                             <b>15.1.</b>
                         
-                         Derive
+                         継承(Derive)
                     </a>
                 
             
@@ -1959,7 +1959,7 @@
                         
                             <b>15.2.</b>
                         
-                         Operator Overloading
+                         演算子のオーバーロード
                     </a>
                 
             
@@ -1975,7 +1975,7 @@
                         
                             <b>15.3.</b>
                         
-                         Drop
+                         メモリ解放
                     </a>
                 
             
@@ -1991,7 +1991,7 @@
                         
                             <b>15.4.</b>
                         
-                         Iterators
+                         イテレータ
                     </a>
                 
             
@@ -2007,7 +2007,7 @@
                         
                             <b>15.5.</b>
                         
-                         Clone
+                         クローン
                     </a>
                 
             
@@ -2264,7 +2264,7 @@
                         
                             <b>17.</b>
                         
-                         Std library types
+                         標準ライブラリの型
                     </a>
                 
             
@@ -2281,7 +2281,7 @@
                         
                             <b>17.1.</b>
                         
-                         Box, stack and heap
+                         Box, スタックとヒープ
                     </a>
                 
             
@@ -2297,7 +2297,7 @@
                         
                             <b>17.2.</b>
                         
-                         Vectors
+                         ベクタ型
                     </a>
                 
             
@@ -2313,7 +2313,7 @@
                         
                             <b>17.3.</b>
                         
-                         Strings
+                         文字列
                     </a>
                 
             
@@ -2399,7 +2399,7 @@
                         
                             <b>17.7.</b>
                         
-                         HashMap
+                         ハッシュマップ
                     </a>
                 
             
@@ -2416,7 +2416,7 @@
                         
                             <b>17.7.1.</b>
                         
-                         Alternate/custom key types
+                         key型の変種
                     </a>
                 
             
@@ -2432,7 +2432,7 @@
                         
                             <b>17.7.2.</b>
                         
-                         HashSet
+                         ハッシュ集合
                     </a>
                 
             
@@ -2458,7 +2458,7 @@
                         
                             <b>18.</b>
                         
-                         Std misc
+                         標準ライブラリのその他
                     </a>
                 
             
@@ -2475,7 +2475,7 @@
                         
                             <b>18.1.</b>
                         
-                         Threads
+                         スレッド
                     </a>
                 
             
@@ -2491,7 +2491,7 @@
                         
                             <b>18.2.</b>
                         
-                         Channels
+                         チャネル
                     </a>
                 
             
@@ -2523,7 +2523,7 @@
                         
                             <b>18.4.</b>
                         
-                         File I/O
+                         ファイル I/O
                     </a>
                 
             
@@ -2577,7 +2577,7 @@
                         
                             <b>18.5.</b>
                         
-                         Child processes
+                         子プロセス
                     </a>
                 
             
@@ -2594,7 +2594,7 @@
                         
                             <b>18.5.1.</b>
                         
-                         Pipes
+                         パイプ
                     </a>
                 
             
@@ -2610,7 +2610,7 @@
                         
                             <b>18.5.2.</b>
                         
-                         Wait
+                         dropの延期
                     </a>
                 
             
@@ -2631,7 +2631,7 @@
                         
                             <b>18.6.</b>
                         
-                         Filesystem Operations
+                         ファイルシステムとのやり取り
                     </a>
                 
             
@@ -2647,7 +2647,7 @@
                         
                             <b>18.7.</b>
                         
-                         Program arguments
+                         引数処理
                     </a>
                 
             
@@ -2664,7 +2664,7 @@
                         
                             <b>18.7.1.</b>
                         
-                         Argument parsing
+                         引数のパース
                     </a>
                 
             
@@ -2685,7 +2685,7 @@
                         
                             <b>18.8.</b>
                         
-                         Foreign Function Interface
+                         他言語関数インターフェイス
                     </a>
                 
             
@@ -2706,7 +2706,7 @@
                         
                             <b>19.</b>
                         
-                         Meta
+                         周辺情報
                     </a>
                 
             
@@ -2723,7 +2723,7 @@
                         
                             <b>19.1.</b>
                         
-                         Documentation
+                         ドキュメンテーション
                     </a>
                 
             
@@ -2739,7 +2739,7 @@
                         
                             <b>19.2.</b>
                         
-                         Testing
+                         テスト
                     </a>
                 
             
@@ -2760,7 +2760,7 @@
                         
                             <b>20.</b>
                         
-                         Unsafe operations
+                         安全でない操作
                     </a>
                 
             
@@ -2858,27 +2858,31 @@
                 
                     <section class="normal" id="section-gitbook_150">
                     
-                        <h1 id="15-traits">15 Traits</h1>
-<p>A <code>trait</code> is a collection of methods defined for an unknown type:
-<code>Self</code>. They can access other methods declared in the same trait.</p>
-<p>Traits can be implemented for any data type. In the example below,
-we define <code>Animal</code>, a group of methods. The <code>Animal</code> <code>trait</code> is 
-then implemented for the <code>Sheep</code> data type, allowing the use of 
-methods from <code>Animal</code> with a <code>Sheep</code>.</p>
+                        <h1 id="15-">15 トレイト</h1>
+<!-- A `trait` is a collection of methods defined for an unknown type:
+`Self`. They can access other methods declared in the same trait. -->
+<p>トレイト(<code>trait</code>)とは任意の型となりうる<code>Self</code>に対して定義されたメソッドの集合のことです。同じトレイト内で宣言されたメソッド同士はお互いにアクセスすることができます。</p>
+<!-- Traits can be implemented for any data type. In the example below,
+we define `Animal`, a group of methods. The `Animal` `trait` is
+then implemented for the `Sheep` data type, allowing the use of
+methods from `Animal` with a `Sheep`. -->
+<p>トレイトはあらゆるデータ型に実装することができます。以下の例ではまず<code>Animal</code>というメソッドの集合を定義し、その後<code>Animal</code>トレイトを<code>Sheep</code>というデータ型に対して実装します。これにより<code>Animal</code>のメソッドを<code>Sheep</code>が使用することが可能になります。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
 <div id="editor">struct Sheep { naked: bool, name: &amp;&#39;static str }
 
 trait Animal {
-    // Static method signature; &#96;Self&#96; refers to the implementor type.
+    // スタティックメソッドのシグネチャ。
+    // &#96;Self&#96; はこのトレイトを実装している型になる。
     fn new(name: &amp;&#39;static str) -&gt; Self;
 
-    // Instance method signatures; these will return a string.
+    // インスタンスメソッドのシグネチャ。
+    // これらの関数は文字列を返す。
     fn name(&amp;self) -&gt; &amp;&#39;static str;
     fn noise(&amp;self) -&gt; &amp;&#39;static str;
 
-    // Traits can provide default method definitions.
+    // メソッドのデフォルトの挙動を定義することもできる。
     fn talk(&amp;self) {
         println!(&quot;{} says {}&quot;, self.name(), self.noise());
     }
@@ -2891,7 +2895,8 @@ impl Sheep {
 
     fn shear(&amp;mut self) {
         if self.is&#95;naked() {
-            // Implementor methods can use the implementor&#39;s trait methods.
+            // メソッドをある型に実装する際に、その型のトレイトメソッドを
+            // 使用することができる。
             println!(&quot;{} is already naked...&quot;, self.name());
         } else {
             println!(&quot;{} gets a haircut!&quot;, self.name);
@@ -2901,9 +2906,9 @@ impl Sheep {
     }
 }
 
-// Implement the &#96;Animal&#96; trait for &#96;Sheep&#96;.
+// &#96;Animal&#96;というトレイトを&#96;Sheep&#96;に実装する。
 impl Animal for Sheep {
-    // &#96;Self&#96; is the implementor type: &#96;Sheep&#96;.
+    // &#96;Self&#96;は実装対象の型: ここでは&#96;Sheep&#96;
     fn new(name: &amp;&#39;static str) -&gt; Sheep {
         Sheep { name: name, naked: false }
     }
@@ -2920,17 +2925,17 @@ impl Animal for Sheep {
         }
     }
 
-    // Default trait methods can be overridden.
+    // デフォルトのトレイトメソッドはオーバーライドすることができる。
     fn talk(&amp;self) {
-        // For example, we can add some quiet contemplation.
+        // 例えば、静かに熟考させてみる。
         println!(&quot;{} pauses briefly... {}&quot;, self.name, self.noise());
     }
 }
 
 fn main() {
-    // Type annotation is necessary in this case.
+    // この場合、型アノテーションが必須。
     let mut dolly: Sheep = Animal::new(&quot;Dolly&quot;);
-    // TODO ^ Try removing the type annotations.
+    // TODO ^ ここの型アノテーションを消してみましょう。
 
     dolly.talk();
     dolly.shear();
@@ -2951,7 +2956,7 @@ fn main() {
         <a href="./scope/lifetime/elision.html" class="navigation navigation-prev " aria-label="Previous page: 省略"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="./trait/derive.html" class="navigation navigation-next " aria-label="Next page: Derive"><i class="fa fa-angle-right"></i></a>
+        <a href="./trait/derive.html" class="navigation navigation-next " aria-label="Next page: 継承(Derive)"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

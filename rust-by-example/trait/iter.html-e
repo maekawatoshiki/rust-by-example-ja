@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
-        <title>Iterators | Rust by Example</title>
+        <title>イテレータ | Rust by Example</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.5.0">
@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="15.4" data-basepath=".." data-revision="1465698239173">
+    <div class="book" data-level="15.4" data-basepath=".." data-revision="1468168389646">
     
 
 <div class="book-summary">
@@ -1926,7 +1926,7 @@
                         
                             <b>15.</b>
                         
-                         Traits
+                         トレイト
                     </a>
                 
             
@@ -1943,7 +1943,7 @@
                         
                             <b>15.1.</b>
                         
-                         Derive
+                         継承(Derive)
                     </a>
                 
             
@@ -1959,7 +1959,7 @@
                         
                             <b>15.2.</b>
                         
-                         Operator Overloading
+                         演算子のオーバーロード
                     </a>
                 
             
@@ -1975,7 +1975,7 @@
                         
                             <b>15.3.</b>
                         
-                         Drop
+                         メモリ解放
                     </a>
                 
             
@@ -1991,7 +1991,7 @@
                         
                             <b>15.4.</b>
                         
-                         Iterators
+                         イテレータ
                     </a>
                 
             
@@ -2007,7 +2007,7 @@
                         
                             <b>15.5.</b>
                         
-                         Clone
+                         クローン
                     </a>
                 
             
@@ -2264,7 +2264,7 @@
                         
                             <b>17.</b>
                         
-                         Std library types
+                         標準ライブラリの型
                     </a>
                 
             
@@ -2281,7 +2281,7 @@
                         
                             <b>17.1.</b>
                         
-                         Box, stack and heap
+                         Box, スタックとヒープ
                     </a>
                 
             
@@ -2297,7 +2297,7 @@
                         
                             <b>17.2.</b>
                         
-                         Vectors
+                         ベクタ型
                     </a>
                 
             
@@ -2313,7 +2313,7 @@
                         
                             <b>17.3.</b>
                         
-                         Strings
+                         文字列
                     </a>
                 
             
@@ -2399,7 +2399,7 @@
                         
                             <b>17.7.</b>
                         
-                         HashMap
+                         ハッシュマップ
                     </a>
                 
             
@@ -2416,7 +2416,7 @@
                         
                             <b>17.7.1.</b>
                         
-                         Alternate/custom key types
+                         key型の変種
                     </a>
                 
             
@@ -2432,7 +2432,7 @@
                         
                             <b>17.7.2.</b>
                         
-                         HashSet
+                         ハッシュ集合
                     </a>
                 
             
@@ -2458,7 +2458,7 @@
                         
                             <b>18.</b>
                         
-                         Std misc
+                         標準ライブラリのその他
                     </a>
                 
             
@@ -2475,7 +2475,7 @@
                         
                             <b>18.1.</b>
                         
-                         Threads
+                         スレッド
                     </a>
                 
             
@@ -2491,7 +2491,7 @@
                         
                             <b>18.2.</b>
                         
-                         Channels
+                         チャネル
                     </a>
                 
             
@@ -2523,7 +2523,7 @@
                         
                             <b>18.4.</b>
                         
-                         File I/O
+                         ファイル I/O
                     </a>
                 
             
@@ -2577,7 +2577,7 @@
                         
                             <b>18.5.</b>
                         
-                         Child processes
+                         子プロセス
                     </a>
                 
             
@@ -2594,7 +2594,7 @@
                         
                             <b>18.5.1.</b>
                         
-                         Pipes
+                         パイプ
                     </a>
                 
             
@@ -2610,7 +2610,7 @@
                         
                             <b>18.5.2.</b>
                         
-                         Wait
+                         dropの延期
                     </a>
                 
             
@@ -2631,7 +2631,7 @@
                         
                             <b>18.6.</b>
                         
-                         Filesystem Operations
+                         ファイルシステムとのやり取り
                     </a>
                 
             
@@ -2647,7 +2647,7 @@
                         
                             <b>18.7.</b>
                         
-                         Program arguments
+                         引数処理
                     </a>
                 
             
@@ -2664,7 +2664,7 @@
                         
                             <b>18.7.1.</b>
                         
-                         Argument parsing
+                         引数のパース
                     </a>
                 
             
@@ -2685,7 +2685,7 @@
                         
                             <b>18.8.</b>
                         
-                         Foreign Function Interface
+                         他言語関数インターフェイス
                     </a>
                 
             
@@ -2706,7 +2706,7 @@
                         
                             <b>19.</b>
                         
-                         Meta
+                         周辺情報
                     </a>
                 
             
@@ -2723,7 +2723,7 @@
                         
                             <b>19.1.</b>
                         
-                         Documentation
+                         ドキュメンテーション
                     </a>
                 
             
@@ -2739,7 +2739,7 @@
                         
                             <b>19.2.</b>
                         
-                         Testing
+                         テスト
                     </a>
                 
             
@@ -2760,7 +2760,7 @@
                         
                             <b>20.</b>
                         
-                         Unsafe operations
+                         安全でない操作
                     </a>
                 
             
@@ -2858,15 +2858,19 @@
                 
                     <section class="normal" id="section-gitbook_148">
                     
-                        <h2 id="154-iterators">15.4 Iterators</h2>
-<p>The <code>Iterator</code> trait is used to implement iterators over collections such as arrays.</p>
-<p>The trait requires only a method to be defined for the <code>next</code> element, 
-which may be manually defined in an <code>impl</code> block or automatically 
-defined (as in arrays and ranges).</p>
-<p>As a point of convenience for common situations, the <code>for</code> construct 
-turns some collections into iterators using the <a href="https://doc.rust-lang.org/std/iter/trait.IntoIterator.html" target="_blank"><code>.into_iterator()</code></a> method.</p>
-<p>Methods that can be accessed using the <code>Iterator</code> trait in addition 
-to those shown in the example below can be found <a href="http://doc.rust-lang.org/core/iter/trait.Iterator.html" target="_blank">here</a>.</p>
+                        <h2 id="154-">15.4 イテレータ</h2>
+<!-- The `Iterator` trait is used to implement iterators over collections such as arrays. -->
+<p><code>Iterator</code>トレイトは、例えば配列のような、要素の集合に対してイテレータを実装するためのトレイトです。</p>
+<!-- The trait requires only a method to be defined for the `next` element,
+which may be manually defined in an `impl` block or automatically
+defined (as in arrays and ranges). -->
+<p>このトレイトは<code>next</code>の要素に相当するものを決定するためのメソッドのみを要求します。このメソッドは<code>impl</code>ブロック内で手動で実装するか、あるいは(配列やrangeのように)自動で定義されます。</p>
+<!-- As a point of convenience for common situations, the `for` construct
+turns some collections into iterators using the [`.into_iterator()`][intoiter] method. -->
+<p>サッとイテレータを使いたい時は、<code>for</code>文で集合からイテレータを作成することが良くあります。これは<a href="https://doc.rust-lang.org/std/iter/trait.IntoIterator.html" target="_blank"><code>.into_iterator()</code></a>メソッドを呼び出しています。</p>
+<!-- Methods that can be accessed using the `Iterator` trait in addition
+to those shown in the example below can be found [here][iter]. -->
+<p><code>Iterator</code>トレイトからアクセスできるメソッドの一覧は<a href="http://doc.rust-lang.org/core/iter/trait.Iterator.html" target="_blank">ここ</a>にあります。以下の例ではその一部を使用しています。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
@@ -2875,34 +2879,34 @@ to those shown in the example below can be found <a href="http://doc.rust-lang.o
     next: u32,
 }
 
-// Implement &#96;Iterator&#96; for &#96;Fibonacci&#96;.
-// The &#96;Iterator&#96; trait only requires a method to be defined for the &#96;next&#96; element.
+// &#96;Iterator&#96;を&#96;Fibonacci&#96;に対して実装する。
+// &#96;Iterator&#96;トレイトは次(&#96;next&#96;)の要素を取得するメソッドの定義だけを要求する。
 impl Iterator for Fibonacci {
     type Item = u32;
 
-    // Here, we define the sequence using &#96;.curr&#96; and &#96;.next&#96;.
-    // The return type is &#96;Option&lt;T&gt;&#96;:
-    //     &#42; When the &#96;Iterator&#96; is finished, &#96;None&#96; is returned.
-    //     &#42; Otherwise, the next value is wrapped in &#96;Some&#96; and returned.
+    // ここではイテレーションの流れを&#96;.curr&#96;と&#96;.next&#96;を使用して定義している。
+    // 返り値の型は&#96;Option&lt;T&gt;&#96;で、これは:
+    //     &#42; &#96;Iterator&#96;が終了した時は&#96;None&#96;を返し、
+    //     &#42; そうでなければ&#96;Some&#96;でラップされた値を返す。
     fn next(&amp;mut self) -&gt; Option&lt;u32&gt; {
         let new&#95;next = self.curr + self.next;
 
         self.curr = self.next;
         self.next = new&#95;next;
 
-        // Since there&#39;s no endpoint to a Fibonacci sequence, the &#96;Iterator&#96; 
-        // will never return &#96;None&#96;, and &#96;Some&#96; is always returned.
+        // フィボナッチ数列には終端がないので、&#96;Iterator&#96;は決して
+        // &#96;None&#96;を返さず、常に&#96;Some&#96;が返される。
         Some(self.curr)
     }
 }
 
-// Returns a Fibonacci sequence generator
+// フィボナッチ数列のジェネレータを返す。
 fn fibonacci() -&gt; Fibonacci {
     Fibonacci { curr: 1, next: 1 }
 }
 
 fn main() {
-    // &#96;0..3&#96; is an &#96;Iterator&#96; that generates: 0, 1, and 2.
+    // &#96;0..3&#96;は0, 1, 2をジェネレートする&#96;Iterator&#96;
     let mut sequence = 0..3;
 
     println!(&quot;Four consecutive &#96;next&#96; calls on 0..3&quot;);
@@ -2911,20 +2915,20 @@ fn main() {
     println!(&quot;&gt; {:?}&quot;, sequence.next());
     println!(&quot;&gt; {:?}&quot;, sequence.next());
 
-    // &#96;for&#96; works through an &#96;Iterator&#96; until it returns &#96;None&#96;.
-    // Each &#96;Some&#96; value is unwrapped and bound to a variable (here, &#96;i&#96;).
+    // &#96;for&#96;は&#96;None&#96;を返すまで、イテレータを舐めていき、出てきた&#96;Some&#96;を
+    // アンラップして変数(ここでは&#96;i&#96;)に束縛する。
     println!(&quot;Iterate through 0..3 using &#96;for&#96;&quot;);
     for i in 0..3 {
         println!(&quot;&gt; {}&quot;, i);
     }
 
-    // The &#96;take(n)&#96; method reduces an &#96;Iterator&#96; to its first &#96;n&#96; terms.
+    // &#96;take(n)&#96;メソッドは&#96;Iterator&#96;をはじめから&#96;n&#96;番目の要素までの部分に減らす。
     println!(&quot;The first four terms of the Fibonacci sequence are: &quot;);
     for i in fibonacci().take(4) {
         println!(&quot;&gt; {}&quot;, i);
     }
 
-    // The &#96;skip(n)&#96; method shortens an &#96;Iterator&#96; by dropping its first &#96;n&#96; terms.
+    // &#96;skip(n)&#96;メソッドは&#96;Iterator&#96;のはじめから&#96;n&#96;番目までの要素をとばす。
     println!(&quot;The next four terms of the Fibonacci sequence are: &quot;);
     for i in fibonacci().skip(4).take(4) {
         println!(&quot;&gt; {}&quot;, i);
@@ -2932,7 +2936,7 @@ fn main() {
 
     let array = [1u32, 3, 3, 7];
 
-    // The &#96;iter&#96; method produces an &#96;Iterator&#96; over an array/slice.
+    // &#96;iter&#96;メソッドは配列やスライスからイテレータを作成する。
     println!(&quot;Iterate the following array {:?}&quot;, &amp;array);
     for i in array.iter() {
         println!(&quot;&gt; {}&quot;, i);
@@ -2951,10 +2955,10 @@ fn main() {
         </div>
 
         
-        <a href="../trait/drop.html" class="navigation navigation-prev " aria-label="Previous page: Drop"><i class="fa fa-angle-left"></i></a>
+        <a href="../trait/drop.html" class="navigation navigation-prev " aria-label="Previous page: メモリ解放"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../trait/clone.html" class="navigation navigation-next " aria-label="Next page: Clone"><i class="fa fa-angle-right"></i></a>
+        <a href="../trait/clone.html" class="navigation navigation-next " aria-label="Next page: クローン"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

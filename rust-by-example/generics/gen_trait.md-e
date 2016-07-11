@@ -1,0 +1,48 @@
+## 13.3 Traits
+
+Of course `trait`s can also be generic. Here we define one which reimplements
+the `Drop` `trait` as a generic method to `drop` itself and an input.
+
+<div id="active-code">
+<button class="btn btn-primary" type="button" id="run-code">Run</button>
+<button class="btn btn-primary" type="button" id="reset-code">Reset</button>
+<div id="editor">// Non-copyable types.
+struct Empty;
+struct Null;
+
+// A trait generic over &#96;T&#96;.
+trait DoubleDrop&lt;T&gt; {
+    // Define a method on the caller type which takes an
+    // additional single parameter &#96;T&#96; and does nothing with it.
+    fn double&#95;drop(self, &#95;: T);
+}
+
+// Implement &#96;DoubleDrop&lt;T&gt;&#96; for any generic parameter &#96;T&#96; and
+// caller &#96;U&#96;.
+impl&lt;T, U&gt; DoubleDrop&lt;T&gt; for U {
+    // This method takes ownership of both passed arguments,
+    // deallocating both.
+    fn double&#95;drop(self, &#95;: T) {}
+}
+
+fn main() {
+    let empty = Empty;
+    let null  = Null;
+
+    // Deallocate &#96;empty&#96; and &#96;null&#96;.
+    empty.double&#95;drop(null);
+
+    //empty;
+    //null;
+    // ^ TODO: Try uncommenting these lines.
+}</div>
+<div id="result"></div>
+</div>
+
+### See also:
+
+[`Drop`][Drop], [`struct`][structs], and [`trait`][traits]
+
+[Drop]: http://doc.rust-lang.org/std/ops/trait.Drop.html
+[structs]: /rust-by-example/custom_types/structs.html
+[traits]: /trait.html

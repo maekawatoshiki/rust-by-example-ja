@@ -1,0 +1,33 @@
+### 14.4.3 メソッド
+
+<!-- Methods are annotated similarly to function/rust-by-example[methods]: -->
+メソッドのライフタイムは関数に似ている。
+
+<div id="active-code">
+<button class="btn btn-primary" type="button" id="run-code">Run</button>
+<button class="btn btn-primary" type="button" id="reset-code">Reset</button>
+<div id="editor">struct Owner(i32);
+
+impl Owner {
+    // 通常の関数と同様にライフタイムを明示
+    fn add&#95;one&lt;'a&gt;(&'a mut self) { self.0 += 1 }
+    fn print&lt;'a&gt;(&'a self) {
+        println!("&#96;print&#96;: {}", self.0);
+    }
+}
+
+fn main() {
+    let mut owner  = Owner(18);
+
+    owner.add&#95;one();
+    owner.print();
+}</div>
+<div id="result"></div>
+</div>
+
+### See als/rust-by-example[methods]:
+
+[メソッド][methods]
+
+
+[methods]: /fn/methods.html

@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
-        <title>Vectors | Rust by Example</title>
+        <title>ベクタ型 | Rust by Example</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.5.0">
@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="17.2" data-basepath=".." data-revision="1465698239173">
+    <div class="book" data-level="17.2" data-basepath=".." data-revision="1468168389646">
     
 
 <div class="book-summary">
@@ -1926,7 +1926,7 @@
                         
                             <b>15.</b>
                         
-                         Traits
+                         トレイト
                     </a>
                 
             
@@ -1943,7 +1943,7 @@
                         
                             <b>15.1.</b>
                         
-                         Derive
+                         継承(Derive)
                     </a>
                 
             
@@ -1959,7 +1959,7 @@
                         
                             <b>15.2.</b>
                         
-                         Operator Overloading
+                         演算子のオーバーロード
                     </a>
                 
             
@@ -1975,7 +1975,7 @@
                         
                             <b>15.3.</b>
                         
-                         Drop
+                         メモリ解放
                     </a>
                 
             
@@ -1991,7 +1991,7 @@
                         
                             <b>15.4.</b>
                         
-                         Iterators
+                         イテレータ
                     </a>
                 
             
@@ -2007,7 +2007,7 @@
                         
                             <b>15.5.</b>
                         
-                         Clone
+                         クローン
                     </a>
                 
             
@@ -2264,7 +2264,7 @@
                         
                             <b>17.</b>
                         
-                         Std library types
+                         標準ライブラリの型
                     </a>
                 
             
@@ -2281,7 +2281,7 @@
                         
                             <b>17.1.</b>
                         
-                         Box, stack and heap
+                         Box, スタックとヒープ
                     </a>
                 
             
@@ -2297,7 +2297,7 @@
                         
                             <b>17.2.</b>
                         
-                         Vectors
+                         ベクタ型
                     </a>
                 
             
@@ -2313,7 +2313,7 @@
                         
                             <b>17.3.</b>
                         
-                         Strings
+                         文字列
                     </a>
                 
             
@@ -2399,7 +2399,7 @@
                         
                             <b>17.7.</b>
                         
-                         HashMap
+                         ハッシュマップ
                     </a>
                 
             
@@ -2416,7 +2416,7 @@
                         
                             <b>17.7.1.</b>
                         
-                         Alternate/custom key types
+                         key型の変種
                     </a>
                 
             
@@ -2432,7 +2432,7 @@
                         
                             <b>17.7.2.</b>
                         
-                         HashSet
+                         ハッシュ集合
                     </a>
                 
             
@@ -2458,7 +2458,7 @@
                         
                             <b>18.</b>
                         
-                         Std misc
+                         標準ライブラリのその他
                     </a>
                 
             
@@ -2475,7 +2475,7 @@
                         
                             <b>18.1.</b>
                         
-                         Threads
+                         スレッド
                     </a>
                 
             
@@ -2491,7 +2491,7 @@
                         
                             <b>18.2.</b>
                         
-                         Channels
+                         チャネル
                     </a>
                 
             
@@ -2523,7 +2523,7 @@
                         
                             <b>18.4.</b>
                         
-                         File I/O
+                         ファイル I/O
                     </a>
                 
             
@@ -2577,7 +2577,7 @@
                         
                             <b>18.5.</b>
                         
-                         Child processes
+                         子プロセス
                     </a>
                 
             
@@ -2594,7 +2594,7 @@
                         
                             <b>18.5.1.</b>
                         
-                         Pipes
+                         パイプ
                     </a>
                 
             
@@ -2610,7 +2610,7 @@
                         
                             <b>18.5.2.</b>
                         
-                         Wait
+                         dropの延期
                     </a>
                 
             
@@ -2631,7 +2631,7 @@
                         
                             <b>18.6.</b>
                         
-                         Filesystem Operations
+                         ファイルシステムとのやり取り
                     </a>
                 
             
@@ -2647,7 +2647,7 @@
                         
                             <b>18.7.</b>
                         
-                         Program arguments
+                         引数処理
                     </a>
                 
             
@@ -2664,7 +2664,7 @@
                         
                             <b>18.7.1.</b>
                         
-                         Argument parsing
+                         引数のパース
                     </a>
                 
             
@@ -2685,7 +2685,7 @@
                         
                             <b>18.8.</b>
                         
-                         Foreign Function Interface
+                         他言語関数インターフェイス
                     </a>
                 
             
@@ -2706,7 +2706,7 @@
                         
                             <b>19.</b>
                         
-                         Meta
+                         周辺情報
                     </a>
                 
             
@@ -2723,7 +2723,7 @@
                         
                             <b>19.1.</b>
                         
-                         Documentation
+                         ドキュメンテーション
                     </a>
                 
             
@@ -2739,7 +2739,7 @@
                         
                             <b>19.2.</b>
                         
-                         Testing
+                         テスト
                     </a>
                 
             
@@ -2760,7 +2760,7 @@
                         
                             <b>20.</b>
                         
-                         Unsafe operations
+                         安全でない操作
                     </a>
                 
             
@@ -2858,51 +2858,60 @@
                 
                     <section class="normal" id="section-gitbook_129">
                     
-                        <h2 id="172-vectors">17.2 Vectors</h2>
-<p>Vectors are re-sizable arrays. Like slices, their size is not known at compile
+                        <h2 id="172-">17.2 ベクタ型</h2>
+<!-- Vectors are re-sizable arrays. Like slices, their size is not known at compile
 time, but they can grow or shrink at any time. A vector is represented using
 3 words: a pointer to the data, its length, and its capacity. The capacity
 indicates how much memory is reserved for the vector. The vector can grow as
 long as the length is smaller than the capacity. When this threshold needs to
-be surpassed, the vector is reallocated with a larger capacity.</p>
+be surpassed, the vector is reallocated with a larger capacity. -->
+<p>「ベクタ」はサイズを変更可能な配列です。スライスと同様、そのサイズはコンパイル時には不定ですが、いつでも要素を追加したり削除したりすることができます。ベクタは3つの要素で、その特徴が完全に決まります。</p>
+<ol>
+<li>データへのポインタ</li>
+<li>長さ</li>
+<li>容量 ... あらかじめメモリ上にベクタのために確保された領域</li>
+</ol>
+<p>ベクタはその容量を超えない限りにおいて長くしていくことができます。超えた場合には、より大きな容量を持つように割り当てなおされます。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
 <div id="editor">fn main() {
-    // Iterators can be collected into vectors
+    // イテレータは要素を収集してベクタにすることができる。
     let collected&#95;iterator: Vec&lt;i32&gt; = (0..10).collect();
     println!(&quot;Collected (0..10) into: {:?}&quot;, collected&#95;iterator);
 
-    // The &#96;vec!&#96; macro can be used to initialize a vector
+    // ベクタの初期化には&#96;vec!&#96;マクロが使用できる。
     let mut xs = vec![1i32, 2, 3];
     println!(&quot;Initial vector: {:?}&quot;, xs);
 
-    // Insert new element at the end of the vector
+    // 新しい要素をベクタの最後に挿入することができる。
     println!(&quot;Push 4 into the vector&quot;);
     xs.push(4);
     println!(&quot;Vector: {:?}&quot;, xs);
 
-    // Error! Immutable vectors can&#39;t grow
+    // エラー！イミュータブルなベクタは成長できない
     collected&#95;iterator.push(0);
-    // FIXME ^ Comment out this line
+    // FIXME ^ この行をコメントアウトしましょう。
 
-    // The &#96;len&#96; method yields the current size of the vector
+    // &#96;len&#96;メソッドは現在のベクタのサイズを返す。
     println!(&quot;Vector size: {}&quot;, xs.len());
 
-    // Indexing is done using the square brackets (indexing starts at 0)
+    // 鍵括弧(&#96;[]&#96;)を用いてインデックスによる要素へのアクセスができる
+    // (インデックスは0から開始する)
     println!(&quot;Second element: {}&quot;, xs[1]);
 
-    // &#96;pop&#96; removes the last element from the vector and returns it
+    // &#96;pop&#96;はベクタの最後の要素を削除すると同時に返す。
     println!(&quot;Pop last element: {:?}&quot;, xs.pop());
 
-    // Out of bounds indexing yields a panic
+    // 不正なインデックスアクセスはpanicを引き起こします。
     println!(&quot;Fourth element: {}&quot;, xs[3]);
 }</div>
 <div id="result"></div>
 </div>
 
-<p>More <code>Vec</code> methods can be found under the
-<a href="http://doc.rust-lang.org/std/vec/" target="_blank">std::vec</a> module</p>
+<!-- More `Vec` methods can be found under the
+[std::vec][vec] module -->
+<p><code>Vec</code>型のメソッドの一覧は<a href="http://doc.rust-lang.org/std/vec/" target="_blank">std::vec</a>モジュールを見てください。</p>
 
                     
                     </section>
@@ -2913,10 +2922,10 @@ be surpassed, the vector is reallocated with a larger capacity.</p>
         </div>
 
         
-        <a href="../std/box.html" class="navigation navigation-prev " aria-label="Previous page: Box, stack and heap"><i class="fa fa-angle-left"></i></a>
+        <a href="../std/box.html" class="navigation navigation-prev " aria-label="Previous page: Box, スタックとヒープ"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../std/str.html" class="navigation navigation-next " aria-label="Next page: Strings"><i class="fa fa-angle-right"></i></a>
+        <a href="../std/str.html" class="navigation navigation-next " aria-label="Next page: 文字列"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>
