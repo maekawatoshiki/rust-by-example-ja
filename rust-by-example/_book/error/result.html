@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="16.4" data-basepath=".." data-revision="1470719679268">
+    <div class="book" data-level="16.4" data-basepath=".." data-revision="1470814953524">
     
 
 <div class="book-summary">
@@ -2028,7 +2028,7 @@
                         
                             <b>16.</b>
                         
-                         Error handling
+                         エラーハンドリング
                     </a>
                 
             
@@ -2045,7 +2045,7 @@
                         
                             <b>16.1.</b>
                         
-                         Option &amp; unwrap
+                         Optionとunwrap
                     </a>
                 
             
@@ -2109,7 +2109,7 @@
                         
                             <b>16.5.</b>
                         
-                         map for Result
+                         Resultにmapする
                     </a>
                 
             
@@ -2125,7 +2125,7 @@
                         
                             <b>16.6.</b>
                         
-                         Result as an alias
+                         Resultのエイリアス
                     </a>
                 
             
@@ -2141,7 +2141,7 @@
                         
                             <b>16.7.</b>
                         
-                         Options with Results
+                         OptionとResultを同時に扱う
                     </a>
                 
             
@@ -2158,7 +2158,7 @@
                         
                             <b>16.7.1.</b>
                         
-                         Errors as strings
+                         Stringをエラーとして扱う
                     </a>
                 
             
@@ -2174,7 +2174,7 @@
                         
                             <b>16.7.2.</b>
                         
-                         Combining separate combinators
+                         コンビネータを組み合わせる
                     </a>
                 
             
@@ -2190,7 +2190,7 @@
                         
                             <b>16.7.3.</b>
                         
-                         Enter try!
+                         try!入門
                     </a>
                 
             
@@ -2211,7 +2211,7 @@
                         
                             <b>16.8.</b>
                         
-                         The limits of strings
+                         stringの限界
                     </a>
                 
             
@@ -2227,7 +2227,7 @@
                         
                             <b>16.9.</b>
                         
-                         Re-enter try!
+                         try!再入門
                     </a>
                 
             
@@ -2243,7 +2243,7 @@
                         
                             <b>16.10.</b>
                         
-                         Re-enabling box
+                         box化を再度可能にする
                     </a>
                 
             
@@ -2856,27 +2856,32 @@
                 <div class="page-inner">
                 
                 
-                    <section class="normal" id="section-gitbook_36">
+                    <section class="normal" id="section-gitbook_35">
                     
                         <h2 id="164-result">16.4 Result</h2>
-<p>Previously, we have used the type <code>Option</code> to annotate that absence is a possibility. This
-absence sometimes appears as an error, for example when <code>None</code> is unwrapped. In the more
+<!-- Previously, we have used the type `Option` to annotate that absence is a possibility. This
+absence sometimes appears as an error, for example when `None` is unwrapped. In the more
 general case where there may be multiple failure points for a multitude of different reasons,
-an <code>Option</code> can be replaced by the more general <code>Result</code> type. A <code>Result&lt;T, E&gt;</code> has these
-variants:</p>
+an `Option` can be replaced by the more general `Result` type. A `Result<T, E>` has these
+variants: -->
+<p>ここまでで、値が欠如している可能性を扱うために<code>Option</code>を使用する例を見てきました。このように値が存在しないことは、時としてエラーを生じさせることがあります。たとえば<code>None</code>をアンラップしようとした場合などがそうです。より一般的に、様々な場所・理由で失敗しうる場合には<code>Option</code>はより包括的な<code>Result</code>型で置き換えることができます。<code>Result&lt;T, E&gt;</code>には以下の様な変種が存在します。</p>
+<!-- * `Ok<T>`: An element `T` was found
+* `Err<E>`: An error was found with element `E` -->
 <ul>
-<li><code>Ok&lt;T&gt;</code>: An element <code>T</code> was found</li>
-<li><code>Err&lt;E&gt;</code>: An error was found with element <code>E</code></li>
+<li><code>Ok&lt;T&gt;</code>: 要素<code>T</code>が見つかった場合</li>
+<li><code>Err&lt;E&gt;</code>: 要素<code>E</code>とともにエラーが見つかった場合</li>
 </ul>
-<p>Similar to <code>Option</code>, <code>Result</code> also contains the <code>unwrap()</code> method which yields the element
-<code>T</code> or calls <code>panic!()</code>. So far, this should seem similar to <code>Option</code>:</p>
+<!-- Similar to `Option`, `Result` also contains the `unwrap()` method which yields the element
+`T` or calls `panic!()`. So far, this should seem similar to `Option`: -->
+<p><code>Option</code>と同様、<code>Result</code>もまた<code>unwrap()</code>メソッドを持っており、これは要素<code>T</code>を産出するか<code>panic!()</code>します。今のところは、これは<code>Option</code>とほぼ同じに見えるでしょう。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
 <div id="editor">fn double&#95;number(number&#95;str: &amp;str) -&gt; i32 {
-    // It might not always be possible to parse a string into the other type
-    // so &#96;parse()&#96; returns a &#96;Result&#96; indicating possible failure. Let&#39;s
-    // just try &#96;unwrap()&#96; to get the number out. Will it bite us?
+    // 文字列は常に他の型にパースできるとは限らない。
+    // ゆえに、&#96;parse()&#96;は失敗の可能性があることを意味する&#96;Result&#96;型を返す。
+    // ここでは単に&#96;unwrap&#96;して数字を取り出すことを試みている。
+    // これが、良くない事態を招く可能性とは？
     2 &#42; number&#95;str.parse::&lt;i32&gt;().unwrap()
 }
 
@@ -2890,8 +2895,9 @@ fn main() {
 <div id="result"></div>
 </div>
 
-<p>Clearly, panicking on an <code>Err</code> leaves an unhelpful error message. Do we even know anything
-about libcore that the error is telling us all about? There must be a better way.</p>
+<!-- Clearly, panicking on an `Err` leaves an unhelpful error message. Do we even know anything
+about libcore that the error is telling us all about? There must be a better way. -->
+<p>明らかに、<code>Err</code>でパニックした結果、役に立たないエラーメッセージをあとに残すのみとなってしまっています。このエラーの内容から、libcoreで何が起こっているかを推測することができるでしょうか？もっといい方法があるはずです。</p>
 <h3 id="see-also">See also:</h3>
 <p><a href="http://doc.rust-lang.org/std/result/enum.Result.html" target="_blank"><code>Result</code></a></p>
 
@@ -2907,7 +2913,7 @@ about libcore that the error is telling us all about? There must be a better way
         <a href="../error/and_then.html" class="navigation navigation-prev " aria-label="Previous page: and_then"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../error/result_map.html" class="navigation navigation-next " aria-label="Next page: map for Result"><i class="fa fa-angle-right"></i></a>
+        <a href="../error/result_map.html" class="navigation navigation-next " aria-label="Next page: Resultにmapする"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

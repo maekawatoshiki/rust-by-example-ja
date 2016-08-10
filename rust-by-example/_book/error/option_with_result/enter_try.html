@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
-        <title>Enter try! | Rust by Example</title>
+        <title>try!入門 | Rust by Example</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.5.0">
@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="16.7.3" data-basepath="../.." data-revision="1470719679268">
+    <div class="book" data-level="16.7.3" data-basepath="../.." data-revision="1470814953524">
     
 
 <div class="book-summary">
@@ -2028,7 +2028,7 @@
                         
                             <b>16.</b>
                         
-                         Error handling
+                         エラーハンドリング
                     </a>
                 
             
@@ -2045,7 +2045,7 @@
                         
                             <b>16.1.</b>
                         
-                         Option &amp; unwrap
+                         Optionとunwrap
                     </a>
                 
             
@@ -2109,7 +2109,7 @@
                         
                             <b>16.5.</b>
                         
-                         map for Result
+                         Resultにmapする
                     </a>
                 
             
@@ -2125,7 +2125,7 @@
                         
                             <b>16.6.</b>
                         
-                         Result as an alias
+                         Resultのエイリアス
                     </a>
                 
             
@@ -2141,7 +2141,7 @@
                         
                             <b>16.7.</b>
                         
-                         Options with Results
+                         OptionとResultを同時に扱う
                     </a>
                 
             
@@ -2158,7 +2158,7 @@
                         
                             <b>16.7.1.</b>
                         
-                         Errors as strings
+                         Stringをエラーとして扱う
                     </a>
                 
             
@@ -2174,7 +2174,7 @@
                         
                             <b>16.7.2.</b>
                         
-                         Combining separate combinators
+                         コンビネータを組み合わせる
                     </a>
                 
             
@@ -2190,7 +2190,7 @@
                         
                             <b>16.7.3.</b>
                         
-                         Enter try!
+                         try!入門
                     </a>
                 
             
@@ -2211,7 +2211,7 @@
                         
                             <b>16.8.</b>
                         
-                         The limits of strings
+                         stringの限界
                     </a>
                 
             
@@ -2227,7 +2227,7 @@
                         
                             <b>16.9.</b>
                         
-                         Re-enter try!
+                         try!再入門
                     </a>
                 
             
@@ -2243,7 +2243,7 @@
                         
                             <b>16.10.</b>
                         
-                         Re-enabling box
+                         box化を再度可能にする
                     </a>
                 
             
@@ -2856,19 +2856,23 @@
                 <div class="page-inner">
                 
                 
-                    <section class="normal" id="section-gitbook_31">
+                    <section class="normal" id="section-gitbook_37">
                     
-                        <h3 id="1673-enter-try">16.7.3 Enter try!</h3>
-<p>The previous problem was awkward because avoiding <code>unwrap</code> forced us to nest deeper and
-deeper when what we really wanted was to get the variable <em>out</em>. So, is there any way
-to accomodate this approach without <code>panic</code>? Well, what is a valid action to take when
-an <code>Err</code> is found? It turns out there are two:</p>
+                        <h3 id="1673-try">16.7.3 try!入門</h3>
+<!-- The previous problem was awkward because avoiding `unwrap` forced us to nest deeper and
+deeper when what we really wanted was to get the variable *out*. So, is there any way
+to accomodate this approach without `panic`? Well, what is a valid action to take when
+an `Err` is found? It turns out there are two: -->
+<p>前項の例では、<code>unwrap</code>の使用を避けようとしたところ、ネストがどんどん深くなっていってしまいましたが、本当の目的は変数を<strong>取り出す</strong>ことだったはずです。では、<code>panic</code>せずにこのアプローチをよりコンパクトにする方法はあるのでしょうか？えーと、<code>Err</code>が見つかった時に取れる手法として有効なものには何があるでしょう？結論としては２つです。</p>
+<!-- 1. `panic!` which we already decided to try to avoid if possible
+2. `return` because an `Err` means it cannot be handled -->
 <ol>
-<li><code>panic!</code> which we already decided to try to avoid if possible</li>
-<li><code>return</code> because an <code>Err</code> means it cannot be handled</li>
+<li><code>panic!</code>、これは可能ならば避けるとすでに決めました。</li>
+<li><code>return</code>、<code>Err</code>とは処理が不可能であることを意味するためです。</li>
 </ol>
-<p>This is exactly the purpose of <code>try!</code>; it is <em>almost</em><sup><a href="#fn_1" id="reffn_1">1</a></sup> exactly equivalent to an
-<code>unwrap</code> which <code>returns</code> instead of <code>panics</code> on <code>Errs</code>.</p>
+<!-- This is exactly the purpose of `try!`; it is *almost*[^1] exactly equivalent to an
+`unwrap` which `returns` instead of `panics` on `Errs`. -->
+<p>これこそまさに<code>try!</code>が必要となる理由です。これは、値が<code>Err</code>の際、<code>panic</code>の代わりに<code>return</code>することを除けば、<code>unwrap</code>と<strong>ほぼ</strong><sup><a href="#fn_1" id="reffn_1">1</a></sup>同一です。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
@@ -2877,7 +2881,7 @@ use std::fs::File;
 
 type Result&lt;T&gt; = std::result::Result&lt;T, String&gt;;
 
-// Setup to make this work. Create two files with some info.
+// 下準備。ファイルを作成し文字列を書き込む
 fn setup() -&gt; std::io::Result&lt;()&gt; {
     let mut a = try!(File::create(&quot;a&quot;));
     try!(a.write&#95;all(b&quot;grape&quot;));
@@ -2886,16 +2890,16 @@ fn setup() -&gt; std::io::Result&lt;()&gt; {
     b.write&#95;all(b&quot;fruit&quot;)
 }
 
-// Get the data from each file with the data stored in a &#96;Result&#96;.
+// それぞれのファイルから&#96;Result&#96;でラップされたデータを取得
 fn get&#95;data(path: &amp;str) -&gt; Result&lt;String&gt; {
-    // &#96;try&#96; unwraps the value or returns the error.
+    // &#96;try&#96;は値をアンラップするかエラーを返す
     let mut file = try!(File::open(path)
-        // Errors still must be converted to strings.
+        // エラーを文字列に変換する必要があるのは今までと同様
         .map&#95;err(|err| err.to&#95;string())
     );
     let mut contents = String::new();
 
-    // Read the data into &#96;contents&#96;.
+    // データを&#96;contents&#96;に読み込む
     try!(file.read&#95;to&#95;string(&amp;mut contents)
         .map&#95;err(|err| err.to&#95;string())
     );
@@ -2903,7 +2907,7 @@ fn get&#95;data(path: &amp;str) -&gt; Result&lt;String&gt; {
     Ok(contents)
 }
 
-// Concat the contents of the two files together into a new &#96;Result&#96;.
+// ２つのファイルの内容を結合させて新しい&#96;Result&#96;を作成。
 fn concat(a: &amp;str, b: &amp;str) -&gt; Result&lt;String&gt; {
     let (data&#95;a, data&#95;b) = (try!(get&#95;data(a)), try!(get&#95;data(b)));
 
@@ -2911,7 +2915,7 @@ fn concat(a: &amp;str, b: &amp;str) -&gt; Result&lt;String&gt; {
 }
 
 fn main() {
-    // Ignore this result.
+    // ここの返り値のResultは無視する
     setup().unwrap();
 
     match concat(&quot;a&quot;, &quot;b&quot;) {
@@ -2922,14 +2926,15 @@ fn main() {
 <div id="result"></div>
 </div>
 
-<p>This really is a <em>huge</em> improvement but there is still the nagging issue of <code>map_err</code>. There is
+<!-- This really is a *huge* improvement but there is still the nagging issue of `map_err`. There is
 actually a way to avoid it (we are using it everywhere it seems) but we are still missing some
-details. First, we have to learn how to make better errors.</p>
+details. First, we have to learn how to make better errors. -->
+<p>これは本当に<strong>大きな</strong>改善ですが、<code>map_err</code>がうるさいという問題はまだ解決していません。使わずに済ませる方法はあるのですが(今は必要そうなところ全てで使用しています)、そのためにはまだ触れていない詳細に立ち入る必要があります。まずはより良いエラーの作り方を学んでいきましょう。</p>
 <blockquote id="fn_1">
-<sup>1</sup>. See <a href="/error/reenter_try.html">re-enter try!</a> for more details.<a href="#reffn_1" title="Jump back to footnote [1] in the text."> &#8617;</a>
+<sup>1</sup>. より詳しくは<a href="../../error/reenter_try.html">try!再入門</a>の項を見ましょう。<a href="#reffn_1" title="Jump back to footnote [1] in the text."> &#8617;</a>
 </blockquote>
 <h3 id="see-also">See also:</h3>
-<p><a href="http://doc.rust-lang.org/std/result/enum.Result.html" target="_blank"><code>Result</code></a> and <a href="http://doc.rust-lang.org/std/io/type.Result.html" target="_blank"><code>io::Result</code></a></p>
+<p><a href="http://doc.rust-lang.org/std/result/enum.Result.html" target="_blank"><code>Result</code></a>、<a href="http://doc.rust-lang.org/std/io/type.Result.html" target="_blank"><code>io::Result</code></a></p>
 
                     
                     </section>
@@ -2940,10 +2945,10 @@ details. First, we have to learn how to make better errors.</p>
         </div>
 
         
-        <a href="../../error/option_with_result/combinator_combinations.html" class="navigation navigation-prev " aria-label="Previous page: Combining separate combinators"><i class="fa fa-angle-left"></i></a>
+        <a href="../../error/option_with_result/combinator_combinations.html" class="navigation navigation-prev " aria-label="Previous page: コンビネータを組み合わせる"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../../error/limits_of_strings.html" class="navigation navigation-next " aria-label="Next page: The limits of strings"><i class="fa fa-angle-right"></i></a>
+        <a href="../../error/limits_of_strings.html" class="navigation navigation-next " aria-label="Next page: stringの限界"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

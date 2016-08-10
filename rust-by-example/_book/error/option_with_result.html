@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
-        <title>Options with Results | Rust by Example</title>
+        <title>OptionとResultを同時に扱う | Rust by Example</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.5.0">
@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="16.7" data-basepath=".." data-revision="1470719679268">
+    <div class="book" data-level="16.7" data-basepath=".." data-revision="1470814953524">
     
 
 <div class="book-summary">
@@ -2028,7 +2028,7 @@
                         
                             <b>16.</b>
                         
-                         Error handling
+                         エラーハンドリング
                     </a>
                 
             
@@ -2045,7 +2045,7 @@
                         
                             <b>16.1.</b>
                         
-                         Option &amp; unwrap
+                         Optionとunwrap
                     </a>
                 
             
@@ -2109,7 +2109,7 @@
                         
                             <b>16.5.</b>
                         
-                         map for Result
+                         Resultにmapする
                     </a>
                 
             
@@ -2125,7 +2125,7 @@
                         
                             <b>16.6.</b>
                         
-                         Result as an alias
+                         Resultのエイリアス
                     </a>
                 
             
@@ -2141,7 +2141,7 @@
                         
                             <b>16.7.</b>
                         
-                         Options with Results
+                         OptionとResultを同時に扱う
                     </a>
                 
             
@@ -2158,7 +2158,7 @@
                         
                             <b>16.7.1.</b>
                         
-                         Errors as strings
+                         Stringをエラーとして扱う
                     </a>
                 
             
@@ -2174,7 +2174,7 @@
                         
                             <b>16.7.2.</b>
                         
-                         Combining separate combinators
+                         コンビネータを組み合わせる
                     </a>
                 
             
@@ -2190,7 +2190,7 @@
                         
                             <b>16.7.3.</b>
                         
-                         Enter try!
+                         try!入門
                     </a>
                 
             
@@ -2211,7 +2211,7 @@
                         
                             <b>16.8.</b>
                         
-                         The limits of strings
+                         stringの限界
                     </a>
                 
             
@@ -2227,7 +2227,7 @@
                         
                             <b>16.9.</b>
                         
-                         Re-enter try!
+                         try!再入門
                     </a>
                 
             
@@ -2243,7 +2243,7 @@
                         
                             <b>16.10.</b>
                         
-                         Re-enabling box
+                         box化を再度可能にする
                     </a>
                 
             
@@ -2856,25 +2856,27 @@
                 <div class="page-inner">
                 
                 
-                    <section class="normal" id="section-gitbook_33">
+                    <section class="normal" id="section-gitbook_32">
                     
-                        <h2 id="167-options-with-results">16.7 Options with Results</h2>
-<p>The previous examples have always been very convenient; a <code>Result</code> interacts with the same
-<code>Results</code> and an <code>Option</code> with the same <code>Option</code>. Sometimes it is not this easy though;
-<code>Options</code> and <code>Results</code> may have to interact or even <code>Result&lt;T, Error1&gt;</code> with
-<code>Result&lt;T, Error2&gt;</code>.</p>
-<p>Here is an example where one returns an <code>Option</code> and the other returns an <code>Result</code>. Aside
-from messy errors provided by <code>unwrap</code>, this looks reasonable:</p>
+                        <h2 id="167-optionresult">16.7 OptionとResultを同時に扱う</h2>
+<!-- The previous examples have always been very convenient; a `Result` interacts with the same
+`Results` and an `Option` with the same `Option`. Sometimes it is not this easy though;
+`Options` and `Results` may have to interact or even `Result<T, Error1>` with
+`Result<T, Error2>`. -->
+<p>全頁までの例では、<code>Result</code>は<code>Result</code>と、<code>Option</code>は<code>Option</code>としか関わらなかったため、非常に扱いやすいものでした。とはいえ、常にこのような扱いやすい場合ばかりではありません。<code>Option</code>と<code>Result</code>が、あるいは<code>Result&lt;T, Error1&gt;</code>と<code>Result&lt;T, Error2&gt;</code>とが関わる場合もあります。</p>
+<!-- Here is an example where one returns an `Option` and the other returns an `Result`. Aside
+from messy errors provided by `unwrap`, this looks reasonable: -->
+<p>以下は、一方が<code>Option</code>を返し、もう一方が<code>Result</code>を返すような場合です。<code>unwrap</code>が汚いエラーメッセージを返すことを除けば、これは筋の通ったやり方に見えます。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
-<div id="editor">// The first attempt conveniently uses &#96;unwrap&#96; with the aforementioned
-// bad errors it results in.
+<div id="editor">// まずは単純に&#96;unwrap&#96;を用いてみましょう。これは前述の好ましくない
+// エラーメッセージを引き起こします。
 fn double&#95;first(vec: Vec&lt;&amp;str&gt;) -&gt; i32 {
-    // What if the vector is empty?
+    // ベクタが空の場合どうなる？
     let first = vec.first().unwrap();
 
-    // What if the element doesn&#39;t parse to a number?
+    // 要素が数値にパースできない場合、どうなる？
     2 &#42; first.parse::&lt;i32&gt;().unwrap()
 }
 
@@ -2885,14 +2887,14 @@ fn main() {
 
     println!(&quot;The first doubled is {}&quot;, double&#95;first(numbers));
     println!(&quot;The first doubled is {}&quot;, double&#95;first(empty));
-    // ^ Comment out this line to see the second error.
+    // ^ ２つ目のエラーを見たければこの行をコメントアウトしましょう。
     println!(&quot;The first doubled is {}&quot;, double&#95;first(strings));
 }</div>
 <div id="result"></div>
 </div>
 
 <h3 id="see-also">See also:</h3>
-<p><a href="http://doc.rust-lang.org/std/result/enum.Result.html" target="_blank"><code>Result</code></a> and <a href="http://doc.rust-lang.org/std/io/type.Result.html" target="_blank"><code>io::Result</code></a></p>
+<p><a href="http://doc.rust-lang.org/std/result/enum.Result.html" target="_blank"><code>Result</code></a> 、<a href="http://doc.rust-lang.org/std/io/type.Result.html" target="_blank"><code>io::Result</code></a></p>
 
                     
                     </section>
@@ -2903,10 +2905,10 @@ fn main() {
         </div>
 
         
-        <a href="../error/result_alias.html" class="navigation navigation-prev " aria-label="Previous page: Result as an alias"><i class="fa fa-angle-left"></i></a>
+        <a href="../error/result_alias.html" class="navigation navigation-prev " aria-label="Previous page: Resultのエイリアス"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../error/option_with_result/result_string_errors.html" class="navigation navigation-next " aria-label="Next page: Errors as strings"><i class="fa fa-angle-right"></i></a>
+        <a href="../error/option_with_result/result_string_errors.html" class="navigation navigation-next " aria-label="Next page: Stringをエラーとして扱う"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

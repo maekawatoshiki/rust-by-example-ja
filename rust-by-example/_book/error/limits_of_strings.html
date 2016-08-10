@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
-        <title>The limits of strings | Rust by Example</title>
+        <title>stringの限界 | Rust by Example</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.5.0">
@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="16.8" data-basepath=".." data-revision="1470719679268">
+    <div class="book" data-level="16.8" data-basepath=".." data-revision="1470814953524">
     
 
 <div class="book-summary">
@@ -2028,7 +2028,7 @@
                         
                             <b>16.</b>
                         
-                         Error handling
+                         エラーハンドリング
                     </a>
                 
             
@@ -2045,7 +2045,7 @@
                         
                             <b>16.1.</b>
                         
-                         Option &amp; unwrap
+                         Optionとunwrap
                     </a>
                 
             
@@ -2109,7 +2109,7 @@
                         
                             <b>16.5.</b>
                         
-                         map for Result
+                         Resultにmapする
                     </a>
                 
             
@@ -2125,7 +2125,7 @@
                         
                             <b>16.6.</b>
                         
-                         Result as an alias
+                         Resultのエイリアス
                     </a>
                 
             
@@ -2141,7 +2141,7 @@
                         
                             <b>16.7.</b>
                         
-                         Options with Results
+                         OptionとResultを同時に扱う
                     </a>
                 
             
@@ -2158,7 +2158,7 @@
                         
                             <b>16.7.1.</b>
                         
-                         Errors as strings
+                         Stringをエラーとして扱う
                     </a>
                 
             
@@ -2174,7 +2174,7 @@
                         
                             <b>16.7.2.</b>
                         
-                         Combining separate combinators
+                         コンビネータを組み合わせる
                     </a>
                 
             
@@ -2190,7 +2190,7 @@
                         
                             <b>16.7.3.</b>
                         
-                         Enter try!
+                         try!入門
                     </a>
                 
             
@@ -2211,7 +2211,7 @@
                         
                             <b>16.8.</b>
                         
-                         The limits of strings
+                         stringの限界
                     </a>
                 
             
@@ -2227,7 +2227,7 @@
                         
                             <b>16.9.</b>
                         
-                         Re-enter try!
+                         try!再入門
                     </a>
                 
             
@@ -2243,7 +2243,7 @@
                         
                             <b>16.10.</b>
                         
-                         Re-enabling box
+                         box化を再度可能にする
                     </a>
                 
             
@@ -2856,30 +2856,40 @@
                 <div class="page-inner">
                 
                 
-                    <section class="normal" id="section-gitbook_34">
+                    <section class="normal" id="section-gitbook_33">
                     
-                        <h2 id="168-the-limits-of-strings">16.8 The limits of strings</h2>
-<p>We have been using <code>Strings</code> as errors for a while. In fact, this is somewhat limiting as
-an error type. Below are the criteria for a good error type. <code>String</code> nicely fulfills the first
-two but not the second two:</p>
+                        <h2 id="168-string">16.8 stringの限界</h2>
+<!-- We have been using `Strings` as errors for a while. In fact, this is somewhat limiting as
+an error type. Below are the criteria for a good error type. `String` nicely fulfills the first
+two but not the second two: -->
+<p>これまで、エラーの値として<code>String</code>をしばらく使用してきました。実のところ、これはエラーとして用いるには限界があります。以下に良いエラー型であるための条件を挙げます。<code>String</code>は1つめと2つめの条件はいい感じに満たしてくれるのですが後の2つは満たしません。</p>
+<!-- * Represents different errors with the same type
+* Presents nice error messages to the user
+* Is easily type comparable. Consider comparing these two types:
+    - `Err("Please use a vector with at least one element".to_owned())`
+    - `Err(EmptyVec)`
+* Can hold information about the error. Compare:
+    - `Err("+ cannot be used here".to_owned())`
+    - `Err(BadChar(c, position))` -->
 <ul>
-<li>Represents different errors with the same type</li>
-<li>Presents nice error messages to the user</li>
-<li>Is easily type comparable. Consider comparing these two types:<ul>
-<li><code>Err(&quot;Please use a vector with at least one element&quot;.to_owned())</code></li>
+<li>異なるエラーを一つの型で表現できる。</li>
+<li>ユーザーに綺麗なエラーメッセージを見せてくれる。</li>
+<li>容易に型比較ができる。例えば以下の二つの型を比較することを考えてみましょう。<ul>
+<li><code>Err(&quot;少なくとも一つの要素を持つベクタを使用してください&quot;.to_owned())</code></li>
 <li><code>Err(EmptyVec)</code></li>
 </ul>
 </li>
-<li>Can hold information about the error. Compare:<ul>
-<li><code>Err(&quot;+ cannot be used here&quot;.to_owned())</code></li>
+<li>エラーの内容に関する情報を持つことができる。例えば以下の二つを比べてください。<ul>
+<li><code>Err(&quot;+ はここでは使用できません&quot;.to_owned())</code></li>
 <li><code>Err(BadChar(c, position))</code></li>
 </ul>
 </li>
 </ul>
-<p>This makes <code>String</code> errors both difficult to react to and verbose to create. In fact, a nice
+<!-- This makes `String` errors both difficult to react to and verbose to create. In fact, a nice
 looking error message has nothing to do with how the type is structured. It is simply a
-consequence of <code>Display</code> being implemented for the type. It should not be necessary to
-pollute logic heavy code with <code>String</code> formatting simply for nice error messages.</p>
+consequence of `Display` being implemented for the type. It should not be necessary to
+pollute logic heavy code with `String` formatting simply for nice error messages. -->
+<p>このことから、<code>String</code>をエラーとして用いると、エラーの対処・明示的な作成という点が困難になります。実際のところ、たとえエラーメッセージの見た目がいい感じであったとしても、それはそのエラーの型の構造とは何の関係もありません。単に、その型に対する<code>Display</code>の実装のみに依存するからです。単純にいい感じのエラーメッセージを表示したいという目的のために<code>String</code>を操作するコードを書くと、どうしてもコードベースが複雑になって汚染されてしまいますので、その必要はありません。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
@@ -2889,31 +2899,31 @@ use std::fmt;
 type Result&lt;T&gt; = std::result::Result&lt;T, DoubleError&gt;;
 
 #[derive(Debug)]
-// Define our error types. These may be customized however is useful for our error
-// handling cases. Now we will be able to defer to the underlying tools error
-// implementation, write our own errors, or something in between.
+// 独自のエラー型を定義する。これならば、ここでのエラーハンドリングの仕方に合わせて
+// 自由にカスタマイズできる。こうすることで、エラーの実装の裏側にあるツール、
+// 独自に定義したエラー、あるいはその両方に従うことが可能となる。
 enum DoubleError {
-    // We don&#39;t require any extra info to detail this error.
+    // このエラーに関しては、エラーの詳細を説明するのに追加の情報は必要ない。
     EmptyVec,
-    // We will defer to the parse error implementation for their error. Supplying extra
-    // info would require adding more data to the type.
+    // パースに失敗した場合はParseIntErrorの挙動に追従する。追加の情報を持たせたい
+    // 場合は、この型に、より多くのデータを追加しなくてはならない。
     Parse(ParseIntError),
 }
 
-// How the type is displayed is completely separate from where the errors are generated.
-// We do not need to be concerned that the display style will clutter the complex logic
-// our utility requires. They are separate matters which are handled separately.
+// 型がどのように表示されるかは、そのエラーが生じた場所とは全く関係がない。
+// また、ここで用いている複雑なロジックが、エラーのディスプレイスタイルによって
+// そのままぶちまけられてしまうことも心配する必要はない。それらは別々の問題であって
+// 別々に扱われる。
 //
-// We don&#39;t store extra info about the errors. If we had desired, for example, to state
-// which string failed to parse then we can&#39;t without modifying our types to carry that
-// information accordingly.
+// ここではエラーに関して、追加の情報を保持してはいない。たとえば、パースに失敗したString
+// がどれであるかを明示したいとする。その場合、独自に定義したエラー型を変更して、その情報を
+// 保持するようにしてやる必要がある。
 impl fmt::Display for DoubleError {
     fn fmt(&amp;self, f: &amp;mut fmt::Formatter) -&gt; fmt::Result {
         match &#42;self {
             DoubleError::EmptyVec =&gt;
                 write!(f, &quot;please use a vector with at least one element&quot;),
-            // This is a wrapper so defer to the underlying types&#39; own implementation
-            // of &#96;fmt&#96;.
+            // こちらはラッパーなので、内側の型(この場合は&#96;ParseIntError&#96;)の&#96;fmt&#96;の実装に従う。
             DoubleError::Parse(ref e) =&gt; e.fmt(f),
         }
     }
@@ -2921,10 +2931,10 @@ impl fmt::Display for DoubleError {
 
 fn double&#95;first(vec: Vec&lt;&amp;str&gt;) -&gt; Result&lt;i32&gt; {
     vec.first()
-       // Change the error to our new type.
+       // エラーを新しい型のものに変換
        .ok&#95;or(DoubleError::EmptyVec)
        .and&#95;then(|s| s.parse::&lt;i32&gt;()
-            // Update to the new error type here also.
+            // ここでも新しいエラー型へとアップデートさせる。
             .map&#95;err(DoubleError::Parse)
             .map(|i| 2 &#42; i))
 }
@@ -2949,7 +2959,7 @@ fn main() {
 </div>
 
 <h3 id="see-also">See also:</h3>
-<p><a href="http://doc.rust-lang.org/std/result/enum.Result.html" target="_blank"><code>Result</code></a> and <a href="http://doc.rust-lang.org/std/io/type.Result.html" target="_blank"><code>io::Result</code></a></p>
+<p><a href="http://doc.rust-lang.org/std/result/enum.Result.html" target="_blank"><code>Result</code></a>、<a href="http://doc.rust-lang.org/std/io/type.Result.html" target="_blank"><code>io::Result</code></a></p>
 
                     
                     </section>
@@ -2960,10 +2970,10 @@ fn main() {
         </div>
 
         
-        <a href="../error/option_with_result/enter_try.html" class="navigation navigation-prev " aria-label="Previous page: Enter try!"><i class="fa fa-angle-left"></i></a>
+        <a href="../error/option_with_result/enter_try.html" class="navigation navigation-prev " aria-label="Previous page: try!入門"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../error/reenter_try.html" class="navigation navigation-next " aria-label="Next page: Re-enter try!"><i class="fa fa-angle-right"></i></a>
+        <a href="../error/reenter_try.html" class="navigation navigation-next " aria-label="Next page: try!再入門"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>
