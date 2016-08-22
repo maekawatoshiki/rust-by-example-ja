@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
-        <title>Traits | Rust by Example</title>
+        <title>ジェネリックトレイト | Rust by Example</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.5.0">
@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="13.3" data-basepath=".." data-revision="1471235310279">
+    <div class="book" data-level="13.3" data-basepath=".." data-revision="1471861047224">
     
 
 <div class="book-summary">
@@ -1382,7 +1382,7 @@
                         
                             <b>13.</b>
                         
-                         Generics
+                         ジェネリクス
                     </a>
                 
             
@@ -1399,7 +1399,7 @@
                         
                             <b>13.1.</b>
                         
-                         Functions
+                         関数
                     </a>
                 
             
@@ -1415,7 +1415,7 @@
                         
                             <b>13.2.</b>
                         
-                         Implementation
+                         メソッド
                     </a>
                 
             
@@ -1431,7 +1431,7 @@
                         
                             <b>13.3.</b>
                         
-                         Traits
+                         ジェネリックトレイト
                     </a>
                 
             
@@ -1447,7 +1447,7 @@
                         
                             <b>13.4.</b>
                         
-                         Bounds
+                         ジェネリック境界
                     </a>
                 
             
@@ -1464,7 +1464,7 @@
                         
                             <b>13.4.1.</b>
                         
-                         Testcase: empty bounds
+                         テストケース: 空トレイト
                     </a>
                 
             
@@ -1485,7 +1485,7 @@
                         
                             <b>13.5.</b>
                         
-                         Multiple bounds
+                         複数のジェネリック境界
                     </a>
                 
             
@@ -1501,7 +1501,7 @@
                         
                             <b>13.6.</b>
                         
-                         Where clauses
+                         Where句
                     </a>
                 
             
@@ -1517,7 +1517,7 @@
                         
                             <b>13.7.</b>
                         
-                         Associated items
+                         関連型
                     </a>
                 
             
@@ -1534,7 +1534,7 @@
                         
                             <b>13.7.1.</b>
                         
-                         The Problem
+                         関連型が必要になる状況
                     </a>
                 
             
@@ -1550,7 +1550,7 @@
                         
                             <b>13.7.2.</b>
                         
-                         Associated types
+                         関連型
                     </a>
                 
             
@@ -1571,7 +1571,7 @@
                         
                             <b>13.8.</b>
                         
-                         Phantom type parameters
+                         幽霊型パラメータ
                     </a>
                 
             
@@ -1588,7 +1588,7 @@
                         
                             <b>13.8.1.</b>
                         
-                         Testcase: unit conversions
+                         テストケース: 単位を扱う
                     </a>
                 
             
@@ -2858,28 +2858,29 @@
                 
                     <section class="normal" id="section-gitbook_70">
                     
-                        <h2 id="133-traits">13.3 Traits</h2>
-<p>Of course <code>trait</code>s can also be generic. Here we define one which reimplements
-the <code>Drop</code> <code>trait</code> as a generic method to <code>drop</code> itself and an input.</p>
+                        <h2 id="133-">13.3 ジェネリックトレイト</h2>
+<!-- Of course `trait`s can also be generic. Here we define one which reimplements
+the `Drop` `trait` as a generic method to `drop` itself and an input. -->
+<p>もちろんトレイトもジェネリクスを活用することができます。ここでは<code>Drop</code>トレイトをジェネリックメソッドとして再実装し、自身と引数として受け取った値の両方を<code>drop</code>するようなメソッドにします。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
-<div id="editor">// Non-copyable types.
+<div id="editor">// コピー不可な型
+// 訳注: &#96;clone()&#96;メソッドを用いないかぎり、値のコピーではなくムーブが起きる型
 struct Empty;
 struct Null;
 
-// A trait generic over &#96;T&#96;.
+// ジェネリック型 &#96;T&#96;に対するトレイト
 trait DoubleDrop&lt;T&gt; {
-    // Define a method on the caller type which takes an
-    // additional single parameter &#96;T&#96; and does nothing with it.
+    // &#96;self&#96;に加えてもう一つジェネリック型を受け取り、
+    // 何もしないメソッドのシグネチャを定義
     fn double&#95;drop(self, &#95;: T);
 }
 
-// Implement &#96;DoubleDrop&lt;T&gt;&#96; for any generic parameter &#96;T&#96; and
-// caller &#96;U&#96;.
+// &#96;U&#96;を&#96;self&#96;として、&#96;T&#96;をもう一つの引数として受け取る&#96;DoubleDrop&lt;T&gt;&#96;
+// を実装する。&#96;U&#96;,&#96;T&#96;はいずれもジェネリック型
 impl&lt;T, U&gt; DoubleDrop&lt;T&gt; for U {
-    // This method takes ownership of both passed arguments,
-    // deallocating both.
+    // このメソッドは2つの引数の所有権を取り、メモリ上から開放する。
     fn double&#95;drop(self, &#95;: T) {}
 }
 
@@ -2887,18 +2888,18 @@ fn main() {
     let empty = Empty;
     let null  = Null;
 
-    // Deallocate &#96;empty&#96; and &#96;null&#96;.
+    // &#96;empty&#96;と&#96;null&#96;を開放
     empty.double&#95;drop(null);
 
     //empty;
     //null;
-    // ^ TODO: Try uncommenting these lines.
+    // ^ TODO: これらの行をアンコメントしてみましょう。
 }</div>
 <div id="result"></div>
 </div>
 
 <h3 id="see-also">See also:</h3>
-<p><a href="http://doc.rust-lang.org/std/ops/trait.Drop.html" target="_blank"><code>Drop</code></a>, <a href="/custom_types/structs.html"><code>struct</code></a>, and <a href="/trait.html"><code>trait</code></a></p>
+<p><a href="http://doc.rust-lang.org/std/ops/trait.Drop.html" target="_blank"><code>Drop</code></a>, <a href="/custom_types/structs.html">構造体(<code>struct</code>)</a>, <a href="/trait.html">トレイト(<code>trait</code>)</a></p>
 
                     
                     </section>
@@ -2909,10 +2910,10 @@ fn main() {
         </div>
 
         
-        <a href="../generics/impl.html" class="navigation navigation-prev " aria-label="Previous page: Implementation"><i class="fa fa-angle-left"></i></a>
+        <a href="../generics/impl.html" class="navigation navigation-prev " aria-label="Previous page: メソッド"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../generics/bounds.html" class="navigation navigation-next " aria-label="Next page: Bounds"><i class="fa fa-angle-right"></i></a>
+        <a href="../generics/bounds.html" class="navigation navigation-next " aria-label="Next page: ジェネリック境界"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
-        <title>Bounds | Rust by Example</title>
+        <title>ジェネリック境界 | Rust by Example</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.5.0">
@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="13.4" data-basepath=".." data-revision="1471235310279">
+    <div class="book" data-level="13.4" data-basepath=".." data-revision="1471861047224">
     
 
 <div class="book-summary">
@@ -1382,7 +1382,7 @@
                         
                             <b>13.</b>
                         
-                         Generics
+                         ジェネリクス
                     </a>
                 
             
@@ -1399,7 +1399,7 @@
                         
                             <b>13.1.</b>
                         
-                         Functions
+                         関数
                     </a>
                 
             
@@ -1415,7 +1415,7 @@
                         
                             <b>13.2.</b>
                         
-                         Implementation
+                         メソッド
                     </a>
                 
             
@@ -1431,7 +1431,7 @@
                         
                             <b>13.3.</b>
                         
-                         Traits
+                         ジェネリックトレイト
                     </a>
                 
             
@@ -1447,7 +1447,7 @@
                         
                             <b>13.4.</b>
                         
-                         Bounds
+                         ジェネリック境界
                     </a>
                 
             
@@ -1464,7 +1464,7 @@
                         
                             <b>13.4.1.</b>
                         
-                         Testcase: empty bounds
+                         テストケース: 空トレイト
                     </a>
                 
             
@@ -1485,7 +1485,7 @@
                         
                             <b>13.5.</b>
                         
-                         Multiple bounds
+                         複数のジェネリック境界
                     </a>
                 
             
@@ -1501,7 +1501,7 @@
                         
                             <b>13.6.</b>
                         
-                         Where clauses
+                         Where句
                     </a>
                 
             
@@ -1517,7 +1517,7 @@
                         
                             <b>13.7.</b>
                         
-                         Associated items
+                         関連型
                     </a>
                 
             
@@ -1534,7 +1534,7 @@
                         
                             <b>13.7.1.</b>
                         
-                         The Problem
+                         関連型が必要になる状況
                     </a>
                 
             
@@ -1550,7 +1550,7 @@
                         
                             <b>13.7.2.</b>
                         
-                         Associated types
+                         関連型
                     </a>
                 
             
@@ -1571,7 +1571,7 @@
                         
                             <b>13.8.</b>
                         
-                         Phantom type parameters
+                         幽霊型パラメータ
                     </a>
                 
             
@@ -1588,7 +1588,7 @@
                         
                             <b>13.8.1.</b>
                         
-                         Testcase: unit conversions
+                         テストケース: 単位を扱う
                     </a>
                 
             
@@ -2858,30 +2858,36 @@
                 
                     <section class="normal" id="section-gitbook_74">
                     
-                        <h2 id="134-bounds">13.4 Bounds</h2>
-<p>When working with generics, the type parameters often must use traits as <em>bounds</em> to
+                        <h2 id="134-">13.4 ジェネリック境界</h2>
+<!-- When working with generics, the type parameters often must use traits as *bounds* to
 stipulate what functionality a type implements. For example, the following
-example uses the trait <code>Display</code> to print and so it requires <code>T</code> to be bound
-by <code>Display</code>; that is, <code>T</code> <em>must</em> implement <code>Display</code>.</p>
-<pre><code class="lang-rust"><span class="hljs-comment">// Define a function `printer` that takes a generic type `T` which</span>
-<span class="hljs-comment">// must implement trait `Display`.</span>
+example uses the trait `Display` to print and so it requires `T` to be bound
+by `Display`; that is, `T` *must* implement `Display`. -->
+<p>ジェネリックプログラミングをしていると、型パラメータが特定の機能を持っていることを規定するため、トレイトに境界(<code>bound</code>)を設ける必要があることがよくあります。例えば、以下の例では、引数の<code>Display</code>トレイトを用いてプリントを行うため、<code>T</code>が<code>Display</code>を持っていることを規定しています。つまり、「<code>T</code>は<code>Display</code>を実装<em>していなくてはならない</em>」という意味です。</p>
+<pre><code class="lang-rust"><span class="hljs-comment">// `Display`トレイトを実装している`T`を引数として取る</span>
+<span class="hljs-comment">// `printer`という関数を定義。</span>
 <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">printer</span></span>&lt;T: Display&gt;(t: T) {
     <span class="hljs-built_in">println!</span>(<span class="hljs-string">"{}"</span>, t);
 }
 </code></pre>
-<p>Bounding restricts the generic to types that conform to the bounds. That is:</p>
+<!-- Bounding restricts the generic to types that conform to the bounds. That is: -->
+<p>境界は、ジェネリクスを全ての型ではなく、一定条件を満たす型に対してのみ適用するためにあります。つまり</p>
+<blockquote>
+<p>訳注: <code>&lt;T: Display&gt;</code>は<code>&lt;T&gt;</code>の部分集合であることを意識すると、「境界」という言葉の意味がしっくり来ると思います。</p>
+</blockquote>
 <pre><code class="lang-rust"><span class="hljs-keyword">struct</span> S&lt;T: Display&gt;(T);
 
-<span class="hljs-comment">// Error! `Vec&lt;T&gt;` does not implement `Display`. This</span>
-<span class="hljs-comment">// specialization will fail.</span>
+<span class="hljs-comment">// エラー! `Vec&lt;T&gt;`は`Display`を実装していないため、この特殊化</span>
+<span class="hljs-comment">// は失敗します。</span>
 <span class="hljs-keyword">let</span> s = S(<span class="hljs-built_in">vec!</span>[<span class="hljs-number">1</span>]);
 </code></pre>
-<p>Another effect of bounding is that generic instances are allowed to access the 
-<a href="/fn/methods.html">methods</a> of traits specified in the bounds. For example:</p>
+<!-- Another effect of bounding is that generic instances are allowed to access the
+[methods] of traits specified in the bounds. For example: -->
+<p>境界のもう一つの効果は、ジェネリック型のインスタンスが、境界条件となるトレイトの<a href="../fn/methods.html">メソッド</a>にアクセスすることができるようになる点です。以下がその例です。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
-<div id="editor">// A trait which implements the print marker: &#96;{:?}&#96;.
+<div id="editor">// プリント時のマーカー&#96;{:?}&#96;を実装するトレイト
 use std::fmt::Debug;
 
 trait HasArea {
@@ -2897,14 +2903,14 @@ struct Rectangle { length: f64, height: f64 }
 #[allow(dead&#95;code)]
 struct Triangle  { length: f64, height: f64 }
 
-// The generic &#96;T&#96; must implement &#96;Debug&#96;. Regardless
-// of the type, this will work properly.
+// ジェネリック型&#96;T&#96;は&#96;Debug&#96;トレイトを実装していなくてはならない。
+// その限りにおいて、&#96;T&#96;がどのような具象型であろうとも次の関数は動作する。
 fn print&#95;debug&lt;T: Debug&gt;(t: &amp;T) {
     println!(&quot;{:?}&quot;, t);
 }
 
-// &#96;T&#96; must implement &#96;HasArea&#96;. Any function which meets
-// the bound can access &#96;HasArea&#96;&#39;s function &#96;area&#96;.
+// 「&#96;T&#96;は&#96;HasArea&#96;を実装していなくてはならない」という境界条件を
+// 満たしていれば、&#96;HasArea&#96;の関数&#96;area&#96;にアクセスできる。
 fn area&lt;T: HasArea&gt;(t: &amp;T) -&gt; f64 { t.area() }
 
 fn main() {
@@ -2916,16 +2922,17 @@ fn main() {
 
     //print&#95;debug(&amp;&#95;triangle);
     //println!(&quot;Area: {}&quot;, area(&amp;&#95;triangle));
-    // ^ TODO: Try uncommenting these.
-    // | Error: Does not implement either &#96;Debug&#96; or &#96;HasArea&#96;. 
+    // ^ TODO: これらの行をアンコメントしてみましょう。
+    // | Error: &#96;Debug&#96; も &#96;HasArea&#96;もどちらも実装されていません!
 }</div>
 <div id="result"></div>
 </div>
 
-<p>As an additional note, <a href="/generics/where.html"><code>where</code></a> clauses can also be used to apply bounds in
-some cases to be more expressive.</p>
+<!-- As an additional note, [`where`][where] clauses can also be used to apply bounds in
+some cases to be more expressive. -->
+<p>付け加えておくと、<a href="../generics/where.html"><code>where</code></a>句を用いて境界を適用することもできます。場合によってはこちらの記法を使用したほうが読みやすくなる場合もあります。</p>
 <h3 id="see-also">See also:</h3>
-<p><a href="/hello/print.html"><code>std::fmt</code></a>, <a href="/custom_types/structs.html"><code>struct</code>s</a>, and <a href="/trait.html"><code>trait</code>s</a></p>
+<p><a href="../hello/print.html"><code>std::fmt</code></a>, <a href="../custom_types/structs.html">構造体(<code>struct</code>)</a>, <a href="../trait.html">トレイト</a></p>
 
                     
                     </section>
@@ -2936,10 +2943,10 @@ some cases to be more expressive.</p>
         </div>
 
         
-        <a href="../generics/gen_trait.html" class="navigation navigation-prev " aria-label="Previous page: Traits"><i class="fa fa-angle-left"></i></a>
+        <a href="../generics/gen_trait.html" class="navigation navigation-prev " aria-label="Previous page: ジェネリックトレイト"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../generics/bounds/testcase_empty.html" class="navigation navigation-next " aria-label="Next page: Testcase: empty bounds"><i class="fa fa-angle-right"></i></a>
+        <a href="../generics/bounds/testcase_empty.html" class="navigation navigation-next " aria-label="Next page: テストケース: 空トレイト"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

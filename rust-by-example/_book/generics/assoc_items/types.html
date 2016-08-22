@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
-        <title>Associated types | Rust by Example</title>
+        <title>関連型 | Rust by Example</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.5.0">
@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="13.7.2" data-basepath="../.." data-revision="1471235310279">
+    <div class="book" data-level="13.7.2" data-basepath="../.." data-revision="1471861047224">
     
 
 <div class="book-summary">
@@ -1382,7 +1382,7 @@
                         
                             <b>13.</b>
                         
-                         Generics
+                         ジェネリクス
                     </a>
                 
             
@@ -1399,7 +1399,7 @@
                         
                             <b>13.1.</b>
                         
-                         Functions
+                         関数
                     </a>
                 
             
@@ -1415,7 +1415,7 @@
                         
                             <b>13.2.</b>
                         
-                         Implementation
+                         メソッド
                     </a>
                 
             
@@ -1431,7 +1431,7 @@
                         
                             <b>13.3.</b>
                         
-                         Traits
+                         ジェネリックトレイト
                     </a>
                 
             
@@ -1447,7 +1447,7 @@
                         
                             <b>13.4.</b>
                         
-                         Bounds
+                         ジェネリック境界
                     </a>
                 
             
@@ -1464,7 +1464,7 @@
                         
                             <b>13.4.1.</b>
                         
-                         Testcase: empty bounds
+                         テストケース: 空トレイト
                     </a>
                 
             
@@ -1485,7 +1485,7 @@
                         
                             <b>13.5.</b>
                         
-                         Multiple bounds
+                         複数のジェネリック境界
                     </a>
                 
             
@@ -1501,7 +1501,7 @@
                         
                             <b>13.6.</b>
                         
-                         Where clauses
+                         Where句
                     </a>
                 
             
@@ -1517,7 +1517,7 @@
                         
                             <b>13.7.</b>
                         
-                         Associated items
+                         関連型
                     </a>
                 
             
@@ -1534,7 +1534,7 @@
                         
                             <b>13.7.1.</b>
                         
-                         The Problem
+                         関連型が必要になる状況
                     </a>
                 
             
@@ -1550,7 +1550,7 @@
                         
                             <b>13.7.2.</b>
                         
-                         Associated types
+                         関連型
                     </a>
                 
             
@@ -1571,7 +1571,7 @@
                         
                             <b>13.8.</b>
                         
-                         Phantom type parameters
+                         幽霊型パラメータ
                     </a>
                 
             
@@ -1588,7 +1588,7 @@
                         
                             <b>13.8.1.</b>
                         
-                         Testcase: unit conversions
+                         テストケース: 単位を扱う
                     </a>
                 
             
@@ -2858,40 +2858,44 @@
                 
                     <section class="normal" id="section-gitbook_72">
                     
-                        <h3 id="1372-associated-types">13.7.2 Associated types</h3>
-<p>The use of &quot;Associated types&quot; improves the overall readability of code 
-by moving inner types locally into a trait as <em>output</em> types. Syntax
-for the <code>trait</code> definition is as follows:</p>
-<pre><code class="lang-rust">// `A` and `B` are defined in the trait via the `type` keyword.
-// (Note: `type` in this context is different from `type` when used for
-// aliases).
+                        <h3 id="1372-">13.7.2 関連型</h3>
+<!-- The use of "Associated types" improves the overall readability of code
+by moving inner types locally into a trait as *output* types. Syntax
+for the `trait` definition is as follows: -->
+<p>関連型を使用すると、コンテナ型の中の要素をトレイトの中に<em>出力型</em>として書くことで、全体の可読性を上げることができます。トレイトを定義する際の構文は以下のようになります。</p>
+<pre><code class="lang-rust">// `A`と`B`は`type`キーワードを用いてトレイト内で宣言されている。
+// (注意: この文脈で使用する`type`は型エイリアスを宣言する際の`type`とは
+// 異なることに注意しましょう。)
 trait Contains {
     type A;
     type B;
 
-    // Updated syntax to refer to these new types generically.
+    // これらの新しい型をジェネリックに使用するために、構文が
+    // アップデートされています。
     fn contains(&amp;self, &amp;Self::A, &amp;Self::B) -&gt; bool;
 }
 </code></pre>
-<p>Note that functions that use the <code>trait</code> <code>Contains</code> are no longer required
-to express <code>A</code> or <code>B</code> at all:</p>
-<pre><code class="lang-rust"><span class="hljs-comment">// Without using associated types</span>
+<!-- Note that functions that use the `trait` `Contains` are no longer required
+to express `A` or `B` at all: -->
+<p><code>Contains</code>トレイトを使用する関数において、<code>A</code>と<code>B</code>を明示する必要がなくなっていることに注目しましょう。</p>
+<pre><code class="lang-rust"><span class="hljs-comment">// 関連型を使用しない場合</span>
 <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">difference</span></span>&lt;A, B, C&gt;(container: &amp;C) -&gt; <span class="hljs-keyword">i32</span> where
     C: Contains&lt;A, B&gt; { ... }
 
-<span class="hljs-comment">// Using associated types</span>
+<span class="hljs-comment">// 使用する場合</span>
 <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">difference</span></span>&lt;C: Contains&gt;(container: &amp;C) -&gt; <span class="hljs-keyword">i32</span> { ... }
 </code></pre>
-<p>Let&#39;s rewrite the example from the previous section using associated types:</p>
+<!-- Let's rewrite the example from the previous section using associated types: -->
+<p>前セクションの例を関連型を使用して書きなおしてみましょう。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
 <div id="editor">struct Container(i32, i32);
 
-// A trait which checks if 2 items are stored inside of container.
-// Also retrieves first or last value.
+// 2つの要素がコンテナ型の中に保持されていることを確認するトレイト。
+// また、最初あるいは最後の要素を取り出すこともできる。
 trait Contains {
-    // Define generic types here which methods will be able to utilize.
+    // メソッドが使用できるジェネリック型を定義
     type A;
     type B;
 
@@ -2901,20 +2905,19 @@ trait Contains {
 }
 
 impl Contains for Container {
-    // Specify what types &#96;A&#96; and &#96;B&#96; are. If the &#96;input&#96; type
-    // is &#96;Container(i32, i32)&#96;, the &#96;output&#96; types are determined
-    // as &#96;i32&#96; and &#96;i32&#96;.
+    // &#96;A&#96;と&#96;B&#96;がどの型であるかを明示。インプットの型(訳注: つまり&#96;Self&#96;の型)
+    // が&#96;Container(i32, i32)&#96;である場合、出力型は&#96;i32&#96;と&#96;i32&#96;となる。
     type A = i32;
     type B = i32;
 
-    // &#96;&amp;Self::A&#96; and &#96;&amp;self::B&#96; are also valid here.
+    // &#96;&amp;i32&#96;の代わりに&#96;&amp;Self::A&#96;または&#96;&amp;self::B&#96;と書いても良い
     fn contains(&amp;self, number&#95;1: &amp;i32, number&#95;2: &amp;i32) -&gt; bool {
         (&amp;self.0 == number&#95;1) &amp;&amp; (&amp;self.1 == number&#95;2)
     }
-    // Grab the first number.
+    // 1つ目の数を取得
     fn first(&amp;self) -&gt; i32 { self.0 }
 
-    // Grab the last number.
+    // 最後の数を取得
     fn last(&amp;self) -&gt; i32 { self.1 }
 }
 
@@ -2948,10 +2951,10 @@ fn main() {
         </div>
 
         
-        <a href="../../generics/assoc_items/the_problem.html" class="navigation navigation-prev " aria-label="Previous page: The Problem"><i class="fa fa-angle-left"></i></a>
+        <a href="../../generics/assoc_items/the_problem.html" class="navigation navigation-prev " aria-label="Previous page: 関連型が必要になる状況"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../../generics/phantom.html" class="navigation navigation-next " aria-label="Next page: Phantom type parameters"><i class="fa fa-angle-right"></i></a>
+        <a href="../../generics/phantom.html" class="navigation navigation-next " aria-label="Next page: 幽霊型パラメータ"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>
