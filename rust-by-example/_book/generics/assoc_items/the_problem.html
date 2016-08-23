@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="13.7.1" data-basepath="../.." data-revision="1471492813552">
+    <div class="book" data-level="13.7.1" data-basepath="../.." data-revision="1471937131783">
     
 
 <div class="book-summary">
@@ -2028,7 +2028,7 @@
                         
                             <b>16.</b>
                         
-                         Error handling
+                         エラーハンドリング
                     </a>
                 
             
@@ -2045,7 +2045,7 @@
                         
                             <b>16.1.</b>
                         
-                         Option &amp; unwrap
+                         Optionとunwrap
                     </a>
                 
             
@@ -2109,7 +2109,7 @@
                         
                             <b>16.5.</b>
                         
-                         map for Result
+                         Resultにmapする
                     </a>
                 
             
@@ -2125,7 +2125,7 @@
                         
                             <b>16.6.</b>
                         
-                         Result as an alias
+                         Resultのエイリアス
                     </a>
                 
             
@@ -2141,7 +2141,7 @@
                         
                             <b>16.7.</b>
                         
-                         Options with Results
+                         OptionとResultを同時に扱う
                     </a>
                 
             
@@ -2158,7 +2158,7 @@
                         
                             <b>16.7.1.</b>
                         
-                         Errors as strings
+                         Stringをエラーとして扱う
                     </a>
                 
             
@@ -2174,7 +2174,7 @@
                         
                             <b>16.7.2.</b>
                         
-                         Combining separate combinators
+                         コンビネータを組み合わせる
                     </a>
                 
             
@@ -2190,7 +2190,7 @@
                         
                             <b>16.7.3.</b>
                         
-                         Enter try!
+                         try!入門
                     </a>
                 
             
@@ -2211,7 +2211,7 @@
                         
                             <b>16.8.</b>
                         
-                         The limits of strings
+                         stringの限界
                     </a>
                 
             
@@ -2227,7 +2227,7 @@
                         
                             <b>16.9.</b>
                         
-                         Re-enter try!
+                         try!再入門
                     </a>
                 
             
@@ -2243,7 +2243,7 @@
                         
                             <b>16.10.</b>
                         
-                         Re-enabling box
+                         box化を再度可能にする
                     </a>
                 
             
@@ -2856,7 +2856,7 @@
                 <div class="page-inner">
                 
                 
-                    <section class="normal" id="section-gitbook_70">
+                    <section class="normal" id="section-gitbook_71">
                     
                         <h3 id="1371-">13.7.1 関連型が必要になる状況</h3>
 <!-- A `trait` that is generic over its container type has type specification
@@ -2870,7 +2870,7 @@ specifying `i32` for `A` and `B` so that it can be used with `fn difference()`. 
 generic types for `fn difference()`. In practice, we want a way to express that
 `A` and `B` are determined by the *input* `C`. As you will see in the next
 section, associated types provide exactly that capability. -->
-<p><code>Contains</code>はジェネリックトレイトなので、<code>fn difference()</code>では<em>全ての</em>ジェネリック型を宣言しなくてはなりません。実際のところ、<code>A</code>と<code>B</code>は<em>引数</em>である<code>C</code>によって決定されていて欲しいにも関わらず、です。これは次のページで紹介する関連型と呼ばれる機能によって可能です。</p>
+<p><code>Contains</code>はジェネリックトレイトなので、<code>fn difference()</code>では<strong>全ての</strong>ジェネリック型を宣言しなくてはなりません。実際のところ、<code>A</code>と<code>B</code>は<strong>引数</strong>である<code>C</code>によって決定されていて欲しいにも関わらず、です。これは次のページで紹介する関連型と呼ばれる機能によって可能です。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
@@ -2886,7 +2886,7 @@ trait Contains&lt;A, B&gt; {
 }
 
 impl Contains&lt;i32, i32&gt; for Container {
-    // コンテナ内の２つの要素が等しいければTrueを返す
+    // コンテナ内の２つの要素が等しければTrueを返す
     fn contains(&amp;self, number&#95;1: &amp;i32, number&#95;2: &amp;i32) -&gt; bool {
         (&amp;self.0 == number&#95;1) &amp;&amp; (&amp;self.1 == number&#95;2)
     }
@@ -2963,10 +2963,6 @@ fn main() {
 
     
     <script src="../../gitbook/plugins/gitbook-plugin-mathjax/plugin.js"></script>
-    
-
-    
-    <script src="../../gitbook/plugins/gitbook-plugin-livereload/plugin.js"></script>
     
 
 <script>
