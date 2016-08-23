@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="13.8" data-basepath=".." data-revision="1471861047224">
+    <div class="book" data-level="13.8" data-basepath=".." data-revision="1471492813552">
     
 
 <div class="book-summary">
@@ -2028,7 +2028,7 @@
                         
                             <b>16.</b>
                         
-                         エラーハンドリング
+                         Error handling
                     </a>
                 
             
@@ -2045,7 +2045,7 @@
                         
                             <b>16.1.</b>
                         
-                         Optionとunwrap
+                         Option &amp; unwrap
                     </a>
                 
             
@@ -2109,7 +2109,7 @@
                         
                             <b>16.5.</b>
                         
-                         Resultにmapする
+                         map for Result
                     </a>
                 
             
@@ -2125,7 +2125,7 @@
                         
                             <b>16.6.</b>
                         
-                         Resultのエイリアス
+                         Result as an alias
                     </a>
                 
             
@@ -2141,7 +2141,7 @@
                         
                             <b>16.7.</b>
                         
-                         OptionとResultを同時に扱う
+                         Options with Results
                     </a>
                 
             
@@ -2158,7 +2158,7 @@
                         
                             <b>16.7.1.</b>
                         
-                         Stringをエラーとして扱う
+                         Errors as strings
                     </a>
                 
             
@@ -2174,7 +2174,7 @@
                         
                             <b>16.7.2.</b>
                         
-                         コンビネータを組み合わせる
+                         Combining separate combinators
                     </a>
                 
             
@@ -2190,7 +2190,7 @@
                         
                             <b>16.7.3.</b>
                         
-                         try!入門
+                         Enter try!
                     </a>
                 
             
@@ -2211,7 +2211,7 @@
                         
                             <b>16.8.</b>
                         
-                         stringの限界
+                         The limits of strings
                     </a>
                 
             
@@ -2227,7 +2227,7 @@
                         
                             <b>16.9.</b>
                         
-                         try!再入門
+                         Re-enter try!
                     </a>
                 
             
@@ -2243,7 +2243,7 @@
                         
                             <b>16.10.</b>
                         
-                         box化を再度可能にする
+                         Re-enabling box
                     </a>
                 
             
@@ -2856,7 +2856,7 @@
                 <div class="page-inner">
                 
                 
-                    <section class="normal" id="section-gitbook_80">
+                    <section class="normal" id="section-gitbook_81">
                     
                         <h2 id="138-">13.8 幽霊型パラメータ</h2>
 <!-- A phantom type parameter is one that doesn't show up at runtime,
@@ -2865,7 +2865,7 @@ but is checked statically (and only) at compile time. -->
 <!-- Data types can use extra generic type parameters to act as markers
 or to perform compile-time type checking. These extra parameters
 hold no storage values, and have no run-time behavior. -->
-<p>構造体などのデータ型は、ジェネリック型パラメータを一つ余分に持ち、それをマーカーとして使ったりコンパイル時の型検査に使ったりすることができます。このマーカーは実際の値を何も持たず、したがって実行時の挙動そのものにはいかなる影響ももたらしません。</p>
+<p>構造体などのデータ型は、ジェネリック型パラメータを一つ余分に持ち、それをマーカーとして使うことでコンパイル時に型チェックを行うことができます。このマーカーは実際の値を何も持たず、したがって実行時の挙動そのものにはいかなる影響ももたらしません。</p>
 <!-- In the following example, we combine [std::marker::PhantomData]
 with the phantom type parameter concept to create tuples containing
 different data types. -->
@@ -2875,7 +2875,7 @@ different data types. -->
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
 <div id="editor">use std::marker::PhantomData;
 
-// ジェネリックなタプル構造体。2つ目のパラメータは幽霊型
+// ジェネリックなタプル。2つ目のパラメータは幽霊型
 #[derive(PartialEq)] // 比較演算子(&#96;==&#96;)での比較を可能にする。
 struct PhantomTuple&lt;A, B&gt;(A,PhantomData&lt;B&gt;);
 
@@ -2955,6 +2955,10 @@ fn main() {
 
     
     <script src="../gitbook/plugins/gitbook-plugin-mathjax/plugin.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-livereload/plugin.js"></script>
     
 
 <script>

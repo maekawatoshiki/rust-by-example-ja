@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
-        <title>Resultのエイリアス | Rust by Example</title>
+        <title>Result as an alias | Rust by Example</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.5.0">
@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="16.6" data-basepath=".." data-revision="1471861047224">
+    <div class="book" data-level="16.6" data-basepath=".." data-revision="1471492813552">
     
 
 <div class="book-summary">
@@ -2028,7 +2028,7 @@
                         
                             <b>16.</b>
                         
-                         エラーハンドリング
+                         Error handling
                     </a>
                 
             
@@ -2045,7 +2045,7 @@
                         
                             <b>16.1.</b>
                         
-                         Optionとunwrap
+                         Option &amp; unwrap
                     </a>
                 
             
@@ -2109,7 +2109,7 @@
                         
                             <b>16.5.</b>
                         
-                         Resultにmapする
+                         map for Result
                     </a>
                 
             
@@ -2125,7 +2125,7 @@
                         
                             <b>16.6.</b>
                         
-                         Resultのエイリアス
+                         Result as an alias
                     </a>
                 
             
@@ -2141,7 +2141,7 @@
                         
                             <b>16.7.</b>
                         
-                         OptionとResultを同時に扱う
+                         Options with Results
                     </a>
                 
             
@@ -2158,7 +2158,7 @@
                         
                             <b>16.7.1.</b>
                         
-                         Stringをエラーとして扱う
+                         Errors as strings
                     </a>
                 
             
@@ -2174,7 +2174,7 @@
                         
                             <b>16.7.2.</b>
                         
-                         コンビネータを組み合わせる
+                         Combining separate combinators
                     </a>
                 
             
@@ -2190,7 +2190,7 @@
                         
                             <b>16.7.3.</b>
                         
-                         try!入門
+                         Enter try!
                     </a>
                 
             
@@ -2211,7 +2211,7 @@
                         
                             <b>16.8.</b>
                         
-                         stringの限界
+                         The limits of strings
                     </a>
                 
             
@@ -2227,7 +2227,7 @@
                         
                             <b>16.9.</b>
                         
-                         try!再入門
+                         Re-enter try!
                     </a>
                 
             
@@ -2243,7 +2243,7 @@
                         
                             <b>16.10.</b>
                         
-                         box化を再度可能にする
+                         Re-enabling box
                     </a>
                 
             
@@ -2858,26 +2858,25 @@
                 
                     <section class="normal" id="section-gitbook_37">
                     
-                        <h2 id="166-result">16.6 Resultのエイリアス</h2>
-<!-- What if the specific `Result` type is reused many many times? Then quickly it becomes tedious
-to write out the full type name. Instead, a generic alias for the specific `Result` may be
-defined. -->
-<p>特定の<code>Result</code>型が何度も何度も使用されると何が起きるでしょう？正解は「型名を書き下すのがすぐに面倒になる」です。このような場合は特定の<code>Result</code>のジェネリックエイリアスを定義すると吉です。</p>
+                        <h2 id="166-result-as-an-alias">16.6 Result as an alias</h2>
+<p>What if the specific <code>Result</code> type is reused many many times? Then quickly it becomes tedious
+to write out the full type name. Instead, a generic alias for the specific <code>Result</code> may be
+defined.</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
 <div id="editor">use std::num::ParseIntError;
 use std::result;
 
-// &#96;ParseIntError&#96;を&#96;Err&#96;の型として持つ全ての&#96;Result&#96;のジェネリックエイリアス
+// A generic alias for any &#96;Result&#96; with this specific &#96;Err&#96; type.
 type Result&lt;T&gt; = result::Result&lt;T, ParseIntError&gt;;
 
-// 上で定義したエイリアス(この場所特有の&#96;Result&#96;型)を使用
+// Use the alias defined above referring to our specific &#96;Result&#96; type.
 fn double&#95;number(number&#95;str: &amp;str) -&gt; Result&lt;i32&gt; {
     number&#95;str.parse::&lt;i32&gt;().map(|n| 2 &#42; n)
 }
 
-// もう一度使用。エイリアスによって再度明記する必要性がない。
+// Again, the alias saved us from defining it again.
 fn print(result: Result&lt;i32&gt;) {
     match result {
         Ok(n)  =&gt; println!(&quot;n is {}&quot;, n),
@@ -2892,15 +2891,11 @@ fn main() {
 <div id="result"></div>
 </div>
 
-<!-- This is particularly helpful at a module level because all errors found in a specific module
-may have the same `Err` type; a single alias succinctly defines *all* module `Results`. This
-is so useful that the std library even supplies one: `io::Result` which refers to IO errors. -->
-<p>これはモジュールのレベルでは特に役立ちます。というのも特定のモジュールで見つかるエラーは同じ<code>Err</code>型(そのモジュール内の<strong>全ての</strong><code>Result</code>を完結に表現する唯一のエイリアス)を持つ可能性があるからです。これは本当に有用なので標準ライブラリ内にもその例があります。IOエラー全般を代表する<code>io::Result</code>です。</p>
-<blockquote>
-<p>訳注: ピンと来ない方は<a href="http://qiita.com/t2y/items/434854fab16159a7c0f7" target="_blank">Python プログラマーのための Rust 入門</a>が参考になるかもしれません。</p>
-</blockquote>
+<p>This is particularly helpful at a module level because all errors found in a specific module
+may have the same <code>Err</code> type; a single alias succinctly defines <em>all</em> module <code>Results</code>. This
+is so useful that the std library even supplies one: <code>io::Result</code> which refers to IO errors.</p>
 <h3 id="see-also">See also:</h3>
-<p><a href="http://doc.rust-lang.org/std/result/enum.Result.html" target="_blank"><code>Result</code></a>、<a href="http://doc.rust-lang.org/std/io/type.Result.html" target="_blank"><code>io::Result</code></a></p>
+<p><a href="http://doc.rust-lang.org/std/result/enum.Result.html" target="_blank"><code>Result</code></a> and <a href="http://doc.rust-lang.org/std/io/type.Result.html" target="_blank"><code>io::Result</code></a></p>
 
                     
                     </section>
@@ -2911,10 +2906,10 @@ is so useful that the std library even supplies one: `io::Result` which refers t
         </div>
 
         
-        <a href="../error/result_map.html" class="navigation navigation-prev " aria-label="Previous page: Resultにmapする"><i class="fa fa-angle-left"></i></a>
+        <a href="../error/result_map.html" class="navigation navigation-prev " aria-label="Previous page: map for Result"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../error/option_with_result.html" class="navigation navigation-next " aria-label="Next page: OptionとResultを同時に扱う"><i class="fa fa-angle-right"></i></a>
+        <a href="../error/option_with_result.html" class="navigation navigation-next " aria-label="Next page: Options with Results"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>
@@ -2940,6 +2935,10 @@ is so useful that the std library even supplies one: `io::Result` which refers t
 
     
     <script src="../gitbook/plugins/gitbook-plugin-mathjax/plugin.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-livereload/plugin.js"></script>
     
 
 <script>

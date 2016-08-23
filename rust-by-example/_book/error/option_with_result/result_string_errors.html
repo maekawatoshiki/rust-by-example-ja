@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
-        <title>Stringをエラーとして扱う | Rust by Example</title>
+        <title>Errors as strings | Rust by Example</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.5.0">
@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="16.7.1" data-basepath="../.." data-revision="1471861047224">
+    <div class="book" data-level="16.7.1" data-basepath="../.." data-revision="1471492813552">
     
 
 <div class="book-summary">
@@ -2028,7 +2028,7 @@
                         
                             <b>16.</b>
                         
-                         エラーハンドリング
+                         Error handling
                     </a>
                 
             
@@ -2045,7 +2045,7 @@
                         
                             <b>16.1.</b>
                         
-                         Optionとunwrap
+                         Option &amp; unwrap
                     </a>
                 
             
@@ -2109,7 +2109,7 @@
                         
                             <b>16.5.</b>
                         
-                         Resultにmapする
+                         map for Result
                     </a>
                 
             
@@ -2125,7 +2125,7 @@
                         
                             <b>16.6.</b>
                         
-                         Resultのエイリアス
+                         Result as an alias
                     </a>
                 
             
@@ -2141,7 +2141,7 @@
                         
                             <b>16.7.</b>
                         
-                         OptionとResultを同時に扱う
+                         Options with Results
                     </a>
                 
             
@@ -2158,7 +2158,7 @@
                         
                             <b>16.7.1.</b>
                         
-                         Stringをエラーとして扱う
+                         Errors as strings
                     </a>
                 
             
@@ -2174,7 +2174,7 @@
                         
                             <b>16.7.2.</b>
                         
-                         コンビネータを組み合わせる
+                         Combining separate combinators
                     </a>
                 
             
@@ -2190,7 +2190,7 @@
                         
                             <b>16.7.3.</b>
                         
-                         try!入門
+                         Enter try!
                     </a>
                 
             
@@ -2211,7 +2211,7 @@
                         
                             <b>16.8.</b>
                         
-                         stringの限界
+                         The limits of strings
                     </a>
                 
             
@@ -2227,7 +2227,7 @@
                         
                             <b>16.9.</b>
                         
-                         try!再入門
+                         Re-enter try!
                     </a>
                 
             
@@ -2243,7 +2243,7 @@
                         
                             <b>16.10.</b>
                         
-                         box化を再度可能にする
+                         Re-enabling box
                     </a>
                 
             
@@ -2856,14 +2856,13 @@
                 <div class="page-inner">
                 
                 
-                    <section class="normal" id="section-gitbook_30">
+                    <section class="normal" id="section-gitbook_32">
                     
-                        <h3 id="1671-string">16.7.1 Stringをエラーとして扱う</h3>
-<!-- Eliminating `unwrap` from the previous example requires more care. The two types in play
-being `Option` and `Result`, one valid approach would be to convert both into a `Result`
-with a common `Err` type. We will try it with `Err(String)` which seems like a nice first
-approximation: -->
-<p>前項の例から<code>unwrap</code>を取り除くには(<code>Result</code>のみの場合よりも)より多くのケアを必要とします。ここで扱っている型は<code>Option</code>と<code>Result</code>の２つなので、有効な方法の一つとして、どちらも同じ<code>Err</code>型を持つ<code>Result</code>にしてしまう、ということが挙げられます。とりあえずは<code>Err(String)</code>から始めるのが良さそうに見えますのでこれを用いていきましょう。</p>
+                        <h3 id="1671-errors-as-strings">16.7.1 Errors as strings</h3>
+<p>Eliminating <code>unwrap</code> from the previous example requires more care. The two types in play
+being <code>Option</code> and <code>Result</code>, one valid approach would be to convert both into a <code>Result</code>
+with a common <code>Err</code> type. We will try it with <code>Err(String)</code> which seems like a nice first
+approximation:</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
@@ -2871,15 +2870,15 @@ approximation: -->
 
 fn double&#95;first(vec: Vec&lt;&amp;str&gt;) -&gt; Result&lt;i32&gt; {
     vec.first()
-       // &#96;Option&#96;が値を持つ場合&#96;Result&#96;に変換する。
-       // &#96;None&#96;の場合、引数として与えた以下の文字列を持つ&#96;Err&#96;となる。
+       // Convert the &#96;Option&#96; to a &#96;Result&#96; if there is a value; otherwise
+       // use an &#96;Err&#96; containing this &#96;String&#96;.
        .ok&#95;or(&quot;Please use a vector with at least one element.&quot;.to&#95;owned())
-       // &#96;parse&#96;は&#96;Result&lt;T, ParseIntError&gt;&#96;を返す。
+       // &#96;parse&#96; returns a &#96;Result&lt;T, ParseIntError&gt;&#96;.
        .and&#95;then(|s| s.parse::&lt;i32&gt;()
-                      //  返り値の型は&#96;Result&lt;T, String&gt;&#96;なので、&#96;parse&#96;
-                      //  により生じたエラーにのみmapを行い、&#96;String&#96;に変換する
+                      //  The return type is &#96;Result&lt;T, String&gt;&#96;. We need
+                      //  to map only the errors &#96;parse&#96; yields to &#96;String&#96;.
                       .map&#95;err(|e| e.to&#95;string())
-                      // 中の値を２倍する
+                      // Apply the double to the number inside.
                       .map(|i| 2 &#42; i))
 }
 
@@ -2902,12 +2901,11 @@ fn main() {
 <div id="result"></div>
 </div>
 
-<!-- This is not too bad but it is hardly as nice as the original (it can still be nicer but
+<p>This is not too bad but it is hardly as nice as the original (it can still be nicer but
 we are not there yet). The question is, does this approach scale well. Consider the next
-example. -->
-<p>これはそこまで悪くはないように見えますが、当初のコードに比べるとやはり難があります。問題となるのはこのアプローチの「スケーラビリティ」です。例えば次の例を見てください。</p>
+example.</p>
 <h3 id="see-also">See also:</h3>
-<p><a href="http://doc.rust-lang.org/std/result/enum.Result.html" target="_blank"><code>Result</code></a>、<a href="http://doc.rust-lang.org/std/io/type.Result.html" target="_blank"><code>io::Result</code></a></p>
+<p><a href="http://doc.rust-lang.org/std/result/enum.Result.html" target="_blank"><code>Result</code></a> and <a href="http://doc.rust-lang.org/std/io/type.Result.html" target="_blank"><code>io::Result</code></a></p>
 
                     
                     </section>
@@ -2918,10 +2916,10 @@ example. -->
         </div>
 
         
-        <a href="../../error/option_with_result.html" class="navigation navigation-prev " aria-label="Previous page: OptionとResultを同時に扱う"><i class="fa fa-angle-left"></i></a>
+        <a href="../../error/option_with_result.html" class="navigation navigation-prev " aria-label="Previous page: Options with Results"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../../error/option_with_result/combinator_combinations.html" class="navigation navigation-next " aria-label="Next page: コンビネータを組み合わせる"><i class="fa fa-angle-right"></i></a>
+        <a href="../../error/option_with_result/combinator_combinations.html" class="navigation navigation-next " aria-label="Next page: Combining separate combinators"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>
@@ -2947,6 +2945,10 @@ example. -->
 
     
     <script src="../../gitbook/plugins/gitbook-plugin-mathjax/plugin.js"></script>
+    
+
+    
+    <script src="../../gitbook/plugins/gitbook-plugin-livereload/plugin.js"></script>
     
 
 <script>

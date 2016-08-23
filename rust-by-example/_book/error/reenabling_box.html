@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
-        <title>box化を再度可能にする | Rust by Example</title>
+        <title>Re-enabling box | Rust by Example</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.5.0">
@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="16.10" data-basepath=".." data-revision="1471861047224">
+    <div class="book" data-level="16.10" data-basepath=".." data-revision="1471492813552">
     
 
 <div class="book-summary">
@@ -2028,7 +2028,7 @@
                         
                             <b>16.</b>
                         
-                         エラーハンドリング
+                         Error handling
                     </a>
                 
             
@@ -2045,7 +2045,7 @@
                         
                             <b>16.1.</b>
                         
-                         Optionとunwrap
+                         Option &amp; unwrap
                     </a>
                 
             
@@ -2109,7 +2109,7 @@
                         
                             <b>16.5.</b>
                         
-                         Resultにmapする
+                         map for Result
                     </a>
                 
             
@@ -2125,7 +2125,7 @@
                         
                             <b>16.6.</b>
                         
-                         Resultのエイリアス
+                         Result as an alias
                     </a>
                 
             
@@ -2141,7 +2141,7 @@
                         
                             <b>16.7.</b>
                         
-                         OptionとResultを同時に扱う
+                         Options with Results
                     </a>
                 
             
@@ -2158,7 +2158,7 @@
                         
                             <b>16.7.1.</b>
                         
-                         Stringをエラーとして扱う
+                         Errors as strings
                     </a>
                 
             
@@ -2174,7 +2174,7 @@
                         
                             <b>16.7.2.</b>
                         
-                         コンビネータを組み合わせる
+                         Combining separate combinators
                     </a>
                 
             
@@ -2190,7 +2190,7 @@
                         
                             <b>16.7.3.</b>
                         
-                         try!入門
+                         Enter try!
                     </a>
                 
             
@@ -2211,7 +2211,7 @@
                         
                             <b>16.8.</b>
                         
-                         stringの限界
+                         The limits of strings
                     </a>
                 
             
@@ -2227,7 +2227,7 @@
                         
                             <b>16.9.</b>
                         
-                         try!再入門
+                         Re-enter try!
                     </a>
                 
             
@@ -2243,7 +2243,7 @@
                         
                             <b>16.10.</b>
                         
-                         box化を再度可能にする
+                         Re-enabling box
                     </a>
                 
             
@@ -2858,41 +2858,33 @@
                 
                     <section class="normal" id="section-gitbook_27">
                     
-                        <h2 id="1610-box">16.10 box化を再度可能にする</h2>
-<!-- We have seen that by implementing `Display` and `From` for our error type, we have enabled
+                        <h2 id="1610-re-enabling-box">16.10 Re-enabling box</h2>
+<p>We have seen that by implementing <code>Display</code> and <code>From</code> for our error type, we have enabled
 usage of almost all of the std library error handling tools. That is, we missed one
-capability: the ability to easily `box` our error type. -->
-<p>独自のエラー型に対して<code>Display</code>と<code>From</code>を実装することで、標準ライブラリのエラーハンドリング機能のほぼすべてが使用できるようになりました。「ほぼ」というのはつまり、エラー型を<code>box</code>化する機能がまだ備わっていないためです。</p>
-<!-- Namely, the std library will automatically convert from any type which implements the
-`Error` trait into the trait object `Box<Error>` via `From`. To a library user, this
-conveniently allows the following: -->
-<p>すなわち、標準ライブラリは<code>From</code>によって、<code>Error</code>トレイトを実装している型あらゆる型を<code>Box&lt;Error&gt;</code>というトレイトオブジェクトへと変換します。ライブラリのユーザにとっては、これは以下のような書き方ができて便利です。</p>
-<pre><code class="lang-rust"><span class="hljs-comment">// 自動的に`Box&lt;Error&gt;`に変換できるエラー型ならばどんなものでもここで使用できる。</span>
+capability: the ability to easily <code>box</code> our error type.</p>
+<p>Namely, the std library will automatically convert from any type which implements the
+<code>Error</code> trait into the trait object <code>Box&lt;Error&gt;</code> via <code>From</code>. To a library user, this
+conveniently allows the following:</p>
+<pre><code class="lang-rust"><span class="hljs-comment">// Any error type automatically convertible to `Box&lt;Error&gt;` may be used here.</span>
 <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">foo</span></span>(...) -&gt; Result&lt;T, Box&lt;Error&gt;&gt; { ... }
 </code></pre>
-<!-- For example, a user may use a variety of libraries which each provide their own error
-types. In order to define a valid `Result<T, E>` type, the user has a few choices: -->
-<p>例えば、ユーザーはそれぞれが独自のエラー型を提供している種々のライブラリを使用することがあるでしょう。有効な<code>Result&lt;T, E&gt;</code>を定義する方法として、ユーザーにはいくつかの選択肢があります。</p>
-<!-- * define a new wrapper error type around the external libraries error types
-* convert it to `String` or some other intermediate choice
-* box it up into `Box<Error>` via type erasure -->
+<p>For example, a user may use a variety of libraries which each provide their own error
+types. In order to define a valid <code>Result&lt;T, E&gt;</code> type, the user has a few choices:</p>
 <ul>
-<li>外部ライブラリのエラー型をラップする新しいエラー型を定義する。</li>
-<li><code>String</code>などの別の型にいったん変換して仲介させる。</li>
-<li>型消去によって<code>Box&lt;Error&gt;</code>に変換する。</li>
+<li>define a new wrapper error type around the external libraries error types</li>
+<li>convert it to <code>String</code> or some other intermediate choice</li>
+<li>box it up into <code>Box&lt;Error&gt;</code> via type erasure</li>
 </ul>
-<!-- Boxing it is a common choice. The only penalty is that the underlying error type is only known
-at runtime and not [statically determined][dynamic_dispatch]. All that needs to be done to enable
-this is implement the `Error` trait: -->
-<p>普通はボックス化する方法を用います。唯一のペナルティは実際の(訳注: Box内の<code>Error</code>トレイトを実装している)エラー型が<a href="http://doc.rust-lang.org/book/trait-objects.html#dynamic-dispatch" target="_blank">静的に決定されているわけではない</a>ため、ランタイムまでわからないという点です。これを可能にするために唯一必要なのは、<code>Error</code>トレイトを実装することです。</p>
+<p>Boxing it is a common choice. The only penalty is that the underlying error type is only known
+at runtime and not <a href="http://doc.rust-lang.org/book/trait-objects.html#dynamic-dispatch" target="_blank">statically determined</a>. All that needs to be done to enable
+this is implement the <code>Error</code> trait:</p>
 <pre><code class="lang-rust">trait Error: Debug + Display {
     fn description(&amp;self) -&gt; &amp;str;
     fn cause(&amp;self) -&gt; Option&lt;&amp;Error&gt;;
 }
 </code></pre>
-<!-- By implementing this, our previous example would be just as valid when the error type
-is `Box<Error>` as it was before with `DoubleError`. -->
-<p>これを実装することで、前項の例は<code>DoubleError</code>を用いる以前と同様に、<code>Box&lt;Error&gt;</code>に対して有効になります。</p>
+<p>By implementing this, our previous example would be just as valid when the error type
+is <code>Box&lt;Error&gt;</code> as it was before with <code>DoubleError</code>.</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
@@ -2900,7 +2892,7 @@ is `Box<Error>` as it was before with `DoubleError`. -->
 use std::fmt;
 use std::num::ParseIntError;
 
-// &#96;Box&lt;error::Error&gt;&#96;へのエイリアスに変更
+// Change the alias to &#96;Box&lt;error::Error&gt;&#96;.
 type Result&lt;T&gt; = std::result::Result&lt;T, Box&lt;error::Error&gt;&gt;;
 
 #[derive(Debug)]
@@ -2928,21 +2920,21 @@ impl fmt::Display for DoubleError {
 impl error::Error for DoubleError {
     fn description(&amp;self) -&gt; &amp;str {
         match &#42;self {
-            // エラー内容の非常に簡潔な説明。
-            // &#96;Display&#96;と同じである必要はない。
+            // A very short description of the error. Doesn&#39;t need to be the
+            // same as &#96;Display&#96;.
             DoubleError::EmptyVec =&gt; &quot;empty vectors not allowed&quot;,
-            // これはすでに&#96;Error&#96;を実装しているので、その実装を用いる。
+            // This already impls &#96;Error&#96;, so defer to its own implementation.
             DoubleError::Parse(ref e) =&gt; e.description(),
         }
     }
 
     fn cause(&amp;self) -&gt; Option&lt;&amp;error::Error&gt; {
         match &#42;self {
-            // 隠れた原因があるわけではないので&#96;None&#96;を返す。
+            // No underlying cause so return &#96;None&#96;.
             DoubleError::EmptyVec =&gt; None,
-            // 原因はParseIntError。&#96;&amp;error::Error&#96;というトレイトオブジェクトに
-            // 暗黙的に変換される。これが可能なのはParseIntErrorがすでに&#96;Error&#96;
-            // トレイトを実装しているため。
+            // The cause is the underlying implementation error type. Is implicitly
+            // cast to the trait object &#96;&amp;error::Error&#96;. This works because the
+            // underlying type already implements the &#96;Error&#96; trait.
             DoubleError::Parse(ref e) =&gt; Some(e),
         }
     }
@@ -2975,7 +2967,7 @@ fn main() {
 </div>
 
 <h3 id="see-also">See also:</h3>
-<p><a href="http://doc.rust-lang.org/book/trait-objects.html#dynamic-dispatch" target="_blank">動的ディスパッチ</a>、<a href="http://doc.rust-lang.org/std/error/trait.Error.html" target="_blank"><code>Error</code>トレイト</a></p>
+<p><a href="http://doc.rust-lang.org/book/trait-objects.html#dynamic-dispatch" target="_blank">Dynamic dispatch</a> and <a href="http://doc.rust-lang.org/std/error/trait.Error.html" target="_blank"><code>Error</code> trait</a></p>
 
                     
                     </section>
@@ -2986,7 +2978,7 @@ fn main() {
         </div>
 
         
-        <a href="../error/reenter_try.html" class="navigation navigation-prev " aria-label="Previous page: try!再入門"><i class="fa fa-angle-left"></i></a>
+        <a href="../error/reenter_try.html" class="navigation navigation-prev " aria-label="Previous page: Re-enter try!"><i class="fa fa-angle-left"></i></a>
         
         
         <a href="../std.html" class="navigation navigation-next " aria-label="Next page: 標準ライブラリの型"><i class="fa fa-angle-right"></i></a>
@@ -3015,6 +3007,10 @@ fn main() {
 
     
     <script src="../gitbook/plugins/gitbook-plugin-mathjax/plugin.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-livereload/plugin.js"></script>
     
 
 <script>

@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="16.2" data-basepath=".." data-revision="1471861047224">
+    <div class="book" data-level="16.2" data-basepath=".." data-revision="1471492813552">
     
 
 <div class="book-summary">
@@ -2028,7 +2028,7 @@
                         
                             <b>16.</b>
                         
-                         エラーハンドリング
+                         Error handling
                     </a>
                 
             
@@ -2045,7 +2045,7 @@
                         
                             <b>16.1.</b>
                         
-                         Optionとunwrap
+                         Option &amp; unwrap
                     </a>
                 
             
@@ -2109,7 +2109,7 @@
                         
                             <b>16.5.</b>
                         
-                         Resultにmapする
+                         map for Result
                     </a>
                 
             
@@ -2125,7 +2125,7 @@
                         
                             <b>16.6.</b>
                         
-                         Resultのエイリアス
+                         Result as an alias
                     </a>
                 
             
@@ -2141,7 +2141,7 @@
                         
                             <b>16.7.</b>
                         
-                         OptionとResultを同時に扱う
+                         Options with Results
                     </a>
                 
             
@@ -2158,7 +2158,7 @@
                         
                             <b>16.7.1.</b>
                         
-                         Stringをエラーとして扱う
+                         Errors as strings
                     </a>
                 
             
@@ -2174,7 +2174,7 @@
                         
                             <b>16.7.2.</b>
                         
-                         コンビネータを組み合わせる
+                         Combining separate combinators
                     </a>
                 
             
@@ -2190,7 +2190,7 @@
                         
                             <b>16.7.3.</b>
                         
-                         try!入門
+                         Enter try!
                     </a>
                 
             
@@ -2211,7 +2211,7 @@
                         
                             <b>16.8.</b>
                         
-                         stringの限界
+                         The limits of strings
                     </a>
                 
             
@@ -2227,7 +2227,7 @@
                         
                             <b>16.9.</b>
                         
-                         try!再入門
+                         Re-enter try!
                     </a>
                 
             
@@ -2243,7 +2243,7 @@
                         
                             <b>16.10.</b>
                         
-                         box化を再度可能にする
+                         Re-enabling box
                     </a>
                 
             
@@ -2856,20 +2856,17 @@
                 <div class="page-inner">
                 
                 
-                    <section class="normal" id="section-gitbook_29">
+                    <section class="normal" id="section-gitbook_28">
                     
                         <h2 id="162-map">16.2 map</h2>
-<!-- `match` is a valid method for handling `Option`s. However, you may eventually
+<p><code>match</code> is a valid method for handling <code>Option</code>s. However, you may eventually
 find heavy usage tedious; this is the case especially with operations that
-are only valid with an input. -->
-<p><code>match</code>は<code>Option</code>は扱うのに適したメソッドです。しかし、大量にこれを使用しているとじきに億劫になってくるでしょう。引数の値が有効である(訳注: この場合は<code>None</code>でない)必要がある関数を扱う際には特にそうです。</p>
-<!-- For situations where a simplistic mapping of `Some -> Some` and
-`None -> None` is needed, `Option` has a built in method called `map()`. -->
-<p><code>Some -&gt; Some</code>あるいは<code>None -&gt; None</code>の単純な操作を適用する必要がある場合には、<code>Option</code>は<code>map()</code>というビルトインのメソッドを提供していますので、これを使用しましょう。</p>
-<!-- Multiple `map()` calls can be chained together for even more flexibility.
-In the following example, `process()` easily replaces all functions previous
-to it while staying compact. -->
-<p><code>map()</code>のフレキシビリティは、複数の<code>map()</code>をチェインしなければならない場合にさらに際立ちます。以下の例では、<code>process()</code>が直前の関数全てを用いた場合と同じ機能を、よりコンパクトに果たしているのがわかります。</p>
+are only valid with an input.</p>
+<p>For situations where a simplistic mapping of <code>Some -&gt; Some</code> and 
+<code>None -&gt; None</code> is needed, <code>Option</code> has a built in method called <code>map()</code>.</p>
+<p>Multiple <code>map()</code> calls can be chained together for even more flexibility.
+In the following example, <code>process()</code> easily replaces all functions previous
+to it while staying compact.</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
@@ -2881,8 +2878,8 @@ to it while staying compact. -->
 #[derive(Debug)] struct Chopped(Food);
 #[derive(Debug)] struct Cooked(Food);
 
-// 食べ物の皮をむく。存在しない場合は単純に&#96;None&#96;を返す。
-// そうでなければ皮を向いた食べ物を返す。
+// Peeling food. If there isn&#39;t any, then just return &#96;None&#96;.
+// Otherwise, return the peeled food.
 fn peel(food: Option&lt;Food&gt;) -&gt; Option&lt;Peeled&gt; {
     match food {
         Some(food) =&gt; Some(Peeled(food)),
@@ -2890,7 +2887,7 @@ fn peel(food: Option&lt;Food&gt;) -&gt; Option&lt;Peeled&gt; {
     }
 }
 
-// 上と同じように、食べ物を切る前に、皮を向いた食べ物の有無を知る必要がある。
+// Like above, we need to know if the peeled food exists before chopping.
 fn chop(peeled: Option&lt;Peeled&gt;) -&gt; Option&lt;Chopped&gt; {
     match peeled {
         Some(Peeled(food)) =&gt; Some(Chopped(food)),
@@ -2898,19 +2895,20 @@ fn chop(peeled: Option&lt;Peeled&gt;) -&gt; Option&lt;Chopped&gt; {
     }
 }
 
-// 上のチェックと同様だが&#96;match&#96;の代わりに&#96;map()&#96;を使用している。
+// Similar to previous checks, but using &#96;map()&#96; instead of &#96;match&#96;.
 fn cook(chopped: Option&lt;Chopped&gt;) -&gt; Option&lt;Cooked&gt; {
     chopped.map(|Chopped(food)| Cooked(food))
 }
 
-// 複数の&#96;map()&#96;をチェインさせて、上のプロセスをシンプルにすることもできる。
+// Alternatively, we can chain multiple uses of &#96;map()&#96; to simplify 
+// the above process.
 fn process(food: Option&lt;Food&gt;) -&gt; Option&lt;Cooked&gt; {
     food.map(|f| Peeled(f))
         .map(|Peeled(f)| Chopped(f))
         .map(|Chopped(f)| Cooked(f))
 }
 
-// 食べる前に、食べ物の有無をチェックするのは大事ですよね!
+// It&#39;s important to know whether there&#39;s food or not before trying to eat it!
 fn eat(food: Option&lt;Cooked&gt;) {
     match food {
         Some(food) =&gt; println!(&quot;Mmm. I love {:?}&quot;, food),
@@ -2925,7 +2923,7 @@ fn main() {
 
     let cooked&#95;apple = cook(chop(peel(apple)));
     let cooked&#95;carrot = cook(chop(peel(carrot)));
-    // よりシンプルな見た目の&#96;process()&#96;を使用する。
+    // Let&#39;s try the simpler looking &#96;process()&#96; now.
     let cooked&#95;potato = process(potato);
 
     eat(cooked&#95;apple);
@@ -2936,7 +2934,7 @@ fn main() {
 </div>
 
 <h3 id="see-also">See also:</h3>
-<p><a href="../fn/closures.html">closures</a></p>
+<p><a href="/fn/closures.html">closures</a></p>
 
                     
                     </section>
@@ -2947,7 +2945,7 @@ fn main() {
         </div>
 
         
-        <a href="../error/unwrap.html" class="navigation navigation-prev " aria-label="Previous page: Optionとunwrap"><i class="fa fa-angle-left"></i></a>
+        <a href="../error/unwrap.html" class="navigation navigation-prev " aria-label="Previous page: Option &amp; unwrap"><i class="fa fa-angle-left"></i></a>
         
         
         <a href="../error/and_then.html" class="navigation navigation-next " aria-label="Next page: and_then"><i class="fa fa-angle-right"></i></a>
@@ -2976,6 +2974,10 @@ fn main() {
 
     
     <script src="../gitbook/plugins/gitbook-plugin-mathjax/plugin.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-livereload/plugin.js"></script>
     
 
 <script>
