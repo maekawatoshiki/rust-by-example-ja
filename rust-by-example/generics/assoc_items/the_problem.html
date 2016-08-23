@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
-        <title>The Problem | Rust by Example</title>
+        <title>関連型が必要になる状況 | Rust by Example</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.5.0">
@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="13.7.1" data-basepath="../.." data-revision="1468168389646">
+    <div class="book" data-level="13.7.1" data-basepath="../.." data-revision="1471940916152">
     
 
 <div class="book-summary">
@@ -1382,7 +1382,7 @@
                         
                             <b>13.</b>
                         
-                         Generics
+                         ジェネリクス
                     </a>
                 
             
@@ -1399,7 +1399,7 @@
                         
                             <b>13.1.</b>
                         
-                         Functions
+                         関数
                     </a>
                 
             
@@ -1415,7 +1415,7 @@
                         
                             <b>13.2.</b>
                         
-                         Implementation
+                         メソッド
                     </a>
                 
             
@@ -1431,7 +1431,7 @@
                         
                             <b>13.3.</b>
                         
-                         Traits
+                         ジェネリックトレイト
                     </a>
                 
             
@@ -1447,7 +1447,7 @@
                         
                             <b>13.4.</b>
                         
-                         Bounds
+                         ジェネリック境界
                     </a>
                 
             
@@ -1464,7 +1464,7 @@
                         
                             <b>13.4.1.</b>
                         
-                         Testcase: empty bounds
+                         テストケース: 空トレイト
                     </a>
                 
             
@@ -1485,7 +1485,7 @@
                         
                             <b>13.5.</b>
                         
-                         Multiple bounds
+                         複数のジェネリック境界
                     </a>
                 
             
@@ -1501,7 +1501,7 @@
                         
                             <b>13.6.</b>
                         
-                         Where clauses
+                         Where句
                     </a>
                 
             
@@ -1517,7 +1517,7 @@
                         
                             <b>13.7.</b>
                         
-                         Associated items
+                         関連型
                     </a>
                 
             
@@ -1534,7 +1534,7 @@
                         
                             <b>13.7.1.</b>
                         
-                         The Problem
+                         関連型が必要になる状況
                     </a>
                 
             
@@ -1550,7 +1550,7 @@
                         
                             <b>13.7.2.</b>
                         
-                         Associated types
+                         関連型
                     </a>
                 
             
@@ -1571,7 +1571,7 @@
                         
                             <b>13.8.</b>
                         
-                         Phantom type parameters
+                         幽霊型パラメータ
                     </a>
                 
             
@@ -1588,7 +1588,7 @@
                         
                             <b>13.8.1.</b>
                         
-                         Testcase: unit conversions
+                         テストケース: 単位を扱う
                     </a>
                 
             
@@ -2028,7 +2028,7 @@
                         
                             <b>16.</b>
                         
-                         Error handling
+                         エラーハンドリング
                     </a>
                 
             
@@ -2045,7 +2045,7 @@
                         
                             <b>16.1.</b>
                         
-                         Option &amp; unwrap
+                         Optionとunwrap
                     </a>
                 
             
@@ -2109,7 +2109,7 @@
                         
                             <b>16.5.</b>
                         
-                         map for Result
+                         Resultにmapする
                     </a>
                 
             
@@ -2125,7 +2125,7 @@
                         
                             <b>16.6.</b>
                         
-                         Result as an alias
+                         Resultのエイリアス
                     </a>
                 
             
@@ -2141,7 +2141,7 @@
                         
                             <b>16.7.</b>
                         
-                         Options with Results
+                         OptionとResultを同時に扱う
                     </a>
                 
             
@@ -2158,7 +2158,7 @@
                         
                             <b>16.7.1.</b>
                         
-                         Errors as strings
+                         Stringをエラーとして扱う
                     </a>
                 
             
@@ -2174,7 +2174,7 @@
                         
                             <b>16.7.2.</b>
                         
-                         Combining separate combinators
+                         コンビネータを組み合わせる
                     </a>
                 
             
@@ -2190,7 +2190,7 @@
                         
                             <b>16.7.3.</b>
                         
-                         Enter try!
+                         try!入門
                     </a>
                 
             
@@ -2211,7 +2211,7 @@
                         
                             <b>16.8.</b>
                         
-                         The limits of strings
+                         stringの限界
                     </a>
                 
             
@@ -2227,7 +2227,7 @@
                         
                             <b>16.9.</b>
                         
-                         Re-enter try!
+                         try!再入門
                     </a>
                 
             
@@ -2243,7 +2243,7 @@
                         
                             <b>16.10.</b>
                         
-                         Re-enabling box
+                         box化を再度可能にする
                     </a>
                 
             
@@ -2858,44 +2858,48 @@
                 
                     <section class="normal" id="section-gitbook_71">
                     
-                        <h3 id="1371-the-problem">13.7.1 The Problem</h3>
-<p>A <code>trait</code> that is generic over its container type has type specification
-requirements - users of the <code>trait</code> <em>must</em> specify all of its generic types.</p>
-<p>In the example below, the <code>Contains</code> <code>trait</code> allows the use of the generic 
-types <code>A</code> and <code>B</code>. The trait is then implemented for the <code>Container</code> type, 
-specifying <code>i32</code> for <code>A</code> and <code>B</code> so that it can be used with <code>fn difference()</code>.</p>
-<p>Because <code>Contains</code> is generic, we are forced to explicitly state <em>all</em> of the 
-generic types for <code>fn difference()</code>. In practice, we want a way to express that 
-<code>A</code> and <code>B</code> are determined by the <em>input</em> <code>C</code>. As you will see in the next 
-section, associated types provide exactly that capability.</p>
+                        <h3 id="1371-">13.7.1 関連型が必要になる状況</h3>
+<!-- A `trait` that is generic over its container type has type specification
+requirements - users of the `trait` *must* specify all of its generic types. -->
+<p>コンテナ型に、その要素に対してジェネリックなトレイトを実装した場合、そのトレイトを使用する者は全てのジェネリック型を明記<em>しなくてはなりません</em>。</p>
+<!-- In the example below, the `Contains` `trait` allows the use of the generic
+types `A` and `B`. The trait is then implemented for the `Container` type,
+specifying `i32` for `A` and `B` so that it can be used with `fn difference()`. -->
+<p>以下の例では<code>Contains</code>トレイトはジェネリック型<code>A</code>と<code>B</code>の使用を許しています。その後、<code>Container</code>型に対して<code>Contains</code>を実装していますが、その際後に<code>fn difference()</code>が使用できるように、<code>A</code>、<code>B</code>はそれぞれ<code>i32</code>と明記されています。</p>
+<!-- Because `Contains` is generic, we are forced to explicitly state *all* of the
+generic types for `fn difference()`. In practice, we want a way to express that
+`A` and `B` are determined by the *input* `C`. As you will see in the next
+section, associated types provide exactly that capability. -->
+<p><code>Contains</code>はジェネリックトレイトなので、<code>fn difference()</code>では<strong>全ての</strong>ジェネリック型を宣言しなくてはなりません。実際のところ、<code>A</code>と<code>B</code>は<strong>引数</strong>である<code>C</code>によって決定されていて欲しいにも関わらず、です。これは次のページで紹介する関連型と呼ばれる機能によって可能です。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
 <div id="editor">struct Container(i32, i32);
 
-// A trait which checks if 2 items are stored inside of container.
-// Also retrieves first or last value.
+// ２つの要素がコンテナ型の中にあることをチェックするトレイト
+// また、最初と最後の値を取得することもできる
 trait Contains&lt;A, B&gt; {
-    fn contains(&amp;self, &amp;A, &amp;B) -&gt; bool; // Explicitly requires &#96;A&#96; and &#96;B&#96;.
-    fn first(&amp;self) -&gt; i32; // Doesn&#39;t explicitly require &#96;A&#96; or &#96;B&#96;.
-    fn last(&amp;self) -&gt; i32;  // Doesn&#39;t explicitly require &#96;A&#96; or &#96;B&#96;.
+    fn contains(&amp;self, &amp;A, &amp;B) -&gt; bool; // &#96;A&#96;と&#96;B&#96;の両方を明示的に要求する
+    fn first(&amp;self) -&gt; i32; // &#96;A&#96;、&#96;B&#96;いずれも要求しない
+    fn last(&amp;self) -&gt; i32;  // &#96;A&#96;、&#96;B&#96;いずれも要求しない
+
 }
 
 impl Contains&lt;i32, i32&gt; for Container {
-    // True if the numbers stored are equal.
+    // コンテナ内の２つの要素が等しければTrueを返す
     fn contains(&amp;self, number&#95;1: &amp;i32, number&#95;2: &amp;i32) -&gt; bool {
         (&amp;self.0 == number&#95;1) &amp;&amp; (&amp;self.1 == number&#95;2)
     }
 
-    // Grab the first number.
+    // ひとつ目の値を取得
     fn first(&amp;self) -&gt; i32 { self.0 }
 
-    // Grab the last number.
+    // 最後(2つめ)の値を取得
     fn last(&amp;self) -&gt; i32 { self.1 }
 }
 
-// &#96;C&#96; contains &#96;A&#96; and &#96;B&#96;. In light of that, having to express &#96;A&#96; and
-// &#96;B&#96; again is a nuisance.
+// &#96;A&#96;と&#96;B&#96;は&#96;C&#96;に保持されていることを考慮すると、&#96;A&#96;と&#96;B&#96;を
+// ２度も書くのは面倒
 fn difference&lt;A, B, C&gt;(container: &amp;C) -&gt; i32 where
     C: Contains&lt;A, B&gt; {
     container.last() - container.first()
@@ -2919,7 +2923,7 @@ fn main() {
 </div>
 
 <h3 id="see-also">See also:</h3>
-<p><a href="/custom_types/structs.html"><code>struct</code>s</a>, and <a href="/trait.html"><code>trait</code>s</a></p>
+<p><a href="/custom_types/structs.html">構造体</a>, <a href="/trait.html">トレイト</a></p>
 
                     
                     </section>
@@ -2930,10 +2934,10 @@ fn main() {
         </div>
 
         
-        <a href="../../generics/assoc_items.html" class="navigation navigation-prev " aria-label="Previous page: Associated items"><i class="fa fa-angle-left"></i></a>
+        <a href="../../generics/assoc_items.html" class="navigation navigation-prev " aria-label="Previous page: 関連型"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../../generics/assoc_items/types.html" class="navigation navigation-next " aria-label="Next page: Associated types"><i class="fa fa-angle-right"></i></a>
+        <a href="../../generics/assoc_items/types.html" class="navigation navigation-next " aria-label="Next page: 関連型"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

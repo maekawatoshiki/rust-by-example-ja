@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
-        <title>Testcase: empty bounds | Rust by Example</title>
+        <title>テストケース: 空トレイト | Rust by Example</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.5.0">
@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="13.4.1" data-basepath="../.." data-revision="1468168389646">
+    <div class="book" data-level="13.4.1" data-basepath="../.." data-revision="1471940916152">
     
 
 <div class="book-summary">
@@ -1382,7 +1382,7 @@
                         
                             <b>13.</b>
                         
-                         Generics
+                         ジェネリクス
                     </a>
                 
             
@@ -1399,7 +1399,7 @@
                         
                             <b>13.1.</b>
                         
-                         Functions
+                         関数
                     </a>
                 
             
@@ -1415,7 +1415,7 @@
                         
                             <b>13.2.</b>
                         
-                         Implementation
+                         メソッド
                     </a>
                 
             
@@ -1431,7 +1431,7 @@
                         
                             <b>13.3.</b>
                         
-                         Traits
+                         ジェネリックトレイト
                     </a>
                 
             
@@ -1447,7 +1447,7 @@
                         
                             <b>13.4.</b>
                         
-                         Bounds
+                         ジェネリック境界
                     </a>
                 
             
@@ -1464,7 +1464,7 @@
                         
                             <b>13.4.1.</b>
                         
-                         Testcase: empty bounds
+                         テストケース: 空トレイト
                     </a>
                 
             
@@ -1485,7 +1485,7 @@
                         
                             <b>13.5.</b>
                         
-                         Multiple bounds
+                         複数のジェネリック境界
                     </a>
                 
             
@@ -1501,7 +1501,7 @@
                         
                             <b>13.6.</b>
                         
-                         Where clauses
+                         Where句
                     </a>
                 
             
@@ -1517,7 +1517,7 @@
                         
                             <b>13.7.</b>
                         
-                         Associated items
+                         関連型
                     </a>
                 
             
@@ -1534,7 +1534,7 @@
                         
                             <b>13.7.1.</b>
                         
-                         The Problem
+                         関連型が必要になる状況
                     </a>
                 
             
@@ -1550,7 +1550,7 @@
                         
                             <b>13.7.2.</b>
                         
-                         Associated types
+                         関連型
                     </a>
                 
             
@@ -1571,7 +1571,7 @@
                         
                             <b>13.8.</b>
                         
-                         Phantom type parameters
+                         幽霊型パラメータ
                     </a>
                 
             
@@ -1588,7 +1588,7 @@
                         
                             <b>13.8.1.</b>
                         
-                         Testcase: unit conversions
+                         テストケース: 単位を扱う
                     </a>
                 
             
@@ -2028,7 +2028,7 @@
                         
                             <b>16.</b>
                         
-                         Error handling
+                         エラーハンドリング
                     </a>
                 
             
@@ -2045,7 +2045,7 @@
                         
                             <b>16.1.</b>
                         
-                         Option &amp; unwrap
+                         Optionとunwrap
                     </a>
                 
             
@@ -2109,7 +2109,7 @@
                         
                             <b>16.5.</b>
                         
-                         map for Result
+                         Resultにmapする
                     </a>
                 
             
@@ -2125,7 +2125,7 @@
                         
                             <b>16.6.</b>
                         
-                         Result as an alias
+                         Resultのエイリアス
                     </a>
                 
             
@@ -2141,7 +2141,7 @@
                         
                             <b>16.7.</b>
                         
-                         Options with Results
+                         OptionとResultを同時に扱う
                     </a>
                 
             
@@ -2158,7 +2158,7 @@
                         
                             <b>16.7.1.</b>
                         
-                         Errors as strings
+                         Stringをエラーとして扱う
                     </a>
                 
             
@@ -2174,7 +2174,7 @@
                         
                             <b>16.7.2.</b>
                         
-                         Combining separate combinators
+                         コンビネータを組み合わせる
                     </a>
                 
             
@@ -2190,7 +2190,7 @@
                         
                             <b>16.7.3.</b>
                         
-                         Enter try!
+                         try!入門
                     </a>
                 
             
@@ -2211,7 +2211,7 @@
                         
                             <b>16.8.</b>
                         
-                         The limits of strings
+                         stringの限界
                     </a>
                 
             
@@ -2227,7 +2227,7 @@
                         
                             <b>16.9.</b>
                         
-                         Re-enter try!
+                         try!再入門
                     </a>
                 
             
@@ -2243,7 +2243,7 @@
                         
                             <b>16.10.</b>
                         
-                         Re-enabling box
+                         box化を再度可能にする
                     </a>
                 
             
@@ -2858,10 +2858,11 @@
                 
                     <section class="normal" id="section-gitbook_73">
                     
-                        <h3 id="1341-testcase-empty-bounds">13.4.1 Testcase: empty bounds</h3>
-<p>A consequence of how bounds work is that even if a <code>trait</code> doesn&#39;t
-include any functionality, you can still use it as a bound. <code>Eq</code> and
-<code>Ord</code> are examples of such <code>trait</code>s from the <code>std</code> library.</p>
+                        <h3 id="1341--">13.4.1 テストケース: 空トレイト</h3>
+<!-- A consequence of how bounds work is that even if a `trait` doesn't
+include any functionality, you can still use it as a bound. `Eq` and
+`Ord` are examples of such `trait`s from the `std` library. -->
+<p>トレイト境界の仕組みから、「トレイトがなにも機能を持っていなくとも境界条件として使用できることには変わりはない」という帰結がもたらされます。<code>Eq</code>と<code>Ord</code>は<code>std</code>ライブラリにおけるそのような例です。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
@@ -2875,28 +2876,29 @@ trait Blue {}
 impl Red for Cardinal {}
 impl Blue for BlueJay {}
 
-// These functions are only valid for types which implement these
-// traits. The fact that the traits are empty is irrelevant.
+// 以下の関数はトレイト境界を設けているが、そのトレイトが空である
+// か否かとは関係がない。
 fn red&lt;T: Red&gt;(&#95;: &amp;T)   -&gt; &amp;&#39;static str { &quot;red&quot; }
 fn blue&lt;T: Blue&gt;(&#95;: &amp;T) -&gt; &amp;&#39;static str { &quot;blue&quot; }
 
 fn main() {
-    let cardinal = Cardinal;
-    let blue&#95;jay = BlueJay;
-    let &#95;turkey   = Turkey;
+    // 訳注: 以下は全て鳥の名前
+    let cardinal = Cardinal; // 猩々紅冠鳥
+    let blue&#95;jay = BlueJay; // アオカケス
+    let &#95;turkey   = Turkey; // 七面鳥
 
-    // &#96;red()&#96; won&#39;t work on a blue jay nor vice versa
-    // because of the bounds.
+    // トレイト境界のため、&#96;red&#96;は&#96;blue&#95;jay&#96;に対しては使用できない。
+    // &#96;blue&#96;と&#96;Cardinal&#96;も同様、
     println!(&quot;A cardinal is {}&quot;, red(&amp;cardinal));
     println!(&quot;A blue jay is {}&quot;, blue(&amp;blue&#95;jay));
     //println!(&quot;A turkey is {}&quot;, red(&amp;&#95;turkey));
-    // ^ TODO: Try uncommenting this line.
+    // ^ TODO: この行をアンコメントしてみましょう。
 }</div>
 <div id="result"></div>
 </div>
 
 <h3 id="see-also">See also:</h3>
-<p><a href="http://doc.rust-lang.org/std/cmp/trait.Eq.html" target="_blank"><code>std::cmp::Eq</code></a>, <a href="http://doc.rust-lang.org/std/cmp/trait.Ord.html" target="_blank"><code>std::cmp::Ord</code>s</a>, and <a href="/trait.html"><code>trait</code>s</a></p>
+<p><a href="http://doc.rust-lang.org/std/cmp/trait.Eq.html" target="_blank"><code>std::cmp::Eq</code></a>, <a href="http://doc.rust-lang.org/std/cmp/trait.Ord.html" target="_blank"><code>std::cmp::Ord</code>s</a>, <a href="../trait.html">トレイト</a></p>
 
                     
                     </section>
@@ -2907,10 +2909,10 @@ fn main() {
         </div>
 
         
-        <a href="../../generics/bounds.html" class="navigation navigation-prev " aria-label="Previous page: Bounds"><i class="fa fa-angle-left"></i></a>
+        <a href="../../generics/bounds.html" class="navigation navigation-prev " aria-label="Previous page: ジェネリック境界"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../../generics/multi_bounds.html" class="navigation navigation-next " aria-label="Next page: Multiple bounds"><i class="fa fa-angle-right"></i></a>
+        <a href="../../generics/multi_bounds.html" class="navigation navigation-next " aria-label="Next page: 複数のジェネリック境界"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>
