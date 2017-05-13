@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="16.9" data-basepath=".." data-revision="1492617070782">
+    <div class="book" data-level="16.9" data-basepath=".." data-revision="1494671877187">
     
 
 <div class="book-summary">
@@ -2875,7 +2875,7 @@ is a conversion utility between different types, this means if you `try!` someth
 error is convertible to the return type, it will convert automatically. This means, if we
 rewrite this example with `try!` when `From::from` is implemented for our error type,
 the `map_err` will go away: -->
-<p>以前、<code>try!</code>マクロは「<code>unwrap</code>、<code>return Err(err)</code>のどちらか」であると説明しました。これは<code>93%</code>の正しさでしかありません。正確には「<code>unwrap</code>、<code>return Err(From::from(err))</code>のどちらか」です。<code>From::from</code>は異なる型同士の変換をおこないます。これはつまり、何かを<code>try!</code>した際にエラーが生じ、そのエラーが返り値の型へと変換可能な場合、自動的に変換するということを意味します。従って、<code>try!</code>この例を<code>try!</code>マクロを用いて書き直し、<code>From::from</code>を我々のエラー型に対して実装すれば、<code>map_err</code>をなくすことが可能になるということを意味します。</p>
+<p>以前、<code>try!</code>マクロは「<code>unwrap</code>、<code>return Err(err)</code>のどちらか」であると説明しました。これは<code>93%</code>の正しさでしかありません。正確には「<code>unwrap</code>、<code>return Err(From::from(err))</code>のどちらか」です。<code>From::from</code>は異なる型同士の変換をおこないます。これはつまり、何かを<code>try!</code>した際にエラーが生じ、そのエラーが返り値の型へと変換可能な場合、自動的に変換するということを意味します。従って、この例を<code>try!</code>マクロを用いて書き直し、<code>From::from</code>を我々のエラー型に対して実装すれば、<code>map_err</code>をなくすことが可能になるということを意味します。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
@@ -2941,7 +2941,7 @@ fn main() {
 <!-- This is actually fairly clean now. If you compare it with the original `panic`, it is very similar
 to replacing the `unwrap` calls with `try!` except that the return types are `Result` and so
 they must be destructured at the top level. -->
-<p>これで大分綺麗になりました。元々の<code>panic</code>していたものと比べると、<code>unwrap</code>の呼び出しが<code>try!</code>で置き換えられているという点で非常に似たものとなっていますa。違いは、返り値が<code>Result</code>なのでトップレベルで中身を取り出す必要があるという点です。</p>
+<p>これで大分綺麗になりました。元々の<code>panic</code>していたものと比べると、<code>unwrap</code>の呼び出しが<code>try!</code>で置き換えられているという点で非常に似たものとなっています。違いは、返り値が<code>Result</code>なのでトップレベルで中身を取り出す必要があるという点です。</p>
 <!-- However, do not expect error handling of this sort to replace all usage of `unwrap` in
 practice. Error handling of this sort tripled our code line count and cannot really be
 called simple even if this is heavily biased by the small code size. Indeed, moving a 1000 line

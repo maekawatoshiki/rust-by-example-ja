@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="16.10" data-basepath=".." data-revision="1492617070782">
+    <div class="book" data-level="16.10" data-basepath=".." data-revision="1494671877187">
     
 
 <div class="book-summary">
@@ -2866,7 +2866,7 @@ capability: the ability to easily `box` our error type. -->
 <!-- Namely, the std library will automatically convert from any type which implements the
 `Error` trait into the trait object `Box<Error>` via `From`. To a library user, this
 conveniently allows the following: -->
-<p>すなわち、標準ライブラリは<code>From</code>によって、<code>Error</code>トレイトを実装している型あらゆる型を<code>Box&lt;Error&gt;</code>というトレイトオブジェクトへと変換します。ライブラリのユーザにとっては、これは以下のような書き方ができて便利です。</p>
+<p>すなわち、標準ライブラリは<code>From</code>によって、<code>Error</code>トレイトを実装しているあらゆる型を<code>Box&lt;Error&gt;</code>というトレイトオブジェクトへと変換します。ライブラリのユーザにとっては、これは以下のような書き方ができて便利です。</p>
 <pre><code class="lang-rust"><span class="hljs-comment">// 自動的に`Box&lt;Error&gt;`に変換できるエラー型ならばどんなものでもここで使用できる。</span>
 <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">foo</span></span>(...) -&gt; Result&lt;T, Box&lt;Error&gt;&gt; { ... }
 </code></pre>
