@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="8.2.6.1" data-basepath="../../.." data-revision="1494671877187">
+    <div class="book" data-level="8.2.6.1" data-basepath="../../.." data-revision="1495164796121">
     
 
 <div class="book-summary">
@@ -2885,7 +2885,7 @@ signature: -->
 
     // ベクトル型に対する&#96;iter&#96;は&#96;&amp;i32&#96;を&#96;yield&#96;するので、&#96;i32&#96;へとデストラクト
     println!(&quot;2 in vec1: {}&quot;, vec1.iter()     .any(|&amp;x| x == 2));
-    // &#96;inter&#95;iter()&#96;の場合は&#96;i32&#96;を&#96;yield&#96;するので、デストラクトする必要はない。
+    // &#96;into&#95;iter()&#96;の場合は&#96;i32&#96;を&#96;yield&#96;するので、デストラクトする必要はない。
     println!(&quot;2 in vec2: {}&quot;, vec2.into&#95;iter().any(| x| x == 2));
 
     let array1 = [1, 2, 3];

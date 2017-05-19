@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="17.1" data-basepath=".." data-revision="1494671877187">
+    <div class="book" data-level="17.1" data-basepath=".." data-revision="1495164796121">
     
 
 <div class="book-summary">
@@ -2863,7 +2863,7 @@
 (allocated in the heap) by creating a `Box<T>`. A box is a smart pointer to a
 heap allocated value of type `T`. When a box goes out of scope, its destructor
 is called, the inner object is destroyed, and the memory in the heap is freed. -->
-<p>Rsutにおいて、すべての値はデフォルトでスタックに割り当てられます。<code>Box&lt;T&gt;</code>を作成することで、値を<em>ボックス化</em>、すなわちヒープ上に割り当てることができます。ボックスとは正確にはヒープ上におかれた<code>T</code>の値へのスマートポインタです。ボックスがスコープを抜けると、デストラクタが呼ばれて内包するオブジェクトが破棄され、ヒープメモリが解放されます。</p>
+<p>Rustにおいて、すべての値はデフォルトでスタックに割り当てられます。<code>Box&lt;T&gt;</code>を作成することで、値を<em>ボックス化</em>、すなわちヒープ上に割り当てることができます。ボックスとは正確にはヒープ上におかれた<code>T</code>の値へのスマートポインタです。ボックスがスコープを抜けると、デストラクタが呼ばれて内包するオブジェクトが破棄され、ヒープメモリが解放されます。</p>
 <!-- Boxed values can be dereferenced using the `*` operator; this removes one layer
 of indirection. -->
 <p>ボックス化された値は<code>*</code>オペレータを用いてデリファレンスすることができます。これにより一段と直接的な操作が可能になります。</p>
